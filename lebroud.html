@@ -1,0 +1,4013 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<title>لبرود</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+/* ===== RESET & BASE ===== */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --brand:#1A5276;
+  --brand-light:#2980B9;
+  --brand-pale:#EBF5FB;
+  --brand-border:#D6EAF8;
+  --accent:#1E8449;
+  --danger:#C0392B;
+  --warn:#E67E22;
+  --gold:#F1C40F;
+  --white:#FFFFFF;
+  --bg:#F0F7FF;
+  --card:#FFFFFF;
+  --text:#1A3A52;
+  --muted:#7FB3D3;
+  --radius:16px;
+  --radius-sm:12px;
+  --shadow:0 4px 20px rgba(26,82,118,0.10);
+  --shadow-sm:0 2px 10px rgba(26,82,118,0.08);
+}
+html{height:100%;}
+body{margin:0;padding:0;background:var(--bg);font-family:'Cairo',sans-serif;color:var(--text);height:100%;overflow:hidden;}
+.page{display:none;position:absolute;top:0;left:0;width:100%;height:100%;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+.page.active{display:block;}
+.tab-content{display:none;padding:12px;}
+.tab-content.on{display:block;}
+/* Espace sous le topbar fixe */
+#gerantPage, #vendeurPage, #operateurPage, #comptablePage{padding-top:64px;}
+#chatPage{padding-top:0;}
+
+/* ===== MODAL GLOBAL ===== */
+#modalOverlay{
+  display:none;position:fixed;inset:0;background:rgba(10,30,60,0.65);
+  z-index:9999;align-items:center;justify-content:center;padding:20px;
+}
+#modalOverlay.show{display:flex;}
+.modal-box{
+  background:#fff;border-radius:20px;padding:28px 24px;width:100%;max-width:340px;
+  text-align:center;border:2px solid var(--brand-border);
+  animation:slideUp 0.2s ease;
+}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.modal-title{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px;}
+.modal-msg{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+.modal-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.btn-cancel{padding:12px;background:var(--brand-pale);color:var(--brand);border:1.5px solid var(--brand-border);border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;}
+.btn-ok{padding:12px;color:#fff;border:none;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;}
+
+/* ===== TOAST ===== */
+#toast{
+  display:none;position:fixed;bottom:90px;left:50%;transform:translateX(-50%);
+  background:var(--brand);color:#fff;padding:10px 22px;border-radius:50px;
+  font-size:13px;font-weight:600;z-index:8888;white-space:nowrap;
+  box-shadow:0 4px 20px rgba(26,82,118,0.3);
+}
+
+/* ===== LOGIN PAGE ===== */
+#loginPage{
+  background:var(--bg);
+  align-items:center;justify-content:flex-start;
+  padding-top:40px;
+}
+.login-logo-wrap{
+  display:flex;justify-content:center;margin-bottom:20px;
+  animation:fadeIn 0.6s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.login-logo{width:220px;height:auto;}
+.login-card{
+  background:var(--card);border-radius:24px;padding:24px 20px;
+  margin:0 16px;width:calc(100% - 32px);
+  box-shadow:var(--shadow);border:1.5px solid var(--brand-border);
+  animation:fadeIn 0.7s ease 0.1s both;
+}
+.lang-toggle{
+  display:flex;background:var(--brand-pale);border-radius:50px;
+  padding:3px;margin-bottom:22px;gap:3px;
+}
+.lang-btn{
+  flex:1;padding:9px;border:none;border-radius:50px;
+  font-size:13px;font-weight:700;cursor:pointer;
+  background:transparent;color:var(--muted);
+  font-family:'Cairo',sans-serif;transition:all 0.2s;
+}
+.lang-btn.on{background:var(--brand);color:#fff;}
+.lang-toggle, .lang-btn, .top-lang-btns{direction:ltr!important;unicode-bidi:embed;}
+[onclick*="setLang"]{direction:ltr!important;}
+.field-group{margin-bottom:14px;}
+.fl{font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:5px;}
+.fi{
+  width:100%;padding:12px 14px;border:1.5px solid var(--brand-border);
+  border-radius:var(--radius-sm);font-size:14px;color:var(--text);
+  background:#F8FBFF;outline:none;font-family:'Cairo',sans-serif;
+  transition:border-color 0.2s;
+}
+.fi:focus{border-color:var(--brand-light);}
+.fi[dir="rtl"]{text-align:right;}
+.role-badge{
+  display:none;margin-top:8px;background:var(--brand-pale);
+  border:1.5px solid var(--brand-light);border-radius:var(--radius-sm);
+  padding:10px 14px;text-align:center;
+}
+.role-badge.show{display:block;}
+.role-name{font-size:15px;font-weight:700;color:var(--brand);}
+.role-ar{font-size:13px;color:var(--brand-light);margin-top:2px;}
+.forgot-link{
+  text-align:right;font-size:12px;color:var(--brand-light);
+  margin-top:6px;cursor:pointer;text-decoration:underline;
+}
+.forgot-msg{
+  display:none;margin-top:8px;background:#FFF8E6;
+  border:1.5px solid var(--warn);border-radius:var(--radius-sm);
+  padding:10px 14px;font-size:12px;color:#7D5A00;line-height:1.5;
+}
+.forgot-msg.show{display:block;}
+.btn-login{
+  width:100%;padding:14px;background:var(--brand);color:#fff;
+  border:none;border-radius:50px;font-size:15px;font-weight:700;
+  cursor:pointer;margin-top:14px;font-family:'Cairo',sans-serif;
+  transition:background 0.2s;
+}
+.btn-login:active{background:var(--brand-light);}
+.login-info{
+  display:flex;align-items:flex-start;gap:8px;
+  background:var(--brand-pale);border-radius:var(--radius-sm);
+  padding:10px 14px;margin-top:14px;
+}
+.info-dot{width:7px;height:7px;background:var(--brand-light);border-radius:50%;flex-shrink:0;margin-top:4px;}
+.info-txt{font-size:11px;color:var(--brand);line-height:1.5;}
+.error-box{
+  display:none;margin-top:10px;background:#FDEDEC;
+  border:1.5px solid var(--danger);border-radius:var(--radius-sm);
+  padding:10px 14px;font-size:12px;color:var(--danger);text-align:center;
+}
+.error-box.show{display:block;}
+
+/* ===== APP TOPBAR ===== */
+.topbar{
+  background:var(--white);padding:10px 14px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1.5px solid var(--brand-border);
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  box-shadow:var(--shadow-sm);
+}
+.tb-avatar{
+  width:40px;height:40px;border-radius:12px;
+  overflow:hidden;flex-shrink:0;background:var(--brand);
+  display:flex;align-items:center;justify-content:center;
+  color:#AED6F1;font-size:16px;font-weight:900;
+  font-family:'Cairo',sans-serif;
+}
+.tb-avatar img{width:100%;height:100%;object-fit:cover;}
+.tb-info{flex:1;min-width:0;}
+.tb-name{font-size:13px;font-weight:700;color:var(--brand);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tb-role{font-size:11px;color:var(--muted);}
+.tb-actions{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.tb-chat-btn{
+  position:relative;width:36px;height:36px;background:var(--brand-pale);
+  border:1.5px solid var(--brand-border);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.chat-badge{
+  position:absolute;top:-4px;right:-4px;width:16px;height:16px;
+  background:var(--danger);border-radius:50%;font-size:9px;
+  font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;
+}
+.tb-quit{
+  background:#FDEDEC;border:1px solid #F1948A;border-radius:8px;
+  padding:6px 10px;font-size:11px;color:var(--danger);
+  cursor:pointer;font-weight:700;font-family:'Cairo',sans-serif;
+}
+
+/* ===== TABS ===== */
+.tabs-wrap{
+  background:var(--white);padding:8px 12px 0;
+  border-bottom:1.5px solid var(--brand-border);
+  overflow-x:auto;white-space:nowrap;
+  position:sticky;top:62px;z-index:99;
+  scrollbar-width:none;
+}
+.tabs-wrap::-webkit-scrollbar{display:none;}
+.tab-btn{
+  display:inline-block;padding:8px 14px;border-radius:20px 20px 0 0;
+  font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;
+  border:1.5px solid transparent;border-bottom:none;
+  font-family:'Cairo',sans-serif;transition:all 0.2s;
+}
+.tab-btn.on{background:var(--brand);color:#fff;}
+
+/* ===== CONTENT AREA ===== */
+/* tab-content géré dans .page */
+
+/* ===== CARDS ===== */
+.card{
+  background:var(--card);border-radius:var(--radius);
+  padding:14px;border:1.5px solid var(--brand-border);
+  margin-bottom:10px;box-shadow:var(--shadow-sm);
+}
+.card-title{font-size:14px;font-weight:700;color:var(--brand);margin-bottom:10px;}
+.card-sub{font-size:12px;color:var(--muted);margin-top:-6px;margin-bottom:10px;}
+
+/* ===== FORM ELEMENTS ===== */
+.frow{margin-bottom:12px;}
+.fi-ro{background:var(--brand-pale);font-weight:700;color:var(--brand);}
+.btn-primary{
+  width:100%;padding:13px;background:var(--brand);color:#fff;
+  border:none;border-radius:50px;font-size:14px;font-weight:700;
+  cursor:pointer;margin-top:10px;font-family:'Cairo',sans-serif;
+  transition:background 0.2s;
+}
+.btn-primary:active{background:var(--brand-light);}
+.btn-secondary{
+  width:100%;padding:13px;background:var(--white);color:var(--brand);
+  border:1.5px solid var(--brand);border-radius:50px;font-size:14px;
+  font-weight:700;cursor:pointer;margin-top:8px;font-family:'Cairo',sans-serif;
+}
+.btn-danger{
+  width:100%;padding:13px;background:var(--danger);color:#fff;
+  border:none;border-radius:50px;font-size:14px;font-weight:700;
+  cursor:pointer;margin-top:8px;font-family:'Cairo',sans-serif;
+}
+
+/* ===== INFO ROWS ===== */
+.ir{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--brand-pale);}
+.ir:last-child{border-bottom:none;}
+.il{font-size:12px;color:var(--muted);}
+.iv{font-size:14px;font-weight:700;color:var(--brand);}
+.iv-g{font-size:14px;font-weight:700;color:var(--accent);}
+.iv-r{font-size:14px;font-weight:700;color:var(--danger);}
+.iv-w{font-size:14px;font-weight:700;color:var(--warn);}
+
+/* ===== STAT GRID ===== */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.stat-card{background:var(--card);border-radius:var(--radius);padding:12px;border:1.5px solid var(--brand-border);}
+.stat-lbl{font-size:11px;color:var(--muted);margin-bottom:4px;}
+.stat-val{font-size:20px;font-weight:900;color:var(--brand);line-height:1;}
+.stat-unit{font-size:11px;color:var(--muted);font-weight:400;}
+.stat-trend{font-size:11px;margin-top:4px;}
+.t-up{color:var(--accent);}
+.t-dn{color:var(--danger);}
+.t-nt{color:var(--warn);}
+
+/* ===== PROGRESS ===== */
+.prog-wrap{margin-top:10px;}
+.prog-hd{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px;}
+.prog-bg{width:100%;height:10px;background:var(--brand-border);border-radius:999px;overflow:hidden;}
+.prog-bar{height:100%;background:var(--brand);border-radius:999px;transition:width 0.4s;}
+
+/* ===== BADGES ===== */
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.b-v{background:var(--brand-pale);color:var(--brand);}
+.b-g{background:#E8F8EF;color:var(--accent);}
+.b-r{background:#FDEDEC;color:var(--danger);}
+.b-w{background:#FEF9E7;color:#7D6608;}
+.b-gold{background:#FEF9E7;color:#856404;}
+
+/* ===== EMPLOYEE LIST ITEM ===== */
+.emp-item{
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:10px 12px;margin-bottom:8px;
+  border:1.5px solid var(--brand-border);
+  display:flex;align-items:center;gap:10px;
+}
+.emp-av{
+  width:38px;height:38px;border-radius:50%;background:var(--brand-pale);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:var(--brand);
+  flex-shrink:0;overflow:hidden;
+}
+.emp-av img{width:100%;height:100%;object-fit:cover;}
+.emp-info{flex:1;min-width:0;}
+.emp-name{font-size:13px;font-weight:700;color:var(--brand);}
+.emp-role{font-size:11px;color:var(--muted);}
+.emp-actions{display:flex;gap:6px;flex-shrink:0;}
+.btn-mini{padding:6px 10px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:none;font-family:'Cairo',sans-serif;}
+.btn-mini-e{background:var(--brand-pale);color:var(--brand);border:1px solid var(--brand-border);}
+.btn-mini-d{background:#FDEDEC;color:var(--danger);border:1px solid #F1948A;}
+
+/* ===== ALERT ITEMS ===== */
+.alert-item{
+  background:#FEF9E7;border:1.5px solid #F9E79F;
+  border-radius:var(--radius-sm);padding:10px 12px;
+  margin-bottom:7px;display:flex;align-items:flex-start;gap:8px;
+}
+.alert-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.alert-txt{font-size:12px;color:#7D6608;line-height:1.4;}
+
+/* ===== HIST ITEMS ===== */
+.hist-item{
+  background:#F8FBFF;border:1.5px solid var(--brand-border);
+  border-radius:var(--radius-sm);padding:10px 12px;
+  margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;
+}
+.hi-main{font-size:12px;font-weight:700;color:var(--brand);}
+.hi-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.hi-amt{font-size:13px;font-weight:800;}
+
+/* ===== VENTE CARD ===== */
+.vente-card{
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:11px 12px;margin-bottom:8px;
+  border:1.5px solid var(--brand-border);
+}
+.vente-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+.vente-client{font-size:13px;font-weight:700;color:var(--brand);}
+.vente-montant{font-size:14px;font-weight:800;color:var(--accent);}
+.vente-detail{font-size:11px;color:var(--muted);margin-bottom:7px;}
+.vente-actions{display:flex;gap:8px;}
+
+/* ===== OPERATEUR BUTTONS ===== */
+.op-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;}
+.op-btn{border:none;border-radius:14px;padding:14px 4px;font-size:13px;font-weight:700;cursor:pointer;color:#fff;font-family:'Cairo',sans-serif;}
+.op-btn-g{background:#1E8449;}
+.op-btn-r{background:#C0392B;}
+.op-btn-b{background:var(--brand);}
+.op-btn[disabled]{opacity:0.3;pointer-events:none;}
+
+/* ===== ARRET ITEMS ===== */
+.arret-item{
+  background:#FEF9E7;border:1.5px solid #F9E79F;
+  border-radius:var(--radius-sm);padding:10px 12px;
+  margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;
+}
+.ac{font-size:12px;font-weight:700;color:#7D6608;}
+.ah{font-size:11px;color:#B7950B;margin-top:2px;}
+
+/* ===== ACTION ROW (actionnaires) ===== */
+.action-row{
+  background:#F8FBFF;border:1.5px solid var(--brand-border);
+  border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;
+}
+.ar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.ar-nom{font-size:13px;font-weight:700;color:var(--brand);}
+.ar-parts{font-size:11px;color:var(--muted);}
+.ar-somme{font-size:13px;font-weight:800;color:var(--accent);}
+.ar-bar-bg{width:100%;height:8px;background:var(--brand-border);border-radius:999px;overflow:hidden;margin-top:6px;}
+.ar-bar{height:100%;background:var(--brand);border-radius:999px;}
+.ar-detail{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;}
+
+/* ===== CHAT PAGE ===== */
+#chatPage{background:var(--bg);}
+.chat-list-item{
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:12px;margin-bottom:8px;border:1.5px solid var(--brand-border);
+  display:flex;align-items:center;gap:12px;cursor:pointer;
+  transition:background 0.15s;
+}
+.chat-list-item:active{background:var(--brand-pale);}
+.chat-av{
+  width:44px;height:44px;border-radius:50%;background:var(--brand-pale);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;color:var(--brand);
+  flex-shrink:0;overflow:hidden;position:relative;
+}
+.chat-av img{width:100%;height:100%;object-fit:cover;}
+.online-dot{
+  position:absolute;bottom:1px;right:1px;width:10px;height:10px;
+  background:var(--accent);border-radius:50%;border:2px solid var(--card);
+}
+.chat-info{flex:1;min-width:0;}
+.chat-name{font-size:13px;font-weight:700;color:var(--brand);}
+.chat-preview{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;}
+.chat-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+.chat-time{font-size:10px;color:var(--muted);}
+.unread-badge{
+  background:var(--danger);color:#fff;border-radius:50%;
+  width:18px;height:18px;font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.chat-window{display:none;flex-direction:column;height:100%;}
+.chat-window.show{display:flex;}
+.chat-header{
+  background:var(--white);padding:10px 14px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1.5px solid var(--brand-border);flex-shrink:0;
+}
+.chat-back{
+  width:32px;height:32px;background:var(--brand-pale);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;border:1.5px solid var(--brand-border);
+  font-size:16px;color:var(--brand);
+}
+.chat-messages{flex:1;overflow-y:auto;padding:12px;background:var(--bg);}
+.msg{margin-bottom:10px;display:flex;flex-direction:column;}
+.msg.me{align-items:flex-end;}
+.msg.other{align-items:flex-start;}
+.msg-bubble{
+  max-width:75%;padding:10px 14px;border-radius:18px;
+  font-size:13px;line-height:1.5;
+}
+.msg.me .msg-bubble{background:var(--brand);color:#fff;border-bottom-right-radius:4px;}
+.msg.other .msg-bubble{background:var(--card);color:var(--text);border:1.5px solid var(--brand-border);border-bottom-left-radius:4px;}
+.msg-time{font-size:10px;color:var(--muted);margin-top:3px;padding:0 4px;}
+.chat-input-wrap{
+  background:var(--white);padding:10px 12px;
+  border-top:1.5px solid var(--brand-border);
+  display:flex;gap:8px;align-items:center;flex-shrink:0;
+}
+.chat-input{
+  flex:1;padding:10px 14px;border:1.5px solid var(--brand-border);
+  border-radius:50px;font-size:14px;color:var(--text);
+  background:#F8FBFF;outline:none;font-family:'Cairo',sans-serif;
+}
+.chat-send{
+  width:40px;height:40px;background:var(--brand);border:none;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;
+}
+.empty-state{text-align:center;color:var(--muted);font-size:13px;padding:20px 0;}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{
+  background:var(--white);border-top:1.5px solid var(--brand-border);
+  display:flex;justify-content:space-around;padding:8px 0 4px;
+  flex-shrink:0;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;
+  gap:3px;cursor:pointer;padding:0 10px;
+}
+.nav-icon{
+  width:24px;height:24px;border-radius:8px;background:var(--brand-border);
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-icon.on{background:var(--brand);}
+.nav-icon svg{width:14px;height:14px;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.nav-icon.on svg{stroke:#fff;}
+.nav-lbl{font-size:10px;color:var(--muted);font-weight:600;}
+.nav-lbl.on{color:var(--brand);font-weight:700;}
+
+/* ===== PHOTO UPLOAD ===== */
+.photo-upload{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  margin-bottom:10px;
+}
+.photo-preview{
+  width:44px;height:44px;border-radius:12px;background:var(--brand-pale);
+  border:2px dashed var(--brand-border);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--muted);cursor:pointer;flex-shrink:0;
+}
+.photo-preview img{width:100%;height:100%;object-fit:cover;}
+.photo-hint{font-size:11px;color:var(--muted);}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--brand-border);border-radius:2px;}
+
+@keyframes splashPop{from{opacity:0;transform:scale(0.4) translateY(30px);}to{opacity:1;transform:scale(1) translateY(0);}}
+@keyframes splashFadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes dotPulse{0%,80%,100%{transform:scale(0.6);opacity:0.4;}40%{transform:scale(1);opacity:1;}}
+@keyframes pageSlideIn{from{opacity:0;transform:translateX(18px);}to{opacity:1;transform:translateX(0);}}
+.page-slide-in{animation:pageSlideIn 0.3s cubic-bezier(.25,.46,.45,.94) both;}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<!-- ===== SPLASH SCREEN ===== -->
+<div id="splashScreen" style="position:fixed;inset:0;background:linear-gradient(160deg,#0D3B5C,#1A5276,#1F618D);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.5s ease;">
+  <img src="logo.png" style="width:160px;height:auto;animation:splashPop 0.7s cubic-bezier(.34,1.56,.64,1) both;filter:drop-shadow(0 8px 32px rgba(0,0,0,0.35));" alt="لبرود" onerror="this.style.display='none'"/>
+  <div style="color:#fff;font-size:28px;font-weight:800;letter-spacing:2px;margin-top:16px;animation:splashPop 0.7s 0.15s cubic-bezier(.34,1.56,.64,1) both;">لبرود</div>
+
+  <div style="margin-top:40px;display:flex;gap:8px;animation:splashFadeUp 0.5s 0.5s ease both;">
+    <div style="width:8px;height:8px;background:#7FB3D3;border-radius:50%;animation:dotPulse 1.2s infinite ease-in-out;"></div>
+    <div style="width:8px;height:8px;background:#7FB3D3;border-radius:50%;animation:dotPulse 1.2s 0.2s infinite ease-in-out;"></div>
+    <div style="width:8px;height:8px;background:#7FB3D3;border-radius:50%;animation:dotPulse 1.2s 0.4s infinite ease-in-out;"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL GLOBAL ===== -->
+<div id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-msg"   id="modalMsg"></div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Annuler / إلغاء</button>
+      <button class="btn-ok"     id="modalOkBtn"><span data-fr="Confirmer" data-ar="تأكيد">Confirmer</span></button>
+    </div>
+  </div>
+</div>
+<div id="toast"></div>
+
+<!-- ===================== LOGIN PAGE ===================== -->
+<div id="loginPage" class="page active">
+  <div class="login-logo-wrap">
+    <div style="background:#F0F6FF;padding:8px;border-radius:16px;display:inline-flex;">
+      <img src="logo.png" alt="لبرود" style="width:240px;height:auto;max-height:120px;object-fit:contain;mix-blend-mode:multiply;display:block;" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;gap:14px;\'><svg width=80 height=80 viewBox=\'0 0 100 100\'><path d=\'M20 38 L50 22 L80 38 L50 54 Z\' fill=\'#A8E6FF\'/><path d=\'M20 38 L50 54 L50 82 L20 66 Z\' fill=\'#3BB8F0\'/><path d=\'M50 54 L80 38 L80 66 L50 82 Z\' fill=\'#1A8EC4\'/></svg><div><div style=\'font-size:46px;font-weight:900;color:#1E9ED8;direction:rtl;\'>لبرود</div></div></div>'"/>
+    </div>
+  </div>
+  <div class="login-card">
+    <div class="lang-toggle" dir="ltr" style="direction:ltr!important;">
+      <button class="lang-btn on" onclick="setLang('fr',this)" dir="ltr" style="direction:ltr!important;">Français</button>
+      <button class="lang-btn"    onclick="setLang('ar',this)" dir="ltr" style="direction:ltr!important;">عربي</button>
+    </div>
+    <div class="field-group">
+      <span class="fl" id="lbl_id">Identifiant</span>
+      <input class="fi" id="loginId" type="text" placeholder="Ex : V001" oninput="detectRole()" autocomplete="off"/>
+    </div>
+    <div class="field-group">
+      <span class="fl" id="lbl_pw"><span data-fr="Mot de passe" data-ar="كلمة المرور">Mot de passe</span></span>
+      <input class="fi" id="loginPw" type="password" placeholder="••••••••"/>
+      <div class="forgot-link" id="forgotLink" onclick="toggleForgot()">Mot de passe oublié ?</div>
+      <div class="forgot-msg" id="forgotMsg"></div>
+    </div>
+    <div class="role-badge" id="roleBadge">
+      <div class="role-name" id="roleNameTxt"></div>
+      <div class="role-ar"   id="roleArTxt"></div>
+    </div>
+    <div class="error-box" id="loginError"></div>
+    <button class="btn-login" id="btnLogin" onclick="doLogin()">🔐 Se connecter</button>
+    <div class="login-info">
+      <div class="info-dot"></div>
+      <div class="info-txt" id="infoTxt">Les comptes sont créés et gérés par le gérant.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== GÉRANT PAGE ===================== -->
+<div id="gerantPage" class="page">
+  <div class="topbar">
+    <div class="tb-avatar" id="gerAvatar" style="background:linear-gradient(135deg,#1A5276,#2980B9);">G</div>
+    <div class="tb-info">
+      <div class="tb-name" style="display:flex;align-items:center;gap:5px;">
+        <span style="font-size:14px;">👔</span> Gérant
+      </div>
+      <div class="tb-role" id="gerIdTxt">GERANT · <span id="gerDate"></span></div>
+    </div>
+    <div class="tb-actions">
+      <div class="tb-chat-btn" onclick="openChatList()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A5276" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div class="chat-badge" id="gerChatBadge" style="display:none;">0</div>
+      </div>
+      <div class="tb-quit" onclick="confirmLogout()" style="display:flex;align-items:center;gap:4px;"><span>🚪</span><span>Quitter</span></div>
+    </div>
+  </div>
+  <div class="tabs-wrap">
+    <span class="tab-btn on"  onclick="showGerTab('dash',this)">🏠 Dashboard</span>
+    <span class="tab-btn"     onclick="showGerTab('prix',this)">💵 Prix</span>
+    <span class="tab-btn"     onclick="showGerTab('emp',this)">👥 Employés</span>
+    <span class="tab-btn"     onclick="showGerTab('act',this)">📊 Actionnaires</span>
+    <span class="tab-btn"     onclick="showGerTab('ops',this)">📋 Opérations</span>
+    <span class="tab-btn"     onclick="showGerTab('exp',this)">📤 Export</span>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="ger-dash" class="tab-content on">
+    <!-- NOTIFICATIONS -->
+    <div id="notifBanner" style="display:none;background:#FEF9E7;border:1.5px solid #F9E79F;border-radius:14px;padding:10px 14px;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <div style="font-size:13px;font-weight:700;color:#7D6608;">🔔 Notifications</div>
+        <button onclick="clearNotifs()" style="background:none;border:none;font-size:11px;color:#B7950B;cursor:pointer;text-decoration:underline;">Tout effacer</button>
+      </div>
+      <div id="notifList"></div>
+    </div>
+    <!-- STATS -->
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-lbl">🛒 Ventes</div><div class="stat-val" id="dashVKg">0 <span class="stat-unit">kg</span></div><div class="stat-trend t-nt" id="dashVTrend">—</div></div>
+      <div class="stat-card"><div class="stat-lbl">💵 CA</div><div class="stat-val" id="dashCA">0 <span class="stat-unit">MRU</span></div><div class="stat-trend t-nt" id="dashCATrend">—</div></div>
+      <div class="stat-card"><div class="stat-lbl"><span data-fr="Production" data-ar="الإنتاج">Production</span></div><div class="stat-val" id="dashProd">0 <span class="stat-unit">kg</span></div><div class="stat-trend t-nt">machine</div></div>
+      <div class="stat-card"><div class="stat-lbl"><span data-fr="Employés actifs" data-ar="الموظفون النشطون">Employés actifs</span></div><div class="stat-val" id="dashEmps">0</div><div class="stat-trend t-nt">enregistrés</div></div>
+    </div>
+    <!-- GRAPHIQUE -->
+    <div class="card">
+      <div class="card-title">📊 Ventes — 7 derniers jours</div>
+      <div style="position:relative;height:160px;margin-top:8px;"><canvas id="chartVentes"></canvas></div>
+    </div>
+    <!-- CONNEXIONS -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="card-title" style="margin:0;">🔐 Dernières connexions</div>
+        <button onclick="clearConnexions()" style="background:none;border:none;font-size:11px;color:var(--muted);cursor:pointer;text-decoration:underline;">Effacer</button>
+      </div>
+      <div id="connexionsList"><div class="empty-state">Aucune connexion enregistrée.</div></div>
+    </div>
+    <div class="card"><div class="card-title">👥 Équipe du jour</div><div id="dashEmpList"><div class="empty-state">Aucun employé créé.</div></div></div>
+    <div class="card"><div class="card-title">🛒 Dernières ventes</div><div id="dashVentes"><div class="empty-state">Aucune vente aujourd'hui.</div></div></div>
+  </div>
+
+  <!-- PRIX & OBJECTIFS -->
+  <div id="ger-prix" class="tab-content">
+    <div class="card">
+      <div class="card-title"><span data-fr="Prix du kg (MRU/kg)" data-ar="سعر الكيلوغرام (MRU/كغ)">Prix du kg (MRU/kg)</span></div>
+      <div class="ir"><span class="il"><span data-fr="Prix actuel" data-ar="السعر الحالي">Prix actuel</span></span><span class="iv" id="prixActuel">—</span></div>
+      <span class="fl"><span data-fr="Nouveau prix (MRU/kg)" data-ar="السعر الجديد (MRU/كغ)">Nouveau prix (MRU/kg)</span></span>
+      <input class="fi" id="prixInput" type="number" placeholder="Ex : 30"/>
+      <button class="btn-primary" onclick="savePrix()"><span data-fr="Enregistrer le prix" data-ar="حفظ السعر">Enregistrer le prix</span></button>
+    </div>
+    <div class="card">
+      <div class="card-title"><span data-fr="Objectifs quotidiens" data-ar="الأهداف اليومية">Objectifs quotidiens</span></div>
+      <span class="fl"><span data-fr="Quota ventes / jour (kg)" data-ar="حصة المبيعات / يوم (كغ)">Quota ventes / jour (kg)</span></span>
+      <input class="fi" id="objVentes" type="number" placeholder="Ex : 480"/>
+      <span class="fl"><span data-fr="Quota production / jour (kg)" data-ar="حصة الإنتاج / يوم (كغ)">Quota production / jour (kg)</span></span>
+      <input class="fi" id="objProd" type="number" placeholder="Ex : 650"/>
+      <button class="btn-primary" onclick="saveObjectifs()"><span data-fr="Enregistrer les objectifs" data-ar="حفظ الأهداف">Enregistrer les objectifs</span></button>
+    </div>
+  </div>
+
+  <!-- EMPLOYÉS -->
+  <div id="ger-emp" class="tab-content">
+    <div class="card">
+      <div class="card-title" id="empFormTitle"><span data-fr="Ajouter un employé" data-ar="إضافة موظف">Ajouter un employé</span></div>
+      <div class="photo-upload">
+        <div class="photo-preview" id="empPhotoPreview" onclick="document.getElementById('empPhotoInput').click()">📷</div>
+        <span class="photo-hint">Appuyer pour ajouter une photo</span>
+        <input type="file" id="empPhotoInput" accept="image/*" style="display:none;" onchange="previewEmpPhoto(this)"/>
+      </div>
+      <input type="hidden" id="empPhotoData"/>
+      <input type="hidden" id="empEditId"/>
+      <span class="fl"><span data-fr="Nom complet" data-ar="الاسم الكامل">Nom complet</span></span>
+      <input class="fi" id="empNom" placeholder="Ex : Mohamed Ould Ahmed"/>
+      <span class="fl"><span data-fr="Rôle" data-ar="الدور">Rôle</span></span>
+      <select class="fi" id="empRole">
+        <option value="vendeur">Vendeur</option>
+        <option value="operateur">Opérateur</option>
+        <option value="comptable">Comptable</option>
+      </select>
+      <span class="fl"><span data-fr="Salaire mensuel (MRU)" data-ar="الراتب الشهري (MRU)">Salaire mensuel (MRU)</span></span>
+      <input class="fi" id="empSalaire" type="number" placeholder="Ex : 8000"/>
+      <span class="fl"><span data-fr="Identifiant de connexion" data-ar="معرف الدخول">Identifiant de connexion</span></span>
+      <input class="fi" id="empLogin" placeholder="Ex : V001"/>
+      <span class="fl"><span data-fr="Mot de passe" data-ar="كلمة المرور">Mot de passe</span></span>
+      <input class="fi" id="empPass" type="password" placeholder="••••••"/>
+      <button class="btn-primary" onclick="saveEmp()"><span data-fr="Enregistrer" data-ar="حفظ">Enregistrer</span></button>
+      <button class="btn-secondary" id="empCancelBtn" style="display:none;" onclick="cancelEmpEdit()"><span data-fr="Annuler" data-ar="إلغاء">Annuler</span></button>
+    </div>
+    <div class="card"><div class="card-title">👥 Liste des employés</div><div id="empList"><div class="empty-state">Aucun employé. Commencez par en ajouter un.</div></div></div>
+  </div>
+
+  <!-- ACTIONNAIRES -->
+  <div id="ger-act" class="tab-content">
+    <div class="card">
+      <div class="card-title" id="actFormTitle"><span data-fr="Ajouter un actionnaire" data-ar="إضافة مساهم">Ajouter un actionnaire</span></div>
+      <input type="hidden" id="actEditId"/>
+      <span class="fl">Nom de l'actionnaire</span>
+      <input class="fi" id="actNom" placeholder="Ex : Ahmed Ould Mohamed"/>
+      <span class="fl">Téléphone</span>
+      <input class="fi" id="actTel" type="tel" placeholder="Ex : 36 00 00 00"/>
+      <span class="fl">CIN (Carte d'identité)</span>
+      <input class="fi" id="actCin" placeholder="Ex : 1234567890"/>
+      <span class="fl">Parts (%)</span>
+      <input class="fi" id="actParts" type="number" placeholder="Ex : 40" min="1" max="100"/>
+      <span class="fl">Montant à distribuer / mois (MRU)</span>
+      <input class="fi" id="actMontant" type="number" placeholder="Ex : 120000"/>
+      <button class="btn-primary" onclick="saveActionnaire()"><span data-fr="Enregistrer" data-ar="حفظ">Enregistrer</span></button>
+      <button class="btn-secondary" id="actCancelBtn" style="display:none;" onclick="cancelActEdit()"><span data-fr="Annuler" data-ar="إلغاء">Annuler</span></button>
+    </div>
+    <div class="card"><div class="card-title">📊 Liste des actionnaires</div><div id="actList"><div class="empty-state">Aucun actionnaire enregistré.</div></div></div>
+  </div>
+
+  <!-- OPÉRATIONS -->
+  <div id="ger-ops" class="tab-content">
+
+    <!-- FILTRES -->
+    <div class="card">
+      <div class="card-title">🔍 Filtres</div>
+
+      <!-- Boutons période rapide -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+        <button onclick="setOpPeriode('today')"   id="opBtn-today"   style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Aujourd'hui</button>
+        <button onclick="setOpPeriode('week')"    id="opBtn-week"    style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">7 jours</button>
+        <button onclick="setOpPeriode('month')"   id="opBtn-month"   style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Ce mois</button>
+        <button onclick="setOpPeriode('all')"     id="opBtn-all"     style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Tout</button>
+      </div>
+
+      <!-- Date précise -->
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+        <input type="date" class="fi" id="opDateDebut" style="flex:1;margin:0;" onchange="setOpPeriode('custom')"/>
+        <span style="color:var(--muted);font-size:12px;">→</span>
+        <input type="date" class="fi" id="opDateFin" style="flex:1;margin:0;" onchange="setOpPeriode('custom')"/>
+      </div>
+
+      <!-- Type -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+        <button onclick="setOpType('all')"    id="opT-all"    style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Tout</button>
+        <button onclick="setOpType('ventes')" id="opT-ventes" style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Ventes</button>
+        <button onclick="setOpType('prod')"   id="opT-prod"   style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Production</button>
+        <button onclick="setOpType('compta')" id="opT-compta" style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Compta</button>
+      </div>
+
+      <!-- Employé -->
+      <select class="fi" id="opEmp" onchange="refreshOps()" style="margin:0;">
+        <option value="">Tous les employés</option>
+      </select>
+    </div>
+
+    <!-- RÉSUMÉ -->
+    <div id="opSummary" style="display:none;background:var(--brand-pale);border-radius:14px;padding:12px 14px;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <div style="text-align:center;flex:1;">
+          <div style="font-size:18px;font-weight:800;color:var(--brand);" id="opSumVentes">0</div>
+          <div style="font-size:10px;color:var(--muted);">Ventes</div>
+        </div>
+        <div style="text-align:center;flex:1;">
+          <div style="font-size:18px;font-weight:800;color:var(--accent);" id="opSumCA">0</div>
+          <div style="font-size:10px;color:var(--muted);">CA (MRU)</div>
+        </div>
+        <div style="text-align:center;flex:1;">
+          <div style="font-size:18px;font-weight:800;color:var(--brand-light);" id="opSumKg">0</div>
+          <div style="font-size:10px;color:var(--muted);">Kg produits</div>
+        </div>
+        <div style="text-align:center;flex:1;">
+          <div style="font-size:18px;font-weight:800;color:var(--danger);" id="opSumDep">0</div>
+          <div style="font-size:10px;color:var(--muted);">Dépenses</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LISTE RÉSULTATS -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="card-title" style="margin:0;">📋 Résultats</div>
+        <div id="opCount" style="font-size:11px;color:var(--muted);"></div>
+      </div>
+      <div id="opResult"><div class="empty-state">Sélectionnez un filtre.</div></div>
+    </div>
+
+  </div>
+
+  <!-- EXPORT -->
+  <div id="ger-exp" class="tab-content">
+    <div class="card">
+      <div class="card-title"><span data-fr="Export rapport global" data-ar="تصدير التقرير الشامل">Export rapport global</span></div>
+      <span class="fl"><span data-fr="Période" data-ar="الفترة">Période</span></span>
+      <select class="fi" id="expPeriod"><option value="today">Aujourd'hui</option><option value="week">Cette semaine</option><option value="month">Ce mois</option></select>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--brand);"><input type="checkbox" id="expV" checked/> Ventes</label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--brand);"><input type="checkbox" id="expP" checked/><span data-fr="Production" data-ar="الإنتاج">Production</span></label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--brand);"><input type="checkbox" id="expC" checked/><span data-fr="Comptabilité" data-ar="المحاسبة">Comptabilité</span></label>
+      </div>
+      <button class="btn-primary" onclick="exportData('xlsx')"><span data-fr="Exporter Excel (.xlsx)" data-ar="تصدير Excel (.xlsx)">Exporter Excel (.xlsx)</span></button>
+      <button class="btn-secondary" onclick="exportData('docx')"><span data-fr="Exporter Word (.docx)" data-ar="تصدير Word (.docx)">Exporter Word (.docx)</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== VENDEUR PAGE ===================== -->
+<div id="vendeurPage" class="page">
+  <div class="topbar">
+    <div class="tb-avatar" id="venAvatar" style="background:linear-gradient(135deg,#1E8449,#27AE60);">V</div>
+    <div class="tb-info">
+      <div class="tb-name" id="venNomTxt" style="display:flex;align-items:center;gap:5px;">
+        <span style="font-size:14px;">🛒</span> Vendeur
+      </div>
+      <div class="tb-role" id="venIdTxt"></div>
+    </div>
+    <div class="tb-actions">
+      <div class="tb-chat-btn" onclick="openChatList()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A5276" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div class="chat-badge" id="venChatBadge" style="display:none;">0</div>
+      </div>
+      <div class="tb-quit" onclick="confirmLogout()" style="display:flex;align-items:center;gap:4px;"><span>🚪</span><span>Quitter</span></div>
+    </div>
+  </div>
+
+  <div class="tab-content" style="display:block;padding:12px;">
+    <div class="card" style="background:linear-gradient(135deg,#EBF5FB,#D6EAF8);">
+      <div class="card-title"><span data-fr="Informations du jour" data-ar="معلومات اليوم">Informations du jour</span></div>
+      <div class="ir"><span class="il"><span data-fr="Prix unitaire" data-ar="السعر الوحدة">Prix unitaire</span></span><span class="iv" id="venPrix">— MRU/kg</span></div>
+      <div class="ir"><span class="il"><span data-fr="Quota du jour" data-ar="حصة اليوم">Quota du jour</span></span><span class="iv" id="venQuota">— kg</span></div>
+      <div class="ir"><span class="il"><span data-fr="Vendu aujourd'hui" data-ar="مبيعات اليوم">Vendu aujourd'hui</span></span><span class="iv" id="venTotal">0 kg</span></div>
+      <div class="ir"><span class="il"><span data-fr="CA du jour" data-ar="رقم الأعمال اليوم">CA du jour</span></span><span class="iv-g" id="venCA">0 MRU</span></div>
+      <div class="prog-wrap">
+        <div class="prog-hd"><span><span data-fr="Progression quota" data-ar="تقدم الحصة">Progression quota</span></span><span id="venPct">0%</span></div>
+        <div class="prog-bg"><div class="prog-bar" id="venPBar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" id="venFormTitle"><span data-fr="Nouvelle vente" data-ar="بيع جديد">Nouvelle vente</span></div>
+      <input type="hidden" id="venEditId"/>
+      <span class="fl"><span data-fr="Nom du client" data-ar="اسم العميل">Nom du client</span></span>
+      <input class="fi" id="venClient" placeholder="Ex : Ahmed Ould..."/>
+      <span class="fl"><span data-fr="Téléphone client" data-ar="هاتف العميل">Téléphone client</span></span>
+      <input class="fi" id="venTel" type="tel" placeholder="Ex : 36 00 00 00"/>
+      <span class="fl"><span data-fr="Poids (kg)" data-ar="الوزن (كغ)">Poids (kg)</span></span>
+      <input class="fi" id="venPoids" type="number" placeholder="Ex : 50" oninput="calcVenteTotal()"/>
+      <span class="fl">Total calculé</span>
+      <input class="fi fi-ro" id="venTotalCalc" value="0 MRU" readonly/>
+      <span class="fl"><span data-fr="Mode de paiement" data-ar="طريقة الدفع">Mode de paiement</span></span>
+      <select class="fi" id="venMode">
+        <option value="">-- Sélectionner --</option>
+        <option>Cash</option><option>Bankily</option><option>BCIPay</option>
+        <option>Masrivi</option><option>Sedad</option><option>Autre</option>
+      </select>
+      <button class="btn-primary" onclick="ajouterVente()"><span data-fr="Valider la vente" data-ar="تأكيد البيع">Valider la vente</span></button>
+      <button class="btn-secondary" id="venCancelBtn" style="display:none;" onclick="cancelVenteEdit()">Annuler modification</button>
+    </div>
+
+    <div class="card"><div class="card-title">📋 Ventes du jour</div><div id="venList"><div class="empty-state">Aucune vente enregistrée.</div></div></div>
+  </div>
+</div>
+
+<!-- ===================== OPÉRATEUR PAGE ===================== -->
+<div id="operateurPage" class="page">
+  <div class="topbar">
+    <div class="tb-avatar" id="opAvatar" style="background:linear-gradient(135deg,#784212,#A04000);">O</div>
+    <div class="tb-info">
+      <div class="tb-name" id="opNomTxt" style="display:flex;align-items:center;gap:5px;">
+        <span style="font-size:14px;">⚙️</span> Opérateur
+      </div>
+      <div class="tb-role" id="opIdTxt"></div>
+    </div>
+    <div class="tb-actions">
+      <div class="tb-chat-btn" onclick="openChatList()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A5276" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div class="chat-badge" id="opChatBadge" style="display:none;">0</div>
+      </div>
+      <div class="tb-quit" onclick="confirmLogout()" style="display:flex;align-items:center;gap:4px;"><span>🚪</span><span>Quitter</span></div>
+    </div>
+  </div>
+
+  <div class="tab-content" style="display:block;padding:12px;">
+    <div class="card" style="background:linear-gradient(135deg,#EBF5FB,#D6EAF8);">
+      <div class="card-title">⚙️ Production du jour</div>
+      <div style="text-align:center;padding:12px 0 8px;">
+        <div style="font-size:48px;font-weight:900;font-family:monospace;color:var(--brand);letter-spacing:3px;" id="opTimer">00:00:00</div>
+        
+      </div>
+      <div class="ir"><span class="il"><span data-fr="Objectif" data-ar="الهدف">Objectif</span></span><span class="iv" id="opObjectif">650 kg</span></div>
+      <div class="ir"><span class="il"><span data-fr="Produit" data-ar="المنتج">Produit</span></span><span class="iv" id="opKgVal">0 kg</span></div>
+      <div class="ir"><span class="il"><span data-fr="Statut machine" data-ar="حالة الآلة">Statut machine</span></span><span class="iv" id="opStatus" style="color:var(--muted);"><span data-fr="En attente" data-ar="في الانتظار">En attente</span></span></div>
+      <div class="prog-wrap">
+        <div class="prog-hd"><span><span data-fr="Progression objectif" data-ar="تقدم الهدف">Progression objectif</span></span><span id="opPct">0%</span></div>
+        <div class="prog-bg"><div class="prog-bar" id="opPBar" style="width:0%"></div></div>
+      </div>
+      <div class="op-btns">
+        <button class="op-btn op-btn-g" id="opBtnStart" onclick="opStart()"><span data-fr="Démarrer" data-ar="بدء">Démarrer</span></button>
+        <button class="op-btn op-btn-r" id="opBtnStop"  onclick="opAskStop()" disabled><span data-fr="Arrêter" data-ar="إيقاف">Arrêter</span></button>
+        <button class="op-btn op-btn-b" id="opBtnFin"   onclick="opAskFin()"><span data-fr="Fin journée" data-ar="نهاية اليوم">Fin journée</span></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔴 Cause d'arrêt</div>
+      <span class="fl"><span data-fr="Sélectionner la cause" data-ar="اختيار السبب">Sélectionner la cause</span></span>
+      <select class="fi" id="opCauseSelect" onchange="opToggleAutre()">
+        <option value="">-- Sélectionner --</option>
+        <option>Coupure d'électricité</option>
+        <option>Manque d'eau</option>
+        <option>Maintenance</option>
+        <option>Nettoyage</option>
+        <option value="Autre">Autre (préciser)</option>
+      </select>
+      <div id="opAutreWrap" style="display:none;margin-top:6px;">
+        <span class="fl">Préciser</span>
+        <input class="fi" id="opCauseAutre" placeholder="Ex : panne moteur..."/>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span data-fr="Historique des arrêts" data-ar="سجل التوقفات">Historique des arrêts</span></div>
+      <div id="opArretsList"><div class="empty-state">Aucun arrêt enregistré.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== COMPTABLE PAGE ===================== -->
+<div id="comptablePage" class="page">
+  <div class="topbar">
+    <div class="tb-avatar" id="compAvatar" style="background:linear-gradient(135deg,#6C3483,#8E44AD);">C</div>
+    <div class="tb-info">
+      <div class="tb-name" id="compNomTxt" style="display:flex;align-items:center;gap:5px;">
+        <span style="font-size:14px;">📒</span> Comptable
+      </div>
+      <div class="tb-role" id="compIdTxt"></div>
+    </div>
+    <div class="tb-actions">
+      <div class="tb-chat-btn" onclick="openChatList()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A5276" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div class="chat-badge" id="compChatBadge" style="display:none;">0</div>
+      </div>
+      <div class="tb-quit" onclick="confirmLogout()" style="display:flex;align-items:center;gap:4px;"><span>🚪</span><span>Quitter</span></div>
+    </div>
+  </div>
+  <div class="tabs-wrap">
+    <span class="tab-btn on" onclick="showCompTab('sal',this)">💰 Salaires</span>
+    <span class="tab-btn"    onclick="showCompTab('act',this)">📊 Actionnaires</span>
+    <span class="tab-btn"    onclick="showCompTab('ach',this)">🛒 Achats</span>
+    <span class="tab-btn"    onclick="showCompTab('tax',this)">🏛️ Taxes</span>
+    <span class="tab-btn"    onclick="showCompTab('exp',this)">📤 Export</span>
+  </div>
+
+  <!-- SALAIRES -->
+  <div id="comp-sal" class="tab-content on">
+    <!-- Formulaire -->
+    <div class="card">
+      <div class="card-title">💰 Paiement salaire</div>
+      <input type="hidden" id="salEditId"/>
+      <span class="fl">Employé</span>
+      <select class="fi" id="salEmpSelect" onchange="updateSalaire()"></select>
+      <span class="fl">Mois à payer</span>
+      <select class="fi" id="salMoisSelect">
+        <option value="01">Janvier</option><option value="02">Février</option><option value="03">Mars</option>
+        <option value="04">Avril</option><option value="05">Mai</option><option value="06">Juin</option>
+        <option value="07">Juillet</option><option value="08">Août</option><option value="09">Septembre</option>
+        <option value="10">Octobre</option><option value="11">Novembre</option><option value="12">Décembre</option>
+      </select>
+      <span class="fl">Salaire mensuel (MRU)</span>
+      <input class="fi fi-ro" id="salMontantDisplay" readonly/>
+      <span class="fl">Commentaire (optionnel)</span>
+      <input class="fi" id="salComment" placeholder="Ex : avance, complément..."/>
+      <button class="btn-primary" onclick="saveSalaire()">Valider le paiement</button>
+      <button class="btn-secondary" id="salCancelBtn" style="display:none;" onclick="cancelSalEdit()">Annuler</button>
+    </div>
+    <!-- Historique salaires -->
+    <div class="card">
+      <div class="card-title">📋 Historique des salaires</div>
+      <div id="histSal"><div class="empty-state">Aucun paiement enregistré.</div></div>
+    </div>
+  </div>
+
+  <!-- ACTIONNAIRES -->
+  <div id="comp-act" class="tab-content">
+    <div class="card"><div class="card-title">📊 État des actionnaires</div><div id="compActList"><div class="empty-state">Aucun actionnaire enregistré par le gérant.</div></div></div>
+    <div class="card">
+      <div class="card-title">Enregistrer une avance</div>
+      <input type="hidden" id="avanceEditId"/>
+      <div id="avanceDepassAlert" style="display:none;background:#FDEDEC;border:1.5px solid #F1948A;border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:12px;color:#C0392B;font-weight:600;"></div>
+      <span class="fl">Actionnaire</span>
+      <select class="fi" id="compActSelect" onchange="updateActMontant()"><option value="">-- Sélectionner --</option></select>
+      <span class="fl">Mois concerné</span>
+      <select class="fi" id="compActMois">
+        <option value="01">Janvier</option><option value="02">Février</option><option value="03">Mars</option>
+        <option value="04">Avril</option><option value="05">Mai</option><option value="06">Juin</option>
+        <option value="07">Juillet</option><option value="08">Août</option><option value="09">Septembre</option>
+        <option value="10">Octobre</option><option value="11">Novembre</option><option value="12">Décembre</option>
+      </select>
+      <span class="fl">Montant dû / mois (fixé gérant)</span>
+      <input class="fi fi-ro" id="compActMontantDu" value="—" readonly/>
+      <span class="fl">Montant versé (MRU) — ne peut pas dépasser le montant dû</span>
+      <input class="fi" id="compActAvance" type="number" placeholder="Ex : 50 000" oninput="checkAvanceLimit()"/>
+      <span class="fl">Date</span>
+      <input class="fi" id="compActDate" type="date"/>
+      <span class="fl">Commentaire (optionnel)</span>
+      <input class="fi" id="compActComment" placeholder="Ex : 1ère avance..."/>
+      <button class="btn-primary" onclick="saveAvance()">Enregistrer l'avance</button>
+      <button class="btn-secondary" id="avanceCancelBtn" style="display:none;" onclick="cancelAvanceEdit()">Annuler</button>
+    </div>
+    <!-- Historique actionnaires -->
+    <div class="card">
+      <div class="card-title">📋 Historique des avances</div>
+      <div id="histAct"><div class="empty-state">Aucune avance enregistrée.</div></div>
+    </div>
+  </div>
+
+  <!-- ACHATS -->
+  <div id="comp-ach" class="tab-content">
+    <div class="card">
+      <div class="card-title">🛒 Enregistrer un achat</div>
+      <input type="hidden" id="achEditId"/>
+      <span class="fl">Titre / description</span>
+      <input class="fi" id="achTitre" placeholder="Ex : Huile machine, carburant..."/>
+      <span class="fl">Montant (MRU)</span>
+      <input class="fi" id="achMontant" type="number" placeholder="Ex : 15000"/>
+      <span class="fl">Référence / facture (optionnel)</span>
+      <input class="fi" id="achRef" placeholder="Ex : FAC-2026-001"/>
+      <span class="fl">Date</span>
+      <input class="fi" id="achDate" type="date"/>
+      <button class="btn-primary" onclick="saveAchat()">Valider l'achat</button>
+      <button class="btn-secondary" id="achCancelBtn" style="display:none;" onclick="cancelAchEdit()">Annuler</button>
+    </div>
+    <!-- Historique achats -->
+    <div class="card">
+      <div class="card-title">📋 Historique des achats</div>
+      <div id="histAch"><div class="empty-state">Aucun achat enregistré.</div></div>
+    </div>
+  </div>
+
+  <!-- TAXES -->
+  <div id="comp-tax" class="tab-content">
+    <div class="card">
+      <div class="card-title">🏛️ Enregistrer une taxe</div>
+      <input type="hidden" id="taxEditId"/>
+      <span class="fl">Type de taxe</span>
+      <select class="fi" id="taxType" onchange="toggleTaxAutre()">
+        <option value="">-- Sélectionner --</option>
+        <option>TVA</option><option>Impôt</option>
+        <option>Taxe municipale</option><option>Sécurité sociale</option>
+        <option value="Autre">Autre (préciser)</option>
+      </select>
+      <div id="taxAutreWrap" style="display:none;">
+        <span class="fl">Titre de la taxe</span>
+        <input class="fi" id="taxAutreTitre" placeholder="Ex : Taxe foncière..."/>
+      </div>
+      <span class="fl">Montant (MRU)</span>
+      <input class="fi" id="taxMontant" type="number" placeholder="Ex : 20000"/>
+      <span class="fl">Date</span>
+      <input class="fi" id="taxDate" type="date"/>
+      <span class="fl">Commentaire (optionnel)</span>
+      <input class="fi" id="taxComment" placeholder="Ex : 1er trimestre 2026..."/>
+      <button class="btn-primary" onclick="saveTaxe()">Valider la taxe</button>
+      <button class="btn-secondary" id="taxCancelBtn" style="display:none;" onclick="cancelTaxEdit()">Annuler</button>
+    </div>
+    <!-- Historique taxes -->
+    <div class="card">
+      <div class="card-title">📋 Historique des taxes</div>
+      <div id="histTax"><div class="empty-state">Aucune taxe enregistrée.</div></div>
+    </div>
+  </div>
+
+  <!-- EXPORT -->
+  <div id="comp-exp" class="tab-content">
+    <div class="card">
+      <div class="card-title">📤 Export rapport comptable</div>
+
+      <!-- Période -->
+      <span class="fl" style="margin-top:4px;">Période</span>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+        <button onclick="setExpPeriode('week')"  id="expBtn-week"  style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Semaine</button>
+        <button onclick="setExpPeriode('month')" id="expBtn-month" style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Ce mois</button>
+        <button onclick="setExpPeriode('year')"  id="expBtn-year"  style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Cette année</button>
+        <button onclick="setExpPeriode('custom')" id="expBtn-custom" style="flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Dates</button>
+      </div>
+      <div id="expDatesWrap" style="display:none;margin-bottom:10px;">
+        <span class="fl">Du</span>
+        <input type="date" class="fi" id="expDateDebut" style="margin-bottom:8px;"/>
+        <span class="fl">Au</span>
+        <input type="date" class="fi" id="expDateFin"/>
+      </div>
+
+      <!-- Catégories -->
+      <span class="fl">Inclure</span>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--brand);"><input type="checkbox" id="expSal" checked/> 💰 Salaires</label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--brand);"><input type="checkbox" id="expAct" checked/> 📊 Actionnaires</label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--brand);"><input type="checkbox" id="expAch" checked/> 🛒 Achats</label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--brand);"><input type="checkbox" id="expTax" checked/> 🏛️ Taxes</label>
+      </div>
+
+      <!-- Aperçu -->
+      <div id="expApercu" style="background:var(--brand-pale);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--brand);">
+        Sélectionnez une période pour voir l'aperçu.
+      </div>
+
+      <button class="btn-primary" onclick="exportCompta('xlsx')" style="margin-bottom:8px;">
+        📊 Exporter Excel (.xlsx)
+      </button>
+      <button class="btn-secondary" onclick="exportCompta('csv')">
+        📄 Exporter CSV
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CHAT PAGE ===================== -->
+<div id="chatPage" class="page">
+
+  <!-- ══ LISTE CONVERSATIONS ══ -->
+  <div id="chatListView" style="display:flex;flex-direction:column;height:100vh;">
+    <div class="topbar">
+      <div style="cursor:pointer;margin-right:6px;" onclick="closeChatList()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A5276" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      </div>
+      <div class="tb-info">
+        <div class="tb-name">💬 Messages</div>
+        <div class="tb-role">Chat interne لبرود</div>
+      </div>
+    </div>
+
+    <div style="overflow-y:auto;flex:1;padding:12px;">
+      <!-- Canal public -->
+      <div onclick="openChatConv('PUBLIC')" style="display:flex;align-items:center;gap:12px;padding:12px;background:linear-gradient(135deg,#1A5276,#2980B9);border-radius:16px;margin-bottom:14px;cursor:pointer;">
+        <div style="width:46px;height:46px;border-radius:13px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📢</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;color:#fff;">Canal public</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px;">Visible par toute l'équipe</div>
+        </div>
+        <div id="publicBadge" style="display:none;background:#F39C12;color:#fff;border-radius:20px;padding:2px 8px;font-size:11px;font-weight:700;"></div>
+      </div>
+
+      <!-- Messages privés -->
+      <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1px;margin-bottom:8px;">MESSAGES PRIVÉS</div>
+      <div id="chatConvList"><div class="empty-state">Aucun employé enregistré.</div></div>
+    </div>
+  </div>
+
+  <!-- ══ FENÊTRE CONVERSATION ══ -->
+  <div id="chatConvView" style="display:none;flex-direction:column;height:100vh;">
+    <!-- Header -->
+    <div class="topbar">
+      <div style="cursor:pointer;margin-right:6px;" onclick="closeChatConv()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A5276" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      </div>
+      <div id="chatConvAvatar" class="tb-avatar" style="width:38px;height:38px;border-radius:11px;font-size:14px;flex-shrink:0;"></div>
+      <div class="tb-info">
+        <div class="tb-name" id="chatConvName">—</div>
+        <div class="tb-role" id="chatConvRole">—</div>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div id="chatMessages" style="flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;"></div>
+
+    <!-- Saisie -->
+    <div class="chat-input-wrap">
+      <input class="chat-input" id="chatInputTxt" placeholder="Écrire un message..." onkeydown="if(event.key==='Enter')sendMsg()"/>
+      <button class="chat-send" onclick="sendMsg()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+
+</div>
+<script>
+// ═══════════════════════════════════════════
+//  FIREBASE — INIT IMMÉDIATE
+// ═══════════════════════════════════════════
+const firebaseConfig = {
+  apiKey: "AIzaSyAX6NbIBG7jT992zjj1Qd0_P05rQ1k52QA",
+  authDomain: "lebroud-21f34.firebaseapp.com",
+  projectId: "lebroud-21f34",
+  storageBucket: "lebroud-21f34.firebasestorage.app",
+  messagingSenderId: "743916104559",
+  appId: "1:743916104559:web:527477ef83f033d7b3969a"
+};
+// Firebase init — protégé si SDK pas encore chargé
+let db = null;
+try {
+  if(typeof firebase !== 'undefined') {
+    if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+  }
+} catch(e) { console.warn('Firebase init:', e); }
+
+// ═══════════════════════════════════════════
+//  ÉTAT GLOBAL
+// ═══════════════════════════════════════════
+const LS = {
+  USERS:      'lb_users_v1',
+  CURRENT:    'lb_current_v1',
+  PRIX:       'lb_prix_v1',
+  OBJECTIFS:  'lb_obj_v1',
+  VENTES:     'lb_ventes_v1',
+  PROD:       'lb_prod_v1',
+  COMPTA:     'lb_compta_v1',
+  ACTEURS:    'lb_acteurs_v1',
+  ACTPAY:     'lb_actpay_v1',
+  MESSAGES:   'lb_msgs_v1',
+  CONNEXIONS: 'lb_connexions_v1',
+  NOTIFS:     'lb_notifs_v1',
+};
+
+let currentUser = null;
+let opTimer = { secs:0, running:false, iv:null, arrets:[] };
+let modalCb = null;
+let currentChatUserId = null;
+let prevScreen = null;
+let empPhotoDataUrl = null;
+
+// ═══════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════
+function ls_get(key){ try{ return JSON.parse(localStorage.getItem(key)||'null'); }catch(e){ return null; } }
+function ls_set(key,val){ localStorage.setItem(key, JSON.stringify(val)); }
+
+function today(){ return new Date().toISOString().slice(0,10); }
+function nowTime(){ return new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}); }
+function fmtDate(){ return new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}); }
+function fmtNum(n){ return Math.round(n||0).toLocaleString('fr-FR'); }
+function genId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+
+function toast(msg, duration=2500){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(()=>{ t.style.display='none'; }, duration);
+}
+
+function getInitials(nom){
+  if(!nom) return '?';
+  return nom.trim().split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+}
+
+function setAvatar(el, user){
+  if(!el) return;
+  if(user && user.photo){
+    el.innerHTML = `<img src="${user.photo}" alt="photo"/>`;
+  } else {
+    el.innerHTML = `<span class="initials">${getInitials(user ? user.nom : '?')}</span>`;
+  }
+}
+
+// ═══════════════════════════════════════════
+//  ÉCRANS
+// ═══════════════════════════════════════════
+function showScreen(id){
+  const idMap = {
+    'login':    'loginPage',
+    'gerant':   'gerantPage',
+    'vendeur':  'vendeurPage',
+    'operateur':'operateurPage',
+    'comptable':'comptablePage',
+    'chat-list':'chatPage',
+    'chat-conv':'chatPage',
+  };
+  document.querySelectorAll('.page').forEach(s=>s.classList.remove('active'));
+  const realId = idMap[id] || id+'Page';
+  const el = document.getElementById(realId);
+  if(el){
+    el.classList.add('active');
+    el.classList.remove('page-slide-in');
+    void el.offsetWidth;
+    el.classList.add('page-slide-in');
+    setTimeout(()=>el.classList.remove('page-slide-in'), 350);
+  }
+}
+
+// ═══════════════════════════════════════════
+//  TABS GÉRANT + COMPTABLE
+// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════
+//  TABS GÉRANT + COMPTABLE
+// ═══════════════════════════════════════════
+function showGerTab(name, btn){
+  ['dash','prix','emp','act','ops','exp'].forEach(t=>{
+    const el = document.getElementById('ger-'+t);
+    if(el) el.style.display = (t===name) ? 'block' : 'none';
+  });
+  document.querySelectorAll('#gerantPage .tab-btn').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  if(name==='dash'){ renderNotifs(); renderConnexions(); setTimeout(renderChart,200); }
+  if(name==='ops'){ populateOpEmp(); setOpPeriode('today'); }
+}
+
+// État filtre ops
+let opPeriode = 'today';
+let opTypeActif = 'all';
+
+function populateOpEmp(){
+  const sel = document.getElementById('opEmp');
+  if(!sel) return;
+  const users = getUsers();
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">Tous les employés</option>' +
+    users.map(u=>`<option value="${u.id}">${u.nom} (${getRoleLabel(u.role)})</option>`).join('');
+  if(cur) sel.value = cur;
+}
+
+function setOpPeriode(p){
+  opPeriode = p;
+  // Mettre à jour boutons période
+  ['today','week','month','all'].forEach(x=>{
+    const b = document.getElementById('opBtn-'+x);
+    if(!b) return;
+    b.style.background = (x===p) ? 'var(--brand)' : 'var(--brand-pale)';
+    b.style.color = (x===p) ? '#fff' : 'var(--brand)';
+  });
+  // Remplir dates si période rapide
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0,10);
+  if(p==='today'){
+    document.getElementById('opDateDebut').value = todayStr;
+    document.getElementById('opDateFin').value = todayStr;
+  } else if(p==='week'){
+    const d = new Date(); d.setDate(d.getDate()-6);
+    document.getElementById('opDateDebut').value = d.toISOString().slice(0,10);
+    document.getElementById('opDateFin').value = todayStr;
+  } else if(p==='month'){
+    document.getElementById('opDateDebut').value = todayStr.slice(0,7)+'-01';
+    document.getElementById('opDateFin').value = todayStr;
+  } else if(p==='all'){
+    document.getElementById('opDateDebut').value = '2024-01-01';
+    document.getElementById('opDateFin').value = todayStr;
+  }
+  refreshOps();
+}
+
+function setOpType(t){
+  opTypeActif = t;
+  ['all','ventes','prod','compta'].forEach(x=>{
+    const b = document.getElementById('opT-'+x);
+    if(!b) return;
+    b.style.background = (x===t) ? 'var(--brand)' : 'var(--brand-pale)';
+    b.style.color = (x===t) ? '#fff' : 'var(--brand)';
+  });
+  refreshOps();
+}
+
+function refreshOps(){
+  const el     = document.getElementById('opResult');
+  const empId  = document.getElementById('opEmp')?.value || '';
+  const debut  = document.getElementById('opDateDebut')?.value || '';
+  const fin    = document.getElementById('opDateFin')?.value || '';
+  if(!el) return;
+
+  const inRange = date => (!debut || date >= debut) && (!fin || date <= fin);
+
+  let rows = [];
+
+  // Ventes
+  if(opTypeActif === 'all' || opTypeActif === 'ventes'){
+    (ls_get(LS.VENTES)||[])
+      .filter(v => inRange(v.date) && (!empId || v.vendeurId === empId))
+      .forEach(v => rows.push({
+        _type:'vente', _date:v.date, _heure:v.heure||'',
+        html:`<div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="background:#D5F5E3;color:#1E8449;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;">Vente</span>
+              <span style="font-size:13px;font-weight:700;color:var(--brand);">${v.clientNom||'—'}</span>
+            </div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">${v.poids} kg · ${v.mode||'—'} · ${v.vendeurNom||'—'}</div>
+            <div style="font-size:10px;color:var(--muted);">${v.date} ${v.heure||''}</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:var(--accent);white-space:nowrap;">${fmtNum(v.total)} MRU</div>
+        </div>`
+      }));
+  }
+
+  // Production
+  if(opTypeActif === 'all' || opTypeActif === 'prod'){
+    (ls_get(LS.PROD)||[])
+      .filter(p => inRange(p.date) && (!empId || p.operateurId === empId))
+      .forEach(p => rows.push({
+        _type:'prod', _date:p.date, _heure:'',
+        html:`<div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="background:#D6EAF8;color:#1A5276;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;">Production</span>
+              <span style="font-size:13px;font-weight:700;color:var(--brand);">${fmtNum(p.kg||0)} kg</span>
+            </div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">${p.operateurNom||'—'} · Durée : ${p.duree||'—'}${p.arrets?.length?' · '+p.arrets.length+' arrêt(s)':''}</div>
+            <div style="font-size:10px;color:var(--muted);">${p.date}</div>
+          </div>
+        </div>`
+      }));
+  }
+
+  // Comptabilité
+  if(opTypeActif === 'all' || opTypeActif === 'compta'){
+    (ls_get(LS.COMPTA)||[])
+      .filter(c => inRange(c.date))
+      .forEach(c => rows.push({
+        _type:'compta', _date:c.date, _heure:'',
+        html:`<div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="background:#FDEDEC;color:#C0392B;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;">${c.typeLabel||c.type||'Compta'}</span>
+              <span style="font-size:13px;font-weight:700;color:var(--brand);">${c.titre||'—'}</span>
+            </div>
+            ${c.comment?`<div style="font-size:11px;color:var(--muted);margin-top:3px;">${c.comment}</div>`:''}
+            <div style="font-size:10px;color:var(--muted);">${c.date}</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:var(--danger);white-space:nowrap;">−${fmtNum(c.montant||0)} MRU</div>
+        </div>`
+      }));
+  }
+
+  // Trier par date+heure décroissant
+  rows.sort((a,b)=> (b._date+b._heure).localeCompare(a._date+a._heure));
+
+  // Résumé
+  const allV = rows.filter(r=>r._type==='vente');
+  const allP = rows.filter(r=>r._type==='prod');
+  const allC = rows.filter(r=>r._type==='compta');
+  const sumCA  = (ls_get(LS.VENTES)||[]).filter(v=>inRange(v.date)&&(!empId||v.vendeurId===empId)).reduce((s,v)=>s+(v.total||0),0);
+  const sumKg  = (ls_get(LS.PROD)||[]).filter(p=>inRange(p.date)).reduce((s,p)=>s+(p.kg||0),0);
+  const sumDep = (ls_get(LS.COMPTA)||[]).filter(c=>inRange(c.date)).reduce((s,c)=>s+(c.montant||0),0);
+
+  const summary = document.getElementById('opSummary');
+  if(summary){
+    summary.style.display = rows.length ? 'block' : 'none';
+    document.getElementById('opSumVentes').textContent = allV.length;
+    document.getElementById('opSumCA').textContent     = fmtNum(sumCA);
+    document.getElementById('opSumKg').textContent     = fmtNum(sumKg);
+    document.getElementById('opSumDep').textContent    = fmtNum(sumDep);
+  }
+
+  const countEl = document.getElementById('opCount');
+  if(countEl) countEl.textContent = rows.length ? rows.length+' résultat(s)' : '';
+
+  if(!rows.length){ el.innerHTML='<div class="empty-state">Aucun résultat pour cette période.</div>'; return; }
+  el.innerHTML = rows.map(r=>`<div style="padding:10px 0;border-bottom:1px solid var(--brand-border);">${r.html}</div>`).join('');
+}
+function showCompTab(name, btn){
+  ['sal','act','ach','tax','exp'].forEach(t=>{
+    const el = document.getElementById('comp-'+t);
+    if(el) el.style.display = (t===name) ? 'block' : 'none';
+  });
+  document.querySelectorAll('#comptablePage .tab-btn').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  if(name==='sal') renderHistSal();
+  if(name==='act'){ refreshCompActList(); renderHistAct(); }
+  if(name==='ach') renderHistAch();
+  if(name==='tax') renderHistTax();
+  if(name==='exp'){ setExpPeriode('month'); }
+}
+
+// ═══════════════════════════════════════════
+//  LANGUE
+// ═══════════════════════════════════════════
+let lang = 'fr';
+const TXT = {
+  fr:{
+    labelId:'Identifiant', labelPass:'Mot de passe',
+    forgot:'Mot de passe oublié ?',
+    forgotMsg:'Veuillez contacter votre supérieur direct pour réinitialiser votre mot de passe.',
+    loginBtn:'Se connecter', info:'Les comptes sont créés et gérés par le gérant.',
+    ph:'Ex : V001', erreur:'Identifiant ou mot de passe incorrect.',
+    roles:{ gerant:'Gérant', vendeur:'Vendeur', operateur:'Opérateur', comptable:'Comptable' },
+    rolesAr:{ gerant:'مدير', vendeur:'بائع', operateur:'مشغّل', comptable:'محاسب' }
+  },
+  ar:{
+    labelId:'رقم التعريف', labelPass:'كلمة المرور',
+    forgot:'نسيت كلمة المرور؟',
+    forgotMsg:'يرجى التواصل مع مسؤولك المباشر لإعادة تعيين كلمة المرور.',
+    loginBtn:'دخول', info:'الحسابات تُنشأ وتُدار من طرف المدير.',
+    ph:'مثال: V001', erreur:'رقم التعريف أو كلمة المرور غير صحيحة.',
+    roles:{ gerant:'مدير', vendeur:'بائع', operateur:'مشغّل', comptable:'محاسب' },
+    rolesAr:{ gerant:'Gérant', vendeur:'Vendeur', operateur:'Opérateur', comptable:'Comptable' }
+  }
+};
+
+function setLang(l){
+  lang = l;
+  ls_set('lb_lang', l);
+  const isAr = l === 'ar';
+  
+  // Direction du document
+  document.documentElement.lang = isAr ? 'ar' : 'fr';
+  document.documentElement.dir  = isAr ? 'rtl' : 'ltr';
+  // Protéger le logo et les boutons de langue - toujours LTR
+  document.querySelectorAll('.login-logo-wrap, [data-no-translate], .lang-toggle, .lang-btn, .top-lang-btns, [onclick*="setLang"]').forEach(el => {
+    el.setAttribute('dir', 'ltr');
+    el.style.direction = 'ltr';
+    el.style.textAlign = 'center';
+  });
+  
+  // Tous les éléments marqués data-fr / data-ar
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    el.textContent = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-fr');
+  });
+  
+  // Boutons de langue
+  document.querySelectorAll('.lang-btn').forEach((b,i) =>
+    b.classList.toggle('on', (l==='fr'&&i===0)||(l==='ar'&&i===1))
+  );
+  
+  // Champs login spécifiques
+  const t = TXT[l];
+  if(document.getElementById('lbl_id')) document.getElementById('lbl_id').textContent = t.labelId;
+  if(document.getElementById('lbl_pw')) document.getElementById('lbl_pw').textContent = t.labelPass;
+  if(document.getElementById('forgotLink')) document.getElementById('forgotLink').textContent = t.forgot;
+  if(document.getElementById('btnLogin')) document.getElementById('btnLogin').textContent = t.loginBtn;
+  if(document.getElementById('infoTxt')) document.getElementById('infoTxt').textContent = t.info;
+  if(document.getElementById('loginId')) document.getElementById('loginId').placeholder = t.ph;
+
+  // Placeholders inputs selon direction
+  document.querySelectorAll('input[type="text"], input[type="number"], input[type="tel"], textarea, select').forEach(el => {
+    el.style.textAlign = isAr ? 'right' : 'left';
+    el.dir = isAr ? 'rtl' : 'ltr';
+  });
+  // Inputs password restent LTR
+  document.querySelectorAll('input[type="password"]').forEach(el => {
+    el.style.textAlign = 'left';
+    el.dir = 'ltr';
+  });
+  
+  // Cards title, tab-btn, fl labels via data-fr
+  document.querySelectorAll('.card-title, .tab-btn, .fl, .btn, .empty-state').forEach(el => {
+    if(el.hasAttribute('data-fr')){
+      el.textContent = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-fr');
+    }
+  });
+  
+  detectRole();
+}
+
+
+// ═══════════════════════════════════════════
+//  LOGIN
+// ═══════════════════════════════════════════
+const ADMIN = { id:'GERANT', pass:'lebroud2026', nom:'Gérant', role:'gerant' };
+
+function getUsers(){ return ls_get(LS.USERS) || []; }
+
+function detectRole(){
+  const val = document.getElementById('loginId').value.trim().toUpperCase();
+  const badge = document.getElementById('roleBadge');
+  const roleColors = { gerant:'#1A5276', vendeur:'#1E8449', operateur:'#784212', comptable:'#6C3483' };
+  const roleIcons  = { gerant:'👔', vendeur:'🛒', operateur:'⚙️', comptable:'📒' };
+  const t = TXT[lang];
+  // Admin
+  if(val === 'GERANT'){
+    document.getElementById('roleNameTxt').textContent = t.roles.gerant;
+    document.getElementById('roleArTxt').textContent = t.rolesAr.gerant;
+    badge.style.display='block'; return;
+  }
+  // Employés
+  const users = getUsers();
+  const found = users.find(u => u.identifiant && u.identifiant.toUpperCase() === val);
+  if(found){
+    const role = found.role || 'vendeur';
+    document.getElementById('roleNameTxt').textContent = t.roles[role] || role;
+    document.getElementById('roleArTxt').textContent = t.rolesAr[role] || role;
+    badge.style.display='block';
+  } else {
+    badge.style.display='none';
+  }
+}
+
+function toggleForgot(){
+  const msg = document.getElementById('forgotMsg');
+  const t = TXT[lang];
+  msg.textContent = t.forgotMsg;
+  msg.style.display = (msg.style.display==='block') ? 'none' : 'block';
+}
+
+function doLogin(){
+  const id = document.getElementById('loginId').value.trim();
+  const pass = document.getElementById('loginPw').value.trim();
+  const errEl = document.getElementById('loginError');
+  errEl.textContent=''; errEl.style.display='none';
+  const t = TXT[lang];
+
+  if(!id || !pass){
+    errEl.textContent = lang==='fr' ? 'Remplissez les deux champs.' : 'يرجى ملء الحقلين.';
+    errEl.style.display='block'; return;
+  }
+
+  // Admin
+  if(id.toUpperCase() === ADMIN.id && pass === ADMIN.pass){
+    currentUser = { nom:'Gérant', role:'gerant', identifiant:'GERANT' };
+    ls_set(LS.CURRENT, currentUser);
+    logConnexion(currentUser);
+    enterRole('gerant'); return;
+  }
+
+  // Employés
+  const users = getUsers();
+  const user = users.find(u => u.identifiant === id && u.password === pass);
+  if(user){
+    currentUser = user;
+    ls_set(LS.CURRENT, user);
+    logConnexion(user);
+    enterRole(user.role); return;
+  }
+
+  errEl.textContent = t.erreur;
+  errEl.style.display='block';
+  document.getElementById('loginPw').value = '';
+}
+
+function enterRole(role){
+  switch(role){
+    case 'gerant':    initGerant();    showScreen('gerant');    break;
+    case 'vendeur':   initVendeur();   showScreen('vendeur');   break;
+    case 'operateur': initOperateur(); showScreen('operateur'); break;
+    case 'comptable': initComptable(); showScreen('comptable'); break;
+    default:
+      document.getElementById('loginError').textContent = 'Rôle inconnu.';
+      document.getElementById('loginError').style.display='block';
+  }
+}
+
+function confirmLogout(){ doLogout(); }
+function doLogout(){
+  showModal('Déconnexion', 'Voulez-vous vraiment vous déconnecter ?', '#C0392B', 'Confirmer', ()=>{
+    currentUser = null;
+    ls_set(LS.CURRENT, null);
+    opTimer.running = false;
+    clearInterval(opTimer.iv);
+    opTimer = { secs:0, running:false, iv:null, arrets:[] };
+    document.getElementById('loginId').value = '';
+    document.getElementById('loginPw').value = '';
+    document.getElementById('roleBadge').classList.remove('show');
+    document.getElementById('loginError').style.display='none';
+    document.getElementById('forgotMsg').classList.remove('show');
+    showScreen('login');
+  });
+}
+
+function openProfile(){
+  toast('Profil — bientôt disponible');
+}
+
+// ═══════════════════════════════════════════
+//  GÉRANT — INIT
+// ═══════════════════════════════════════════
+function initGerant(){
+  setAvatar(document.getElementById('gerAvatar'), currentUser);
+  const gerDate = document.getElementById('gerDate');
+  if(gerDate) gerDate.textContent = fmtDate();
+  refreshDashboard();
+  loadPrixDisplay();
+  loadObjDisplay();
+  renderEmpList();
+  renderActList();
+  updateChatBadges();
+  renderNotifs();
+  renderConnexions();
+  setTimeout(renderChart, 400);
+}
+
+function refreshDashboard(){
+  const ventes = (ls_get(LS.VENTES)||[]).filter(v=>v.date===today());
+  const totalKg = ventes.reduce((s,v)=>s+(v.poids||0),0);
+  const totalCA = ventes.reduce((s,v)=>s+(v.total||0),0);
+  const el_vkg = document.getElementById('dashVKg');
+  const el_ca  = document.getElementById('dashCA');
+  if(el_vkg) el_vkg.innerHTML = fmtNum(totalKg)+' <span class="stat-unit">kg</span>';
+  if(el_ca)  el_ca.innerHTML  = fmtNum(totalCA)+' <span class="stat-unit">MRU</span>';
+
+  const prod = (ls_get(LS.PROD)||[]).filter(p=>p.date===today());
+  const totalProd = prod.reduce((s,p)=>s+(p.kg||0),0);
+  const el_prod = document.getElementById('dashProd');
+  if(el_prod) el_prod.innerHTML = fmtNum(totalProd)+' <span class="stat-unit">kg</span>';
+
+  const users = getUsers();
+  const el_emps = document.getElementById('dashEmps');
+  if(el_emps) el_emps.textContent = users.length;
+
+  const equipeEl = document.getElementById('dashEmpList');
+  if(!users.length){ equipeEl.innerHTML = '<div class="empty-state">Aucun employé enregistré.</div>'; return; }
+  equipeEl.innerHTML = users.map(u=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--brand-border);">
+      <div class="tb-avatar" style="width:48px;height:48px;border-radius:14px;flex-shrink:0;">
+        ${u.photo?`<img src="${u.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:14px;"/>`:`<span style="font-size:15px;font-weight:800;color:#AED6F1;">${getInitials(u.nom)}</span>`}
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:14px;font-weight:700;color:var(--brand);">${u.nom}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">${u.identifiant} · ${getRoleLabel(u.role)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function getRoleLabel(role){
+  const map = { gerant:'Gérant', vendeur:'Vendeur', operateur:'Opérateur', comptable:'Comptable' };
+  return map[role] || role;
+}
+
+// ═══════════════════════════════════════════
+//  GÉRANT — PRIX & OBJECTIFS
+// ═══════════════════════════════════════════
+function loadPrixDisplay(){
+  const prix = ls_get(LS.PRIX);
+  document.getElementById('prixActuel').textContent = prix ? fmtNum(prix.val)+' MRU/kg' : '— MRU/kg';
+  if(prix) document.getElementById('prixInput').value = prix.val;
+}
+
+function savePrix(){
+  const val = parseFloat(document.getElementById('prixInput').value);
+  if(!val||val<=0){ toast('Entrez un prix valide.'); return; }
+  ls_set(LS.PRIX, {val, date:today()});
+  loadPrixDisplay();
+  toast('Prix enregistré : '+fmtNum(val)+' MRU/kg');
+}
+
+function loadObjDisplay(){
+  const obj = ls_get(LS.OBJECTIFS);
+  if(obj){
+    document.getElementById('objVentes').value = obj.ventes || '';
+    document.getElementById('objProd').value = obj.prod || '';
+  }
+}
+
+function saveObjectifs(){
+  const ventes = parseInt(document.getElementById('objVentes').value)||0;
+  const prod = parseInt(document.getElementById('objProd').value)||0;
+  ls_set(LS.OBJECTIFS, {ventes, prod});
+  toast('Objectifs enregistrés');
+}
+
+// ═══════════════════════════════════════════
+//  GÉRANT — EMPLOYÉS
+// ═══════════════════════════════════════════
+function previewEmpPhoto(input){
+  const file = (input || document.getElementById('empPhotoInput')).files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    // Compresser via canvas : max 200x200, qualité 0.6
+    const img = new Image();
+    img.onload = ()=>{
+      const canvas = document.createElement('canvas');
+      const MAX = 200;
+      let w = img.width, h = img.height;
+      if(w > h){ if(w>MAX){h=Math.round(h*MAX/w);w=MAX;} } else { if(h>MAX){w=Math.round(w*MAX/h);h=MAX;} }
+      canvas.width=w; canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      empPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.6);
+      const prev = document.getElementById('empPhotoPreview');
+      if(prev) prev.innerHTML = `<img src="${empPhotoDataUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"/>`;
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveEmp(){
+  const nom        = document.getElementById('empNom').value.trim();
+  const role       = document.getElementById('empRole').value;
+  const salaire    = parseInt(document.getElementById('empSalaire').value)||0;
+  const identifiant= document.getElementById('empLogin').value.trim();
+  const password   = document.getElementById('empPass').value.trim();
+  const editId     = document.getElementById('empEditId').value;
+
+  if(!nom||!identifiant||!password){ toast('Remplissez nom, identifiant et mot de passe.'); return; }
+
+  const users = getUsers();
+  const doublon = users.find(u=>u.identifiant===identifiant && u.id!==editId);
+  if(doublon){ toast('Identifiant déjà utilisé.'); return; }
+
+  if(editId){
+    const idx = users.findIndex(u=>u.id===editId);
+    if(idx>=0){
+      users[idx] = {...users[idx], nom, role, salaire, identifiant, password, photo: empPhotoDataUrl||users[idx].photo };
+    }
+  } else {
+    users.push({ id:genId(), nom, role, salaire, identifiant, password, photo:empPhotoDataUrl||null });
+  }
+  ls_set(LS.USERS, users);
+  resetEmpForm();
+  renderEmpList();
+  toast(editId ? 'Employé modifié ✓' : 'Employé ajouté ✓');
+  syncUsersToSupabase();
+  // Sync Supabase en arrière-plan
+  sbSyncUsersAfterSave();
+}
+
+function resetEmpForm(){
+  ['empNom','empSalaire','empLogin','empPass','empEditId'].forEach(id=>{
+    const el = document.getElementById(id); if(el) el.value='';
+  });
+  const role = document.getElementById('empRole'); if(role) role.value='vendeur';
+  const prev = document.getElementById('empPhotoPreview'); if(prev) prev.innerHTML='📷';
+  const title = document.getElementById('empFormTitle'); if(title) title.textContent='Ajouter un employé';
+  const cancelBtn = document.getElementById('empCancelBtn'); if(cancelBtn) cancelBtn.style.display='none';
+  empPhotoDataUrl = null;
+}
+
+function renderEmpList(){
+  const users = getUsers();
+  const el = document.getElementById('empList');
+  if(!users.length){ el.innerHTML='<div class="empty">Aucun employé enregistré.</div>'; return; }
+  el.innerHTML = users.map(u=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--brand-border);">
+      <div class="tb-avatar" style="width:48px;height:48px;border-radius:14px;flex-shrink:0;">
+        ${u.photo?`<img src="${u.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:14px;"/>`:`<span style="font-size:15px;font-weight:800;color:#AED6F1;">${getInitials(u.nom)}</span>`}
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:14px;font-weight:700;color:var(--brand);">${u.nom}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">${u.identifiant} · ${getRoleLabel(u.role)} · ${fmtNum(u.salaire)} MRU/mois</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        <button onclick="editEmp('${u.id}')" style="width:32px;height:32px;border:none;border-radius:10px;background:var(--brand-pale);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button>
+        <button onclick="deleteEmp('${u.id}')" style="width:32px;height:32px;border:none;border-radius:10px;background:#FDEDEC;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        </button>
+      </div>
+    </div>
+  `).join('');
+  // Mettre à jour la liste comptable salaires
+  refreshCompSalList();
+}
+
+function editEmp(id){
+  const u = getUsers().find(u=>u.id===id);
+  if(!u) return;
+  document.getElementById('empNom').value       = u.nom;
+  document.getElementById('empRole').value      = u.role;
+  document.getElementById('empSalaire').value   = u.salaire;
+  document.getElementById('empLogin').value     = u.identifiant;
+  document.getElementById('empPass').value      = u.password;
+  document.getElementById('empEditId').value    = u.id;
+  const title = document.getElementById('empFormTitle'); if(title) title.textContent = "Modifier l'employé";
+  const cancelBtn = document.getElementById('empCancelBtn'); if(cancelBtn) cancelBtn.style.display='block';
+  if(u.photo){
+    empPhotoDataUrl = u.photo;
+    const prev = document.getElementById('empPhotoPreview');
+    if(prev) prev.innerHTML = `<img src="${u.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"/>`;
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function deleteEmp(id){
+  showModal('Supprimer l\'employé ?', 'Cette action supprimera le compte de connexion. Confirmer ?', '#C0392B', 'Supprimer', ()=>{
+    const users = getUsers().filter(u=>u.id!==id);
+    ls_set(LS.USERS, users);
+    renderEmpList();
+    toast('Employé supprimé');
+  });
+}
+
+// ═══════════════════════════════════════════
+//  GÉRANT — ACTIONNAIRES
+// ═══════════════════════════════════════════
+function getActeurs(){ return ls_get(LS.ACTEURS)||[]; }
+
+function saveActionnaire(){
+  const nom     = document.getElementById('actNom').value.trim();
+  const tel     = document.getElementById('actTel').value.trim();
+  const cin     = document.getElementById('actCin').value.trim();
+  const parts   = parseFloat(document.getElementById('actParts').value)||0;
+  const montant = parseFloat(document.getElementById('actMontant').value)||0;
+  const editId  = document.getElementById('actEditId').value;
+
+  if(!nom||!parts||!montant){ toast('Remplissez nom, parts et montant.'); return; }
+
+  const acteurs = getActeurs();
+  if(editId){
+    const idx = acteurs.findIndex(a=>a.id===editId);
+    if(idx>=0) acteurs[idx] = {...acteurs[idx], nom, tel, cin, parts, montant};
+  } else {
+    acteurs.push({ id:genId(), nom, tel, cin, parts, montant });
+  }
+  ls_set(LS.ACTEURS, acteurs);
+  resetActForm();
+  renderActList();
+  toast(editId ? 'Actionnaire modifié ✓' : 'Actionnaire ajouté ✓');
+}
+
+function resetActForm(){
+  ['actNom','actTel','actCin','actParts','actMontant','actEditId'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  const t=document.getElementById('actFormTitle'); if(t) t.textContent='Ajouter un actionnaire';
+  const c=document.getElementById('actCancelBtn'); if(c) c.style.display='none';
+}
+
+function renderActList(){
+  const acteurs = getActeurs();
+  const el = document.getElementById('actList');
+  if(!acteurs.length){ el.innerHTML='<div class="empty-state">Aucun actionnaire enregistré.</div>'; return; }
+  el.innerHTML = acteurs.map(a=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--brand-border);">
+      <div class="tb-avatar" style="width:44px;height:44px;border-radius:13px;flex-shrink:0;">
+        <span style="font-size:15px;font-weight:800;color:#AED6F1;">${getInitials(a.nom)}</span>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:13px;font-weight:700;color:var(--brand);">${a.nom}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:1px;">${a.parts}% · ${fmtNum(a.montant)} MRU/mois</div>
+        ${a.tel?`<div style="font-size:11px;color:var(--muted);">📞 ${a.tel}</div>`:''}
+        ${a.cin?`<div style="font-size:11px;color:var(--muted);">🪪 ${a.cin}</div>`:''}
+      </div>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        <button onclick="editActionnaire('${a.id}')" style="width:32px;height:32px;border:none;border-radius:10px;background:var(--brand-pale);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button>
+        <button onclick="deleteActionnaire('${a.id}')" style="width:32px;height:32px;border:none;border-radius:10px;background:#FDEDEC;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        </button>
+      </div>
+    </div>
+  `).join('');
+  refreshCompActList();
+}
+
+function editActionnaire(id){
+  const a = getActeurs().find(a=>a.id===id);
+  if(!a) return;
+  document.getElementById('actNom').value     = a.nom;
+  document.getElementById('actTel').value     = a.tel||'';
+  document.getElementById('actCin').value     = a.cin||'';
+  document.getElementById('actParts').value   = a.parts;
+  document.getElementById('actMontant').value = a.montant;
+  document.getElementById('actEditId').value  = a.id;
+  const t=document.getElementById('actFormTitle'); if(t) t.textContent="Modifier l'actionnaire";
+  const c=document.getElementById('actCancelBtn'); if(c) c.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function cancelActEdit(){ resetActForm(); }
+
+function deleteActionnaire(id){
+  showModal('Supprimer l\'actionnaire ?', 'Toutes les données liées seront supprimées. Confirmer ?', '#C0392B', 'Supprimer', ()=>{
+    ls_set(LS.ACTEURS, getActeurs().filter(a=>a.id!==id));
+    renderActList();
+    toast('Actionnaire supprimé');
+  });
+}
+
+// ═══════════════════════════════════════════
+//  GÉRANT — OPÉRATIONS
+// ═══════════════════════════════════════════
+function loadOperations(){
+  const type = document.getElementById('g-op-type').value;
+  const periode = document.getElementById('g-op-periode').value;
+  const el = document.getElementById('g-op-results');
+
+  let items = [];
+  let dateFilter = v => true;
+  if(periode==='today') dateFilter = v => v.date===today();
+  else if(periode==='month') dateFilter = v => v.date && v.date.startsWith(new Date().toISOString().slice(0,7));
+
+  if(type==='ventes'){
+    items = (ls_get(LS.VENTES)||[]).filter(dateFilter);
+    if(!items.length){ el.innerHTML='<div class="empty">Aucune vente sur cette période.</div>'; return; }
+    const total = items.reduce((s,v)=>s+(v.total||0),0);
+    el.innerHTML = `<div class="ir"><span class="il">Total ventes</span><span class="iv-green">${fmtNum(total)} MRU</span></div>`
+      + items.map(v=>`<div class="hist-item"><div><div class="hi-main">${v.clientNom||'—'} <span class="badge badge-vente">Vente</span></div><div class="hi-sub">${v.vendeurNom||''} · ${v.poids}kg · ${v.mode} · ${v.date}</div></div><div class="hi-amt" style="color:var(--vert);">+${fmtNum(v.total)} MRU</div></div>`).join('');
+  } else if(type==='production'){
+    items = (ls_get(LS.PROD)||[]).filter(dateFilter);
+    if(!items.length){ el.innerHTML='<div class="empty">Aucune production sur cette période.</div>'; return; }
+    el.innerHTML = items.map(p=>`<div class="hist-item"><div><div class="hi-main">${p.operateurNom||'—'} <span class="badge badge-prod"><span data-fr="Production" data-ar="الإنتاج">Production</span></span></div><div class="hi-sub">${p.date}</div></div><div class="hi-amt" style="color:var(--bleu);">${fmtNum(p.kg)} kg</div></div>`).join('');
+  } else {
+    items = (ls_get(LS.COMPTA)||[]).filter(dateFilter);
+    if(!items.length){ el.innerHTML='<div class="empty">Aucune opération comptable.</div>'; return; }
+    el.innerHTML = items.map(c=>`<div class="hist-item"><div><div class="hi-main">${c.titre} <span class="badge badge-${c.type||'ach'}">${c.typeLabel||c.type}</span></div><div class="hi-sub">${c.date||''}</div></div><div class="hi-amt amt-red">-${fmtNum(c.montant)} MRU</div></div>`).join('');
+  }
+}
+
+// ═══════════════════════════════════════════
+//  VENDEUR
+// ═══════════════════════════════════════════
+function initVendeur(){
+  setAvatar(document.getElementById('venAvatar'), currentUser);
+  document.getElementById('venIdTxt').textContent = (currentUser.identifiant||'')+' · '+fmtDate();
+  const venNom = document.getElementById('venNomTxt');
+  if(venNom) venNom.innerHTML = '<span style="font-size:14px;">🛒</span> '+(currentUser.nom||'Vendeur');
+  loadVendeurInfos();
+  renderVentes();
+}
+
+function loadVendeurInfos(){
+  const prix = ls_get(LS.PRIX);
+  const obj = ls_get(LS.OBJECTIFS);
+  document.getElementById('venPrix').textContent = prix ? fmtNum(prix.val)+' MRU/kg' : '— MRU/kg';
+  document.getElementById('venQuota').textContent = obj ? fmtNum(obj.ventes)+' kg' : '— kg';
+  updateVenteStats();
+}
+
+function getVentesToday(){
+  return (ls_get(LS.VENTES)||[]).filter(v=>v.date===today() && v.vendeurId===currentUser.id);
+}
+
+function updateVenteStats(){
+  const v = getVentesToday();
+  const obj = ls_get(LS.OBJECTIFS);
+  const quota = obj ? (obj.ventes||0) : 0;
+  const totalKg = v.reduce((s,x)=>s+(x.poids||0),0);
+  const totalCA = v.reduce((s,x)=>s+(x.total||0),0);
+  const pct = quota>0 ? Math.min(100,Math.round(totalKg/quota*100)) : 0;
+  document.getElementById('venTotal').textContent = fmtNum(totalKg)+' kg';
+  document.getElementById('venCA').textContent = fmtNum(totalCA)+' MRU';
+  document.getElementById('venPct').textContent = pct+'%';
+  document.getElementById('venPBar').style.width = pct+'%';
+}
+
+function calcVenteTotal(){
+  const poids = parseFloat(document.getElementById('venPoids').value)||0;
+  const prix = ls_get(LS.PRIX);
+  const prixVal = prix ? prix.val : 0;
+  const total = Math.round(poids * prixVal);
+  const el = document.getElementById('venTotalCalc');
+  if(el) el.value = fmtNum(total)+' MRU';
+}
+
+function ajouterVente(){
+  const nom = document.getElementById('venClient').value.trim();
+  const tel = document.getElementById('venTel').value.trim();
+  const poids = parseFloat(document.getElementById('venPoids').value)||0;
+  const mode = document.getElementById('venMode').value;
+  const editId = document.getElementById('venEditId').value;
+
+  if(!nom||!tel||!poids||!mode){ toast('Remplissez tous les champs.'); return; }
+
+  const prix = ls_get(LS.PRIX);
+  const prixVal = prix ? prix.val : 0;
+  const total = Math.round(poids * prixVal);
+
+  const allVentes = ls_get(LS.VENTES)||[];
+  if(editId){
+    const idx = allVentes.findIndex(v=>v.id===editId);
+    if(idx>=0) allVentes[idx] = {...allVentes[idx], clientNom:nom, clientTel:tel, poids, mode, total};
+    document.getElementById('venEditId').value = '';
+  } else {
+    allVentes.push({ id:genId(), vendeurId:currentUser.id, vendeurNom:currentUser.nom, clientNom:nom, clientTel:tel, poids, mode, total, date:today(), heure:nowTime() });
+    addNotif(`${currentUser.nom} a vendu ${poids} kg à ${nom} — ${fmtNum(total)} MRU`, 'vente');
+  }
+  ls_set(LS.VENTES, allVentes);
+  ['venClient','venTel','venPoids'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('venMode').value='';
+  document.getElementById('venTotalCalc').value='0 MRU';
+  renderVentes();
+  toast('Vente enregistrée : '+fmtNum(total)+' MRU');
+}
+
+function renderVentes(){
+  const ventes = getVentesToday();
+  const el = document.getElementById('venList');
+  if(!ventes.length){ el.innerHTML='<div class="empty-state">Aucune vente enregistrée.</div>'; updateVenteStats(); return; }
+  el.innerHTML = ventes.map(v=>`
+    <div style="padding:10px 0;border-bottom:1px solid var(--brand-border);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:700;color:var(--brand);">👤 ${v.clientNom}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">📞 ${v.clientTel} · ${v.poids} kg · ${v.mode}</div>
+          <div style="font-size:10px;color:var(--muted);">${v.heure||''}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;">
+          <div style="font-size:14px;font-weight:800;color:var(--accent);">${fmtNum(v.total)} MRU</div>
+          <div style="display:flex;gap:4px;">
+            <button onclick="editVente('${v.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:var(--brand-pale);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+            </button>
+            <button onclick="deleteVente('${v.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:#FDEDEC;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  updateVenteStats();
+}
+
+function editVente(id){
+  const all = ls_get(LS.VENTES)||[];
+  const v = all.find(x=>x.id===id);
+  if(!v) return;
+  document.getElementById('venClient').value = v.clientNom;
+  document.getElementById('venTel').value = v.clientTel;
+  document.getElementById('venPoids').value = v.poids;
+  document.getElementById('venMode').value = v.mode;
+  document.getElementById('venEditId').value = v.id;
+}
+
+function deleteVente(id){
+  showModal('Supprimer cette vente ?', 'Cette action est irréversible. Confirmer ?', '#C0392B', 'Supprimer', ()=>{
+    ls_set(LS.VENTES, (ls_get(LS.VENTES)||[]).filter(v=>v.id!==id));
+    renderVentes();
+    toast('Vente supprimée');
+  });
+}
+
+// ═══════════════════════════════════════════
+//  OPÉRATEUR
+// ═══════════════════════════════════════════
+const OP_OBJECTIF = 650;
+const OP_SPK = (24*3600) / OP_OBJECTIF;
+
+function initOperateur(){
+  setAvatar(document.getElementById('opAvatar'), currentUser);
+  document.getElementById('opIdTxt').textContent = (currentUser.identifiant||'')+' · '+fmtDate();
+  const opNom = document.getElementById('opNomTxt');
+  if(opNom) opNom.innerHTML = '<span style="font-size:14px;">⚙️</span> '+(currentUser.nom||'Opérateur');
+  const obj = ls_get(LS.OBJECTIFS);
+  const objProd = obj ? (obj.prod || OP_OBJECTIF) : OP_OBJECTIF;
+  document.getElementById('opObjectif').textContent = fmtNum(objProd)+' kg';
+  opRefreshUI();
+}
+
+function opFmt(s){
+  return [Math.floor(s/3600),Math.floor((s%3600)/60),s%60].map(n=>String(n).padStart(2,'0')).join(':');
+}
+
+function opRefreshUI(){
+  const obj = ls_get(LS.OBJECTIFS);
+  const objProd = obj ? (obj.prod||OP_OBJECTIF) : OP_OBJECTIF;
+  const kg = Math.floor(opTimer.secs / OP_SPK);
+  const pct = Math.min(100, Math.round(kg/objProd*100));
+  document.getElementById('opTimer').textContent = opFmt(opTimer.secs);
+  
+  document.getElementById('opKgVal').textContent = fmtNum(kg)+' kg';
+  document.getElementById('opPct').textContent = pct+'%';
+  document.getElementById('opPBar').style.width = pct+'%';
+}
+
+function opStart(){
+  if(opTimer.running) return;
+  opTimer.running = true;
+  opTimer.iv = setInterval(()=>{ opTimer.secs++; opRefreshUI(); }, 1000);
+  document.getElementById('opStatus').textContent = 'En production';
+  document.getElementById('opStatus').style.color = 'var(--vert)';
+  document.getElementById('opBtnStart').disabled = true;
+  document.getElementById('opBtnStop').disabled = false;
+}
+
+function opStop(){
+  clearInterval(opTimer.iv); opTimer.iv=null; opTimer.running=false;
+  document.getElementById('opStatus').textContent = 'Arrêtée';
+  document.getElementById('opStatus').style.color = 'var(--rouge)';
+  document.getElementById('opBtnStart').disabled = false;
+  document.getElementById('opBtnStop').disabled = true;
+}
+
+function opAskStop(){
+  if(!opTimer.running) return;
+  const cause = document.getElementById('opCauseSelect').value;
+  const autre = document.getElementById('opCauseAutre').value.trim();
+  if(!cause){ toast('Sélectionnez une cause d\'arrêt.'); return; }
+  if(cause==='Autre'&&!autre){ toast('Précisez la cause.'); return; }
+  const causeFinal = cause==='Autre' ? autre : cause;
+  showModal('Arrêter la machine ?', 'Cause : "'+causeFinal+'" — Confirmer l\'arrêt ?', '#C0392B', 'Confirmer', ()=>{
+    opStop();
+    opTimer.arrets.push({ id:genId(), heure:nowTime(), cause:causeFinal });
+    opRenderArrets();
+    document.getElementById('opCauseSelect').value='';
+    document.getElementById('opCauseAutre').value='';
+     document.getElementById('opAutreWrap').style.display='none';
+  });
+}
+
+function opAskFin(){
+  showModal('Fin de journée ?', 'Les données seront archivées et le timer remis à zéro. Confirmer ?', '#1A5276', 'Confirmer', ()=>{
+    opStop();
+    const kg = Math.floor(opTimer.secs / OP_SPK);
+    const prod = ls_get(LS.PROD)||[];
+    prod.push({ id:genId(), operateurId:currentUser.id, operateurNom:currentUser.nom, kg, arrets:opTimer.arrets.length, date:today() });
+    ls_set(LS.PROD, prod);
+    opTimer.secs=0; opTimer.arrets=[];
+    opRefreshUI(); opRenderArrets();
+    document.getElementById('opStatus').textContent = 'Journée archivée';
+    document.getElementById('opStatus').style.color = 'var(--bleu)';
+    toast('Journée archivée — '+fmtNum(kg)+' kg produits');
+  });
+}
+
+function opRenderArrets(){
+  const el = document.getElementById('opArretsList');
+  if(!opTimer.arrets.length){ el.innerHTML='<div class="empty-state">Aucun arrêt enregistré.</div>'; return; }
+  el.innerHTML = opTimer.arrets.map(a=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--brand-border);">
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:var(--brand);">🔴 ${a.cause}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">${a.heure||''}</div>
+      </div>
+      <button onclick="opDeleteArret('${a.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:#FDEDEC;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+      </button>
+    </div>
+  `).join('');
+}
+
+function opDeleteArret(id){
+  showModal('Supprimer cet arrêt ?', 'Cette action est irréversible. Confirmer ?', '#C0392B', 'Supprimer', ()=>{
+    opTimer.arrets = opTimer.arrets.filter(a=>a.id!==id);
+    opRenderArrets();
+    toast('Arrêt supprimé');
+  });
+}
+
+function opToggleAutre(){
+   document.getElementById('opAutreWrap').style.display =
+    document.getElementById('opCauseSelect').value==='Autre' ? 'block' : 'none';
+}
+
+// ═══════════════════════════════════════════
+//  COMPTABLE
+// ═══════════════════════════════════════════
+function initComptable(){
+  setAvatar(document.getElementById('compAvatar'), currentUser);
+  document.getElementById('compIdTxt').textContent = (currentUser.identifiant||'')+' · '+fmtDate();
+  const compNom = document.getElementById('compNomTxt');
+  if(compNom) compNom.innerHTML = '<span style="font-size:14px;">📒</span> '+(currentUser.nom||'Comptable');
+  refreshCompSalList();
+  refreshCompActList();
+  renderHistSal();
+  renderHistAct();
+  renderHistAch();
+  renderHistTax();
+  updateChatBadges();
+  const d = today();
+  ['achDate','taxDate','compActDate'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.value = d;
+  });
+}
+
+function refreshCompSalList(){
+  const users = getUsers();
+  const sel = document.getElementById('salEmpSelect');
+  if(!sel) return;
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">-- Sélectionner --</option>'
+    + users.map(u=>`<option value="${u.id}" data-sal="${u.salaire}">${u.nom} (${u.identifiant})</option>`).join('');
+  if(cur) sel.value = cur;
+  updateSalaire();
+}
+
+function updateSalaire(){
+  const sel = document.getElementById('salEmpSelect');
+  const opt = sel.options[sel.selectedIndex];
+  const sal = opt ? opt.dataset.sal : null;
+  document.getElementById('salMontantDisplay').value = sal ? fmtNum(sal)+' MRU' : '—';
+}
+
+function validerSalaire(){
+  const empSel = document.getElementById('salEmpSelect');
+  if(!empSel) return;
+  const empId  = empSel.value;
+  const empNom = empSel.options[empSel.selectedIndex]?.text || '';
+  const mois   = document.getElementById('salMoisSelect')?.value || '';
+  const montantTxt = document.getElementById('salMontantDisplay')?.value || '0';
+  const montant = parseInt(montantTxt.replace(/[^0-9]/g,''))||0;
+  const comment = document.getElementById('salComment')?.value.trim()||'';
+  if(!empId){ toast('Sélectionnez un employé.'); return; }
+  if(!montant){ toast('Aucun salaire défini pour cet employé.'); return; }
+  saveCompta({ type:'sal', typeLabel:'Salaire', titre:empNom, montant, mois, comment });
+  const sc = document.getElementById('salComment'); if(sc) sc.value='';
+  toast('Salaire enregistré : '+fmtNum(montant)+' MRU ✓');
+}
+
+function refreshCompActList(){
+  const acteurs = getActeurs();
+  // État
+  const stateEl = document.getElementById('compActList');
+  if(stateEl){
+    if(!acteurs.length){ stateEl.innerHTML='<div class="empty">Aucun actionnaire enregistré.</div>'; }
+    else {
+      const pays = ls_get(LS.ACTPAY)||[];
+      stateEl.innerHTML = acteurs.map(a=>{
+        const totalPaye = pays.filter(p=>p.actId===a.id).reduce((s,p)=>s+(p.montant||0),0);
+        const pct = a.montant>0 ? Math.min(100,Math.round(totalPaye/a.montant*100)) : 0;
+        const reste = Math.max(0, a.montant - totalPaye);
+        return `<div class="act-row">
+          <div class="act-top">
+            <div><div class="act-nom">${a.nom}</div><div class="act-parts">${a.parts}% des parts</div></div>
+            <div class="act-somme">${fmtNum(a.montant)} MRU</div>
+          </div>
+          <div class="act-bar-bg"><div class="act-bar" style="width:${pct}%"></div></div>
+          <div class="act-detail"><span>Versé : ${fmtNum(totalPaye)} MRU</span><span ${reste===0?'style="color:var(--vert);font-weight:700;"':''}>Reste : ${reste===0?'Soldé ✓':fmtNum(reste)+' MRU'}</span></div>
+        </div>`;
+      }).join('');
+    }
+  }
+  // Select avances
+  const sel = document.getElementById('compActSelect');
+  if(!sel) return;
+  sel.innerHTML = '<option value="">-- Sélectionner --</option>'
+    + acteurs.map(a=>`<option value="${a.id}" data-montant="${a.montant}">${a.nom} — ${fmtNum(a.montant)} MRU</option>`).join('');
+  updateActMontant();
+}
+
+function updateActMontant(){
+  const sel = document.getElementById('compActSelect');
+  const opt = sel.options[sel.selectedIndex];
+  const m = opt ? opt.dataset.montant : null;
+  document.getElementById('compActMontantDu').value = m ? fmtNum(m)+' MRU' : '—';
+}
+
+function validerAvance(){
+  const sel = document.getElementById('compActSelect');
+  const actId = sel.value;
+  const actNom = sel.options[sel.selectedIndex]?.text || '';
+  const avance = parseFloat(document.getElementById('compActAvance').value)||0;
+  const date = document.getElementById('compActDate').value || today();
+  const comment = document.getElementById('compActComment')?.value.trim()||'';
+  if(!actId){ toast('Sélectionnez un actionnaire.'); return; }
+  if(!avance||avance<=0){ toast('Saisissez un montant valide.'); return; }
+  // Sauver dans actpay
+  const pays = ls_get(LS.ACTPAY)||[];
+  pays.push({ id:genId(), actId, actNom, montant:avance, date, comment });
+  ls_set(LS.ACTPAY, pays);
+  saveCompta({ type:'act', typeLabel:'Actionnaire', titre:actNom+' (avance)', montant:avance, date, comment });
+  const caa = document.getElementById('compActAvance'); if(caa) caa.value='';
+  const cac = document.getElementById('compActComment'); if(cac) cac.value='';
+  refreshCompActList();
+  toast('Avance enregistrée : '+fmtNum(avance)+' MRU');
+}
+
+function validerAchat(){
+  const titre   = document.getElementById('achTitre')?.value.trim()||'';
+  const montant = parseFloat(document.getElementById('achMontant')?.value)||0;
+  const ref     = document.getElementById('achRef')?.value.trim()||'';
+  const date    = document.getElementById('achDate')?.value || today();
+  if(!titre||!montant){ toast('Remplissez le titre et le montant.'); return; }
+  saveCompta({ type:'ach', typeLabel:'Achat', titre, montant, ref, date });
+  ['achTitre','achMontant','achRef'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  toast('Achat enregistré : '+fmtNum(montant)+' MRU');
+}
+
+function validerTaxe(){
+  const type    = document.getElementById('taxType')?.value||'';
+  const autre   = document.getElementById('taxAutreTitre')?.value.trim()||'';
+  const montant = parseFloat(document.getElementById('taxMontant')?.value)||0;
+  const date    = document.getElementById('taxDate')?.value || today();
+  const comment = document.getElementById('taxComment')?.value.trim()||'';
+  if(!type){ toast('Sélectionnez un type.'); return; }
+  if(type==='Autre'&&!autre){ toast('Précisez le titre de la taxe.'); return; }
+  if(!montant){ toast('Saisissez le montant.'); return; }
+  const titre = type==='Autre' ? autre : type;
+  saveCompta({ type:'tax', typeLabel:'Taxe', titre, montant, date, comment });
+  ['taxMontant','taxAutreTitre','taxComment'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  const tsel = document.getElementById('taxType'); if(tsel) tsel.value='';
+  const tw = document.getElementById('taxAutreWrap'); if(tw) tw.style.display='none';
+  toast('Taxe enregistrée : '+fmtNum(montant)+' MRU');
+}
+
+function toggleTaxAutre(){
+   document.getElementById('taxAutreWrap').style.display =
+    document.getElementById('taxType').value==='Autre' ? 'block' : 'none';
+}
+
+// ═══════════════════════════════════════════
+//  COMPTABLE — FONCTIONS COMPLÈTES
+// ═══════════════════════════════════════════
+
+function getCompta(){ return ls_get(LS.COMPTA)||[]; }
+
+// ── SALAIRES ──
+function saveSalaire(){
+  const empSel  = document.getElementById('salEmpSelect');
+  const editId  = document.getElementById('salEditId')?.value||'';
+  const empId   = empSel?.value||'';
+  const empNom  = empSel?.options[empSel.selectedIndex]?.text||'';
+  const mois    = document.getElementById('salMoisSelect')?.value||'';
+  const montant = parseInt((document.getElementById('salMontantDisplay')?.value||'0').replace(/[^0-9]/g,''))||0;
+  const comment = document.getElementById('salComment')?.value.trim()||'';
+
+  if(!empId){ toast('Sélectionnez un employé.'); return; }
+  if(!montant){ toast('Aucun salaire défini pour cet employé.'); return; }
+
+  // Vérifier doublon (même employé + même mois) sauf si édition
+  const all = getCompta();
+  const doublon = all.find(c=>c.type==='sal' && c.empId===empId && c.mois===mois && c.id!==editId);
+  if(doublon && !editId){
+    showModal('Doublon détecté', `Un salaire pour ${empNom} en ${moisLabel(mois)} existe déjà (${fmtNum(doublon.montant)} MRU). Confirmer quand même ?`, '#E67E22', 'Confirmer', ()=>{
+      _doSaveSalaire(editId, empId, empNom, mois, montant, comment);
+    });
+    return;
+  }
+  _doSaveSalaire(editId, empId, empNom, mois, montant, comment);
+}
+
+function _doSaveSalaire(editId, empId, empNom, mois, montant, comment){
+  const all = getCompta();
+  if(editId){
+    const idx = all.findIndex(c=>c.id===editId);
+    if(idx>=0) all[idx] = {...all[idx], empId, titre:empNom, mois, montant, comment, par:currentUser.nom};
+  } else {
+    all.push({ id:genId(), type:'sal', typeLabel:'Salaire', empId, titre:empNom, mois, montant, comment, date:today(), par:currentUser.nom });
+  }
+  ls_set(LS.COMPTA, all);
+  cancelSalEdit();
+  renderHistSal();
+  toast((editId?'Salaire modifié':'Salaire enregistré')+' : '+fmtNum(montant)+' MRU ✓');
+}
+
+function cancelSalEdit(){
+  document.getElementById('salEditId').value='';
+  document.getElementById('salComment').value='';
+  const cb = document.getElementById('salCancelBtn'); if(cb) cb.style.display='none';
+}
+
+function editSalaire(id){
+  const c = getCompta().find(c=>c.id===id); if(!c) return;
+  document.getElementById('salEditId').value = id;
+  const sel = document.getElementById('salEmpSelect');
+  if(sel){ sel.value=c.empId; updateSalaire(); }
+  const ms = document.getElementById('salMoisSelect'); if(ms) ms.value=c.mois||'';
+  const sc = document.getElementById('salComment'); if(sc) sc.value=c.comment||'';
+  const cb = document.getElementById('salCancelBtn'); if(cb) cb.style.display='block';
+  document.getElementById('comp-sal').scrollTo({top:0,behavior:'smooth'});
+  toast('Modification en cours...');
+}
+
+function deleteSalaire(id){
+  const c = getCompta().find(c=>c.id===id); if(!c) return;
+  showModal('Supprimer ?', `Supprimer le salaire de ${c.titre} (${fmtNum(c.montant)} MRU) ?`, '#C0392B', 'Supprimer', ()=>{
+    ls_set(LS.COMPTA, getCompta().filter(x=>x.id!==id));
+    renderHistSal();
+    toast('Supprimé');
+  });
+}
+
+function renderHistSal(){
+  const el = document.getElementById('histSal'); if(!el) return;
+  const all = getCompta().filter(c=>c.type==='sal').sort((a,b)=>b.date.localeCompare(a.date));
+  if(!all.length){ el.innerHTML='<div class="empty-state">Aucun paiement enregistré.</div>'; return; }
+  el.innerHTML = all.map(c=>`
+    <div style="padding:10px 0;border-bottom:1px solid var(--brand-border);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--brand);">👤 ${c.titre}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">${moisLabel(c.mois||'')} · ${c.date} ${c.comment?'· '+c.comment:''}</div>
+          <div style="font-size:10px;color:var(--muted);">Par : ${c.par||'—'}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:14px;font-weight:800;color:var(--danger);">−${fmtNum(c.montant)} MRU</div>
+          <div style="display:flex;gap:4px;margin-top:4px;justify-content:flex-end;">
+            <button onclick="editSalaire('${c.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:var(--brand-pale);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+            </button>
+            <button onclick="deleteSalaire('${c.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:#FDEDEC;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ── ACTIONNAIRES ──
+function updateActMontant(){
+  const sel = document.getElementById('compActSelect');
+  const opt = sel?.options[sel.selectedIndex];
+  const m = opt ? opt.dataset.montant : null;
+  const el = document.getElementById('compActMontantDu');
+  if(el) el.value = m ? fmtNum(m)+' MRU/mois' : '—';
+  checkAvanceLimit();
+}
+
+function checkAvanceLimit(){
+  const sel = document.getElementById('compActSelect');
+  const opt = sel?.options[sel.selectedIndex];
+  const maxMontant = parseFloat(opt?.dataset.montant||0);
+  const saisi = parseFloat(document.getElementById('compActAvance')?.value||0);
+  const alertEl = document.getElementById('avanceDepassAlert');
+  const inputEl = document.getElementById('compActAvance');
+  if(maxMontant>0 && saisi>maxMontant){
+    if(alertEl){ alertEl.style.display='block'; alertEl.textContent=`❌ Dépassement : ${fmtNum(saisi)} MRU > ${fmtNum(maxMontant)} MRU autorisé. Le versement sera bloqué.`; }
+    if(inputEl) inputEl.style.borderColor='#C0392B';
+  } else {
+    if(alertEl) alertEl.style.display='none';
+    if(inputEl) inputEl.style.borderColor='';
+  }
+}
+
+function saveAvance(){
+  const sel     = document.getElementById('compActSelect');
+  const editId  = document.getElementById('avanceEditId')?.value||'';
+  const actId   = sel?.value||'';
+  const actNom  = sel?.options[sel.selectedIndex]?.text.split(' —')[0]||'';
+  const avance  = parseFloat(document.getElementById('compActAvance')?.value)||0;
+  const date    = document.getElementById('compActDate')?.value||today();
+  const comment = document.getElementById('compActComment')?.value.trim()||'';
+  const maxMontant = parseFloat(sel?.options[sel.selectedIndex]?.dataset.montant||0);
+
+  const mois = document.getElementById('compActMois')?.value || today().slice(5,7);
+
+  if(!actId){ toast('Sélectionnez un actionnaire.'); return; }
+  if(!avance||avance<=0){ toast('Saisissez un montant valide.'); return; }
+  // BLOCAGE STRICT — ne pas permettre de dépasser le montant dû
+  if(maxMontant>0 && avance>maxMontant){
+    toast(`❌ Impossible : ${fmtNum(avance)} MRU dépasse le montant dû (${fmtNum(maxMontant)} MRU/mois).`);
+    return;
+  }
+
+  const all = getCompta();
+  if(editId){
+    const idx = all.findIndex(c=>c.id===editId);
+    if(idx>=0) all[idx]={...all[idx], actId, titre:actNom, mois, montant:avance, date, comment, par:currentUser.nom};
+  } else {
+    all.push({ id:genId(), type:'act', typeLabel:'Actionnaire', actId, titre:actNom, mois, montant:avance, date, comment, par:currentUser.nom });
+    const pays = ls_get(LS.ACTPAY)||[];
+    pays.push({ id:genId(), actId, actNom, mois, montant:avance, date, comment });
+    ls_set(LS.ACTPAY, pays);
+  }
+  ls_set(LS.COMPTA, all);
+  cancelAvanceEdit();
+  refreshCompActList();
+  renderHistAct();
+  toast((editId?'Avance modifiée':'Avance enregistrée')+' : '+fmtNum(avance)+' MRU ✓');
+}
+
+function cancelAvanceEdit(){
+  document.getElementById('avanceEditId').value='';
+  const fields = ['compActAvance','compActComment'];
+  fields.forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  const cb=document.getElementById('avanceCancelBtn'); if(cb) cb.style.display='none';
+  checkAvanceLimit();
+}
+
+function editAvance(id){
+  const c = getCompta().find(c=>c.id===id); if(!c) return;
+  document.getElementById('avanceEditId').value=id;
+  const sel=document.getElementById('compActSelect'); if(sel){ sel.value=c.actId; updateActMontant(); }
+  const av=document.getElementById('compActAvance'); if(av) av.value=c.montant;
+  const dt=document.getElementById('compActDate'); if(dt) dt.value=c.date;
+  const cm=document.getElementById('compActComment'); if(cm) cm.value=c.comment||'';
+  const cb=document.getElementById('avanceCancelBtn'); if(cb) cb.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('comp-act')?.scrollTo({top:0,behavior:'smooth'});
+}
+
+function deleteAvance(id){
+  const c=getCompta().find(c=>c.id===id); if(!c) return;
+  showModal('Supprimer ?',`Supprimer l'avance de ${c.titre} (${fmtNum(c.montant)} MRU) ?`,'#C0392B','Supprimer',()=>{
+    ls_set(LS.COMPTA, getCompta().filter(x=>x.id!==id));
+    renderHistAct(); refreshCompActList();
+    toast('Supprimé');
+  });
+}
+
+function renderHistAct(){
+  const el=document.getElementById('histAct'); if(!el) return;
+  const all=getCompta().filter(c=>c.type==='act').sort((a,b)=>b.date.localeCompare(a.date));
+  if(!all.length){ el.innerHTML='<div class="empty-state">Aucune avance enregistrée.</div>'; return; }
+  el.innerHTML=all.map(c=>`
+    <div style="padding:10px 0;border-bottom:1px solid var(--brand-border);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--brand);">📊 ${c.titre}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">${moisLabel(c.mois||'')} · ${c.date} ${c.comment?'· '+c.comment:''}</div>
+          <div style="font-size:10px;color:var(--muted);">Par : ${c.par||'—'}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:14px;font-weight:800;color:var(--danger);">−${fmtNum(c.montant)} MRU</div>
+          <div style="display:flex;gap:4px;margin-top:4px;justify-content:flex-end;">
+            <button onclick="editAvance('${c.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:var(--brand-pale);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+            </button>
+            <button onclick="deleteAvance('${c.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:#FDEDEC;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ── ACHATS ──
+function saveAchat(){
+  const editId  = document.getElementById('achEditId')?.value||'';
+  const titre   = document.getElementById('achTitre')?.value.trim()||'';
+  const montant = parseFloat(document.getElementById('achMontant')?.value)||0;
+  const ref     = document.getElementById('achRef')?.value.trim()||'';
+  const date    = document.getElementById('achDate')?.value||today();
+  if(!titre||!montant){ toast('Remplissez le titre et le montant.'); return; }
+
+  const all = getCompta();
+  if(editId){
+    const idx=all.findIndex(c=>c.id===editId);
+    if(idx>=0) all[idx]={...all[idx], titre, montant, ref, date, par:currentUser.nom};
+  } else {
+    all.push({ id:genId(), type:'ach', typeLabel:'Achat', titre, montant, ref, date, par:currentUser.nom });
+  }
+  ls_set(LS.COMPTA, all);
+  cancelAchEdit();
+  renderHistAch();
+  toast((editId?'Achat modifié':'Achat enregistré')+' : '+fmtNum(montant)+' MRU ✓');
+}
+
+function cancelAchEdit(){
+  document.getElementById('achEditId').value='';
+  ['achTitre','achMontant','achRef'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  const cb=document.getElementById('achCancelBtn'); if(cb) cb.style.display='none';
+}
+
+function editAchat(id){
+  const c=getCompta().find(c=>c.id===id); if(!c) return;
+  document.getElementById('achEditId').value=id;
+  document.getElementById('achTitre').value=c.titre||'';
+  document.getElementById('achMontant').value=c.montant||'';
+  document.getElementById('achRef').value=c.ref||'';
+  document.getElementById('achDate').value=c.date||'';
+  const cb=document.getElementById('achCancelBtn'); if(cb) cb.style.display='block';
+  document.getElementById('comp-ach').scrollTo({top:0,behavior:'smooth'});
+}
+
+function deleteAchat(id){
+  const c=getCompta().find(c=>c.id===id); if(!c) return;
+  showModal('Supprimer ?',`Supprimer l'achat "${c.titre}" (${fmtNum(c.montant)} MRU) ?`,'#C0392B','Supprimer',()=>{
+    ls_set(LS.COMPTA, getCompta().filter(x=>x.id!==id));
+    renderHistAch(); toast('Supprimé');
+  });
+}
+
+function renderHistAch(){
+  const el=document.getElementById('histAch'); if(!el) return;
+  const all=getCompta().filter(c=>c.type==='ach').sort((a,b)=>b.date.localeCompare(a.date));
+  if(!all.length){ el.innerHTML='<div class="empty-state">Aucun achat enregistré.</div>'; return; }
+  el.innerHTML=all.map(c=>`
+    <div style="padding:10px 0;border-bottom:1px solid var(--brand-border);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--brand);">🛒 ${c.titre}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">${c.date}${c.ref?' · '+c.ref:''}</div>
+          <div style="font-size:10px;color:var(--muted);">Par : ${c.par||'—'}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:14px;font-weight:800;color:var(--danger);">−${fmtNum(c.montant)} MRU</div>
+          <div style="display:flex;gap:4px;margin-top:4px;justify-content:flex-end;">
+            <button onclick="editAchat('${c.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:var(--brand-pale);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+            </button>
+            <button onclick="deleteAchat('${c.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:#FDEDEC;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ── TAXES ──
+function saveTaxe(){
+  const editId  = document.getElementById('taxEditId')?.value||'';
+  const type    = document.getElementById('taxType')?.value||'';
+  const autre   = document.getElementById('taxAutreTitre')?.value.trim()||'';
+  const montant = parseFloat(document.getElementById('taxMontant')?.value)||0;
+  const date    = document.getElementById('taxDate')?.value||today();
+  const comment = document.getElementById('taxComment')?.value.trim()||'';
+  if(!type){ toast('Sélectionnez un type.'); return; }
+  if(type==='Autre'&&!autre){ toast('Précisez le titre de la taxe.'); return; }
+  if(!montant){ toast('Saisissez le montant.'); return; }
+  const titre = type==='Autre' ? autre : type;
+
+  const all = getCompta();
+  if(editId){
+    const idx=all.findIndex(c=>c.id===editId);
+    if(idx>=0) all[idx]={...all[idx], titre, montant, date, comment, par:currentUser.nom};
+  } else {
+    all.push({ id:genId(), type:'tax', typeLabel:'Taxe', titre, montant, date, comment, par:currentUser.nom });
+  }
+  ls_set(LS.COMPTA, all);
+  cancelTaxEdit();
+  renderHistTax();
+  toast((editId?'Taxe modifiée':'Taxe enregistrée')+' : '+fmtNum(montant)+' MRU ✓');
+}
+
+function cancelTaxEdit(){
+  document.getElementById('taxEditId').value='';
+  ['taxMontant','taxAutreTitre','taxComment'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  const tsel=document.getElementById('taxType'); if(tsel) tsel.value='';
+  const tw=document.getElementById('taxAutreWrap'); if(tw) tw.style.display='none';
+  const cb=document.getElementById('taxCancelBtn'); if(cb) cb.style.display='none';
+}
+
+function editTaxe(id){
+  const c=getCompta().find(c=>c.id===id); if(!c) return;
+  document.getElementById('taxEditId').value=id;
+  document.getElementById('taxType').value=c.titre||'';
+  document.getElementById('taxMontant').value=c.montant||'';
+  document.getElementById('taxDate').value=c.date||'';
+  document.getElementById('taxComment').value=c.comment||'';
+  const cb=document.getElementById('taxCancelBtn'); if(cb) cb.style.display='block';
+  document.getElementById('comp-tax').scrollTo({top:0,behavior:'smooth'});
+}
+
+function deleteTaxe(id){
+  const c=getCompta().find(c=>c.id===id); if(!c) return;
+  showModal('Supprimer ?',`Supprimer la taxe "${c.titre}" (${fmtNum(c.montant)} MRU) ?`,'#C0392B','Supprimer',()=>{
+    ls_set(LS.COMPTA, getCompta().filter(x=>x.id!==id));
+    renderHistTax(); toast('Supprimé');
+  });
+}
+
+function renderHistTax(){
+  const el=document.getElementById('histTax'); if(!el) return;
+  const all=getCompta().filter(c=>c.type==='tax').sort((a,b)=>b.date.localeCompare(a.date));
+  if(!all.length){ el.innerHTML='<div class="empty-state">Aucune taxe enregistrée.</div>'; return; }
+  el.innerHTML=all.map(c=>`
+    <div style="padding:10px 0;border-bottom:1px solid var(--brand-border);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--brand);">🏛️ ${c.titre}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">${moisLabel(c.mois||'')} · ${c.date} ${c.comment?'· '+c.comment:''}</div>
+          <div style="font-size:10px;color:var(--muted);">Par : ${c.par||'—'}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:14px;font-weight:800;color:var(--danger);">−${fmtNum(c.montant)} MRU</div>
+          <div style="display:flex;gap:4px;margin-top:4px;justify-content:flex-end;">
+            <button onclick="editTaxe('${c.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:var(--brand-pale);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+            </button>
+            <button onclick="deleteTaxe('${c.id}')" style="width:28px;height:28px;border:none;border-radius:8px;background:#FDEDEC;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ── UTILITAIRES ──
+function toggleTaxAutre(){
+  const tw=document.getElementById('taxAutreWrap');
+  if(tw) tw.style.display = document.getElementById('taxType')?.value==='Autre' ? 'block' : 'none';
+}
+
+function moisLabel(m){
+  const labels=['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  return labels[parseInt(m)]||m;
+}
+
+function saveCompta(item){
+  item.id=item.id||genId(); item.date=item.date||today(); item.par=currentUser.nom;
+  const all=ls_get(LS.COMPTA)||[]; all.push(item); ls_set(LS.COMPTA, all);
+  // Sync Supabase
+}
+
+function loadHistorique(){ renderHistSal(); renderHistAct(); renderHistAch(); renderHistTax(); }
+function refreshHist(){ loadHistorique(); }
+function validerSalaire(){ saveSalaire(); }
+function validerAvance(){ saveAvance(); }
+function validerAchat(){ saveAchat(); }
+function validerTaxe(){ saveTaxe(); }
+
+
+
+// ═══════════════════════════════════════════
+//  CHAT
+// ═══════════════════════════════════════════
+
+function getConversations(){
+  const msgs = getMsgs();
+  const users = getUsers();
+  const myId = currentUser.id || 'GERANT';
+  const convMap = {};
+
+  // Tous les utilisateurs sauf moi
+  const allUsers = [...users];
+  if(currentUser.role !== 'gerant'){
+    allUsers.push({ id:'GERANT', nom:'Gérant', role:'gerant', identifiant:'GERANT' });
+  }
+
+  allUsers.forEach(u=>{
+    if(u.id===myId) return;
+    const uid = u.id || 'GERANT';
+    const convMsgs = msgs.filter(m=>
+      (m.fromId===myId && m.toId===uid) ||
+      (m.fromId===uid && m.toId===myId)
+    );
+    const last = convMsgs[convMsgs.length-1];
+    const unread = convMsgs.filter(m=>m.toId===myId && !m.read).length;
+    convMap[uid] = { user:u, last, unread, count:convMsgs.length };
+  });
+  return Object.values(convMap);
+}
+
+// ═══════════════════════════════════════════
+//  CHAT — SYSTÈME COMPLET
+// ═══════════════════════════════════════════
+function getMsgs(){ return ls_get(LS.MESSAGES)||[]; }
+const PUBLIC_ID = 'PUBLIC';
+
+function openChatList(){
+  prevScreen = currentUser?.role || 'login';
+  renderChatConvList();
+  document.getElementById('chatListView').style.display = 'flex';
+  document.getElementById('chatConvView').style.display = 'none';
+  showScreen('chat-list');
+}
+
+function closeChatList(){
+  showScreen(prevScreen || (currentUser ? currentUser.role : 'login'));
+}
+
+function renderChatConvList(){
+  const myId = currentUser?.id || 'GERANT';
+  const allMsgs = getMsgs();
+  const users = getUsers();
+  // Ajouter le gérant si on n'est pas le gérant
+  let contacts = [...users];
+  if(currentUser?.role !== 'gerant'){
+    const gerant = { id:'GERANT', nom:'Gérant', role:'gerant', identifiant:'GERANT', photo:null };
+    if(!contacts.find(u=>u.id==='GERANT')) contacts.unshift(gerant);
+  }
+  // Exclure soi-même
+  contacts = contacts.filter(u=>(u.id||'GERANT') !== myId);
+
+  // Badge public
+  const pubUnread = allMsgs.filter(m=>m.toId===PUBLIC_ID && !m.readBy?.includes(myId)).length;
+  const pubBadge = document.getElementById('publicBadge');
+  if(pubBadge){ pubBadge.textContent=pubUnread; pubBadge.style.display=pubUnread>0?'flex':'none'; }
+
+  const el = document.getElementById('chatConvList');
+  if(!el) return;
+  if(!contacts.length){ el.innerHTML='<div class="empty-state">Aucun contact disponible.</div>'; return; }
+
+  el.innerHTML = contacts.map(u=>{
+    const uid = u.id || 'GERANT';
+    // Dernier message privé
+    const conv = allMsgs.filter(m=>
+      (m.fromId===myId && m.toId===uid)||(m.fromId===uid && m.toId===myId)
+    ).sort((a,b)=>(b.date+b.heure).localeCompare(a.date+a.heure));
+    const last = conv[0];
+    const unread = conv.filter(m=>m.fromId===uid && m.toId===myId && !m.read).length;
+    return `
+    <div onclick="openChatConv('${uid}')" style="display:flex;align-items:center;gap:12px;padding:11px 12px;background:var(--white);border-radius:14px;margin-bottom:8px;cursor:pointer;box-shadow:var(--shadow-sm);">
+      <div style="width:44px;height:44px;border-radius:13px;background:var(--brand);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        ${u.photo?`<img src="${u.photo}" style="width:100%;height:100%;object-fit:cover;"/>`:`<span style="font-size:14px;font-weight:800;color:#AED6F1;">${getInitials(u.nom)}</span>`}
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:13px;font-weight:700;color:var(--brand);">${u.nom}</div>
+        <div style="font-size:11px;color:var(--muted);">${getRoleLabel(u.role)}</div>
+        ${last?`<div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">${last.text}</div>`:''}
+      </div>
+      ${unread>0?`<div style="background:var(--brand);color:#fff;border-radius:20px;padding:2px 8px;font-size:11px;font-weight:700;flex-shrink:0;">${unread}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function openChatConv(userId){
+  const myId = currentUser?.id || 'GERANT';
+  currentChatUserId = userId;
+
+  // Définir le contact
+  let contact;
+  if(userId === PUBLIC_ID){
+    contact = { id:PUBLIC_ID, nom:'Canal public', role:'', identifiant:'' };
+  } else if(userId === 'GERANT'){
+    contact = { id:'GERANT', nom:'Gérant', role:'gerant', identifiant:'GERANT', photo:null };
+  } else {
+    contact = getUsers().find(u=>u.id===userId);
+    if(!contact) return;
+  }
+
+  // Header
+  const nameEl = document.getElementById('chatConvName');
+  const roleEl = document.getElementById('chatConvRole');
+  const avEl   = document.getElementById('chatConvAvatar');
+  if(nameEl) nameEl.textContent = contact.nom;
+  if(roleEl) roleEl.textContent = userId===PUBLIC_ID ? "Messages visibles par toute l'équipe" : getRoleLabel(contact.role);
+  if(avEl){
+    if(userId===PUBLIC_ID) avEl.innerHTML='📢';
+    else if(contact.photo) avEl.innerHTML=`<img src="${contact.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:11px;"/>`;
+    else avEl.innerHTML=`<span style="font-size:14px;font-weight:800;color:#AED6F1;">${getInitials(contact.nom)}</span>`;
+  }
+
+  // Marquer comme lus
+  const msgs = getMsgs().map(m=>{
+    if(userId===PUBLIC_ID){
+      if(m.toId===PUBLIC_ID){
+        const rb = m.readBy||[];
+        if(!rb.includes(myId)) return {...m, readBy:[...rb, myId]};
+      }
+    } else {
+      if(m.fromId===userId && m.toId===myId) return {...m, read:true};
+    }
+    return m;
+  });
+  ls_set(LS.MESSAGES, msgs);
+  updateChatBadges();
+
+  // Afficher fenêtre
+  document.getElementById('chatListView').style.display = 'none';
+  document.getElementById('chatConvView').style.display = 'flex';
+
+  renderChatMsgs();
+  setTimeout(()=>{
+    const el = document.getElementById('chatMessages');
+    if(el) el.scrollTop = el.scrollHeight;
+    document.getElementById('chatInputTxt')?.focus();
+  }, 100);
+}
+
+function closeChatConv(){
+  document.getElementById('chatConvView').style.display = 'none';
+  document.getElementById('chatListView').style.display = 'flex';
+  renderChatConvList();
+}
+
+function renderChatMsgs(){
+  const myId = currentUser?.id || 'GERANT';
+  const allMsgs = getMsgs();
+  let msgs;
+
+  if(currentChatUserId === PUBLIC_ID){
+    msgs = allMsgs.filter(m=>m.toId===PUBLIC_ID)
+      .sort((a,b)=>(a.date+a.heure).localeCompare(b.date+b.heure));
+  } else {
+    msgs = allMsgs.filter(m=>
+      (m.fromId===myId && m.toId===currentChatUserId)||
+      (m.fromId===currentChatUserId && m.toId===myId)
+    ).sort((a,b)=>(a.date+a.heure).localeCompare(b.date+b.heure));
+  }
+
+  const el = document.getElementById('chatMessages');
+  if(!el) return;
+  if(!msgs.length){
+    el.innerHTML='<div style="text-align:center;color:var(--muted);font-size:13px;margin-top:40px;">Commencez la conversation 👋</div>';
+    return;
+  }
+
+  el.innerHTML = msgs.map(m=>{
+    const mine = m.fromId === myId;
+    const senderName = mine ? 'Moi' : (m.fromNom || '—');
+    return `
+    <div style="display:flex;flex-direction:column;align-items:${mine?'flex-end':'flex-start'};">
+      ${(!mine && currentChatUserId===PUBLIC_ID)?`<div style="font-size:10px;color:var(--muted);margin-bottom:2px;margin-left:4px;">${senderName}</div>`:''}
+      <div style="max-width:80%;padding:10px 14px;border-radius:${mine?'18px 18px 4px 18px':'18px 18px 18px 4px'};
+        background:${mine?'var(--brand)':'var(--white)'};
+        color:${mine?'#fff':'var(--text)'};
+        font-size:13px;line-height:1.5;
+        box-shadow:var(--shadow-sm);">${m.text}</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px;${mine?'margin-right:4px;':'margin-left:4px;'}">${m.heure}</div>
+    </div>`;
+  }).join('');
+  el.scrollTop = el.scrollHeight;
+}
+
+function sendMsg(){
+  const input = document.getElementById('chatInputTxt');
+  if(!input) return;
+  const text = input.value.trim();
+  if(!text || !currentChatUserId) return;
+  const myId = currentUser?.id || 'GERANT';
+  const msgs = getMsgs();
+  const newMsg = {
+    id: genId(),
+    fromId: myId,
+    fromNom: currentUser?.nom || 'Gérant',
+    toId: currentChatUserId,
+    text,
+    heure: nowTime(),
+    date: today(),
+    read: false,
+    readBy: currentChatUserId===PUBLIC_ID ? [myId] : undefined,
+  };
+  msgs.push(newMsg);
+  ls_set(LS.MESSAGES, msgs);
+  input.value = '';
+  renderChatMsgs();
+  renderChatConvList();
+}
+
+function updateChatBadges(){
+  const myId = currentUser?.id || 'GERANT';
+  const allMsgs = getMsgs();
+  const unreadPriv = allMsgs.filter(m=>m.toId===myId && !m.read).length;
+  const unreadPub  = allMsgs.filter(m=>m.toId===PUBLIC_ID && !m.readBy?.includes(myId)).length;
+  const total = unreadPriv + unreadPub;
+  document.querySelectorAll('.chat-badge').forEach(b=>{
+    b.textContent = total;
+    b.style.display = total>0 ? 'flex' : 'none';
+  });
+}
+
+// ═══════════════════════════════════════════
+//  MODAL CONFIRMATION
+// ═══════════════════════════════════════════
+function showModal(titre, msg, couleur, btnTxt, action){
+  document.getElementById('modalTitle').textContent = titre;
+  document.getElementById('modalMsg').textContent = msg;
+  const okBtn = document.getElementById('modalOkBtn');
+  okBtn.style.background = couleur;
+  okBtn.textContent = btnTxt;
+  modalCb = action;
+  okBtn.onclick = doConfirm;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('show');
+  modalCb = null;
+}
+
+function doConfirm(){
+  const action = modalCb;
+  closeModal();
+  if(action) action();
+}
+
+// ═══════════════════════════════════════════
+//  INIT AU CHARGEMENT
+// ═══════════════════════════════════════════
+// Compresser les photos déjà stockées si trop lourdes
+function compressStoredPhotos(){
+  try {
+    const users = ls_get(LS.USERS) || [];
+    let changed = false;
+    users.forEach(u=>{
+      if(u.photo && u.photo.length > 30000){
+        // Redimensionner via canvas
+        const img = new Image();
+        img.onload = ()=>{
+          const canvas = document.createElement('canvas');
+          const MAX = 200;
+          let w=img.width, h=img.height;
+          if(w>h){if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}}else{if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}}
+          canvas.width=w; canvas.height=h;
+          canvas.getContext('2d').drawImage(img,0,0,w,h);
+          u.photo = canvas.toDataURL('image/jpeg',0.5);
+          try{ ls_set(LS.USERS, users); }catch(e){ console.warn('Quota toujours plein après compression'); }
+        };
+        img.src = u.photo;
+        changed = true;
+      }
+    });
+  } catch(e){ console.warn('compressStoredPhotos:', e); }
+}
+
+window.addEventListener('DOMContentLoaded', ()=>{
+  // Restaurer langue
+  const savedLang = ls_get('lb_lang') || 'fr';
+  if(savedLang !== 'fr') setLang(savedLang);
+
+  // Comprimer photos lourdes existantes
+  compressStoredPhotos();
+
+  // Toujours démarrer sur login
+  ls_set(LS.CURRENT, null);
+  showScreen('login');
+  // Sync Firebase
+  setTimeout(fbInitSync, 800);
+  // Date par défaut champs
+  document.querySelectorAll('input[type="date"]').forEach(el=>{
+    if(!el.value) el.value = today();
+  });
+});
+
+// Keyboard shortcut enter login
+
+// ═══════════════════════════════════════════
+//  EXPORT COMPTABLE
+// ═══════════════════════════════════════════
+let expPeriodeActif = 'month';
+
+function setExpPeriode(p){
+  expPeriodeActif = p;
+  ['week','month','year','custom'].forEach(x=>{
+    const b=document.getElementById('expBtn-'+x);
+    if(!b) return;
+    b.style.background = (x===p)?'var(--brand)':'var(--brand-pale)';
+    b.style.color = (x===p)?'#fff':'var(--brand)';
+  });
+  const dw = document.getElementById('expDatesWrap');
+  if(dw) dw.style.display = (p==='custom')?'block':'none';
+  if(p!=='custom') buildExpApercu();
+}
+
+function getExpRange(){
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0,10);
+  if(expPeriodeActif==='week'){
+    const d=new Date(); d.setDate(d.getDate()-6);
+    return { debut:d.toISOString().slice(0,10), fin:todayStr, label:'7 derniers jours' };
+  } else if(expPeriodeActif==='month'){
+    return { debut:todayStr.slice(0,7)+'-01', fin:todayStr, label:'Ce mois ('+moisLabel(todayStr.slice(5,7))+')' };
+  } else if(expPeriodeActif==='year'){
+    return { debut:now.getFullYear()+'-01-01', fin:todayStr, label:'Année '+now.getFullYear() };
+  } else {
+    const debut=document.getElementById('expDateDebut')?.value||todayStr.slice(0,7)+'-01';
+    const fin=document.getElementById('expDateFin')?.value||todayStr;
+    return { debut, fin, label:debut+' → '+fin };
+  }
+}
+
+function buildExpApercu(){
+  const {debut,fin,label} = getExpRange();
+  const inclSal = document.getElementById('expSal')?.checked;
+  const inclAct = document.getElementById('expAct')?.checked;
+  const inclAch = document.getElementById('expAch')?.checked;
+  const inclTax = document.getElementById('expTax')?.checked;
+
+  const all = getCompta().filter(c=>c.date>=debut && c.date<=fin);
+  const sal = inclSal ? all.filter(c=>c.type==='sal') : [];
+  const act = inclAct ? all.filter(c=>c.type==='act') : [];
+  const ach = inclAch ? all.filter(c=>c.type==='ach') : [];
+  const tax = inclTax ? all.filter(c=>c.type==='tax') : [];
+
+  const sumSal = sal.reduce((s,c)=>s+(c.montant||0),0);
+  const sumAct = act.reduce((s,c)=>s+(c.montant||0),0);
+  const sumAch = ach.reduce((s,c)=>s+(c.montant||0),0);
+  const sumTax = tax.reduce((s,c)=>s+(c.montant||0),0);
+  const total  = sumSal+sumAct+sumAch+sumTax;
+
+  const ap = document.getElementById('expApercu');
+  if(!ap) return;
+  ap.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px;font-size:12px;">📅 ${label}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      ${inclSal?`<div>💰 Salaires</div><div style="text-align:right;font-weight:700;color:var(--danger);">−${fmtNum(sumSal)} MRU (${sal.length})</div>`:''}
+      ${inclAct?`<div>📊 Actionnaires</div><div style="text-align:right;font-weight:700;color:var(--danger);">−${fmtNum(sumAct)} MRU (${act.length})</div>`:''}
+      ${inclAch?`<div>🛒 Achats</div><div style="text-align:right;font-weight:700;color:var(--danger);">−${fmtNum(sumAch)} MRU (${ach.length})</div>`:''}
+      ${inclTax?`<div>🏛️ Taxes</div><div style="text-align:right;font-weight:700;color:var(--danger);">−${fmtNum(sumTax)} MRU (${tax.length})</div>`:''}
+      <div style="font-weight:800;border-top:1px solid var(--brand-border);padding-top:6px;margin-top:2px;">TOTAL</div>
+      <div style="text-align:right;font-weight:800;color:var(--danger);border-top:1px solid var(--brand-border);padding-top:6px;">−${fmtNum(total)} MRU</div>
+    </div>`;
+}
+
+function exportCompta(format){
+  const {debut,fin,label} = getExpRange();
+  const inclSal = document.getElementById('expSal')?.checked;
+  const inclAct = document.getElementById('expAct')?.checked;
+  const inclAch = document.getElementById('expAch')?.checked;
+  const inclTax = document.getElementById('expTax')?.checked;
+
+  const all = getCompta().filter(c=>c.date>=debut && c.date<=fin);
+  let rows = [];
+  if(inclSal) rows.push(...all.filter(c=>c.type==='sal'));
+  if(inclAct) rows.push(...all.filter(c=>c.type==='act'));
+  if(inclAch) rows.push(...all.filter(c=>c.type==='ach'));
+  if(inclTax) rows.push(...all.filter(c=>c.type==='tax'));
+  rows.sort((a,b)=>a.date.localeCompare(b.date));
+
+  if(!rows.length){ toast('Aucune donnée pour cette période.'); return; }
+
+  if(format==='xlsx') exportCSV(rows, label);
+  if(format==='word') exportWord(rows, label);
+}
+
+function exportCSV(rows, label){
+  const header = ['Type','Titre','Montant (MRU)','Mois','Date','Commentaire','Par'];
+  const lines  = [header.join(';')];
+  rows.forEach(r=>{
+    lines.push([
+      r.typeLabel||r.type,
+      r.titre||'',
+      r.montant||0,
+      r.mois ? moisLabel(r.mois) : '',
+      r.date||'',
+      (r.comment||'').replace(/;/g,','),
+      r.par||''
+    ].join(';'));
+  });
+  // Totaux
+  const total = rows.reduce((s,r)=>s+(r.montant||0),0);
+  lines.push('');
+  lines.push(['TOTAL','',''+total,'','','',''].join(';'));
+
+  const blob = new Blob(['﻿'+lines.join('\n')], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'lebroud_compta_'+label.replace(/[^a-zA-Z0-9]/g,'_')+'.csv';
+  a.click();
+  toast('Export CSV téléchargé ✓');
+}
+
+function exportWord(rows, label){
+  const total = rows.reduce((s,r)=>s+(r.montant||0),0);
+  const lignes = rows.map(r=>`
+    <tr>
+      <td style="border:1px solid #ccc;padding:6px;">${r.typeLabel||r.type}</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.titre||''}</td>
+      <td style="border:1px solid #ccc;padding:6px;text-align:right;">${fmtNum(r.montant||0)} MRU</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.mois?moisLabel(r.mois):''}</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.date||''}</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.comment||''}</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.par||''}</td>
+    </tr>`).join('');
+
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"/>
+  <style>body{font-family:Arial,sans-serif;padding:20px;}h1{color:#1A5276;}table{border-collapse:collapse;width:100%;}
+  th{background:#1A5276;color:#fff;padding:8px;border:1px solid #ccc;} .total{font-weight:bold;background:#EBF5FB;}</style>
+  </head><body>
+  <h1>لبرود — Rapport comptable</h1>
+  <p><strong>Période :</strong> ${label} &nbsp;|&nbsp; <strong>Généré le :</strong> ${today()} &nbsp;|&nbsp; <strong>Par :</strong> ${currentUser?.nom||'—'}</p>
+  <table>
+    <thead><tr>
+      <th>Type</th><th>Titre</th><th>Montant</th><th>Mois</th><th>Date</th><th>Commentaire</th><th>Par</th>
+    </tr></thead>
+    <tbody>${lignes}
+      <tr class="total">
+        <td colspan="2" style="border:1px solid #ccc;padding:6px;text-align:right;">TOTAL</td>
+        <td style="border:1px solid #ccc;padding:6px;text-align:right;">${fmtNum(total)} MRU</td>
+        <td colspan="4" style="border:1px solid #ccc;padding:6px;"></td>
+      </tr>
+    </tbody>
+  </table>
+  </body></html>`;
+
+  const blob = new Blob([html], {type:'application/msword'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'lebroud_compta_'+label.replace(/[^a-zA-Z0-9]/g,'_')+'.doc';
+  a.click();
+  toast('Export Word téléchargé ✓');
+}
+
+document.getElementById('loginPw').addEventListener('keydown', e=>{
+  if(e.key==='Enter') doLogin();
+});
+
+// ═══════════════════════════════════════════
+//  SPLASH
+// ═══════════════════════════════════════════
+(function(){
+  const splash = document.getElementById('splashScreen');
+  if(!splash) return;
+  setTimeout(()=>{
+    splash.style.opacity = '0';
+    setTimeout(()=>{ splash.style.display='none'; }, 520);
+  }, 1800);
+})();
+
+// animation déclenchée depuis showScreen directement (voir fonction showScreen plus haut)
+
+// ═══════════════════════════════════════════
+//  NOTIFICATIONS
+// ═══════════════════════════════════════════
+function addNotif(msg, type='info'){
+  const notifs = ls_get(LS.NOTIFS) || [];
+  notifs.unshift({ id:genId(), msg, type, date:today(), heure:nowTime() });
+  if(notifs.length>20) notifs.pop();
+  ls_set(LS.NOTIFS, notifs);
+  renderNotifs();
+}
+function renderNotifs(){
+  const notifs = ls_get(LS.NOTIFS)||[];
+  const banner = document.getElementById('notifBanner');
+  const list   = document.getElementById('notifList');
+  if(!banner||!list) return;
+  if(!notifs.length){ banner.style.display='none'; return; }
+  banner.style.display='block';
+  list.innerHTML = notifs.slice(0,5).map(n=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #F9E79F;">
+      <div style="width:6px;height:6px;background:#F39C12;border-radius:50%;flex-shrink:0;"></div>
+      <div style="flex:1;font-size:12px;color:#7D6608;">${n.msg}</div>
+      <div style="font-size:10px;color:#B7950B;white-space:nowrap;">${n.heure}</div>
+    </div>`).join('');
+}
+function clearNotifs(){ ls_set(LS.NOTIFS,[]); renderNotifs(); }
+
+// ═══════════════════════════════════════════
+//  CONNEXIONS
+// ═══════════════════════════════════════════
+function logConnexion(user){
+  const conns = ls_get(LS.CONNEXIONS)||[];
+  conns.unshift({ id:genId(), nom:user.nom||'Gérant', role:user.role||'gerant', identifiant:user.identifiant||'GERANT', date:today(), heure:nowTime(), photo:user.photo||null });
+  if(conns.length>50) conns.pop();
+  ls_set(LS.CONNEXIONS, conns);
+  if(user.role !== 'gerant') addNotif(`${user.nom} (${getRoleLabel(user.role)}) vient de se connecter`, 'connexion');
+}
+function renderConnexions(){
+  const el = document.getElementById('connexionsList');
+  if(!el) return;
+  const conns = ls_get(LS.CONNEXIONS)||[];
+  if(!conns.length){ el.innerHTML='<div class="empty-state">Aucune connexion enregistrée.</div>'; return; }
+  el.innerHTML = conns.slice(0,10).map(c=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--brand-border);">
+      <div style="width:36px;height:36px;border-radius:10px;flex-shrink:0;overflow:hidden;background:var(--brand);display:flex;align-items:center;justify-content:center;">
+        ${c.photo?`<img src="${c.photo}" style="width:100%;height:100%;object-fit:cover;"/>`:`<span style="font-size:12px;font-weight:700;color:#AED6F1;">${getInitials(c.nom)}</span>`}
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:12px;font-weight:700;color:var(--brand);">${c.nom}</div>
+        <div style="font-size:11px;color:var(--muted);">${getRoleLabel(c.role)} · ${c.identifiant}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:11px;font-weight:600;color:var(--brand);">${c.heure}</div>
+        <div style="font-size:10px;color:var(--muted);">${c.date}</div>
+      </div>
+    </div>`).join('');
+}
+function clearConnexions(){ ls_set(LS.CONNEXIONS,[]); renderConnexions(); toast('Historique effacé'); }
+
+// ═══════════════════════════════════════════
+//  GRAPHIQUE
+// ═══════════════════════════════════════════
+let chartInstance = null;
+function renderChart(){
+  const canvas = document.getElementById('chartVentes');
+  if(!canvas || typeof Chart === 'undefined') return;
+  const allVentes = ls_get(LS.VENTES)||[];
+  const labels=[], dataKg=[];
+  for(let i=6;i>=0;i--){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const dateStr=d.toISOString().slice(0,10);
+    const label=d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric'});
+    const kg=allVentes.filter(v=>v.date===dateStr).reduce((s,v)=>s+(v.poids||0),0);
+    labels.push(label); dataKg.push(kg);
+  }
+  if(chartInstance){ chartInstance.destroy(); chartInstance=null; }
+  chartInstance = new Chart(canvas.getContext('2d'),{
+    type:'bar',
+    data:{ labels, datasets:[{ label:'kg', data:dataKg, backgroundColor:'rgba(26,82,118,0.75)', borderRadius:6, borderSkipped:false }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, scales:{ x:{ grid:{display:false}, ticks:{font:{size:10},color:'#7FB3D3'} }, y:{ beginAtZero:true, ticks:{font:{size:10},color:'#7FB3D3'} } } }
+  });
+}
+
+
+// ═══════════════════════════════════════════
+//  EXPORT COMPTABLE
+// ═══════════════════════════════════════════
+// expPeriodeActif déjà déclaré
+
+function setExpPeriode(p){
+  expPeriodeActif = p;
+  ['week','month','year','custom'].forEach(x=>{
+    const b=document.getElementById('expBtn-'+x); if(!b) return;
+    b.style.background=(x===p)?'var(--brand)':'var(--brand-pale)';
+    b.style.color=(x===p)?'#fff':'var(--brand)';
+  });
+  const dw=document.getElementById('expDatesWrap');
+  if(dw) dw.style.display=(p==='custom')?'block':'none';
+  const todayStr=today();
+  let debut='', fin=todayStr;
+  if(p==='week'){ const d=new Date(); d.setDate(d.getDate()-6); debut=d.toISOString().slice(0,10); }
+  else if(p==='month'){ debut=todayStr.slice(0,7)+'-01'; }
+  else if(p==='year'){ debut=todayStr.slice(0,4)+'-01-01'; }
+  else if(p==='custom'){
+    debut=document.getElementById('expDateDebut')?.value||'';
+    fin=document.getElementById('expDateFin')?.value||todayStr;
+  }
+  const dd=document.getElementById('expDateDebut'); if(dd&&debut) dd.value=debut;
+  const df=document.getElementById('expDateFin');   if(df) df.value=fin;
+  updateExpApercu(debut, fin);
+}
+
+function updateExpApercu(debut, fin){
+  const el=document.getElementById('expApercu'); if(!el) return;
+  const all=getCompta().filter(c=>(!debut||c.date>=debut)&&(!fin||c.date<=fin));
+  const sal=all.filter(c=>c.type==='sal');
+  const act=all.filter(c=>c.type==='act');
+  const ach=all.filter(c=>c.type==='ach');
+  const tax=all.filter(c=>c.type==='tax');
+  const total=all.reduce((s,c)=>s+(c.montant||0),0);
+  el.innerHTML=`
+    <div style="font-weight:700;margin-bottom:6px;font-size:12px;">📋 ${debut} → ${fin}</div>
+    <div style="display:grid;grid-template-columns:1fr auto;gap:3px;font-size:12px;">
+      <span>💰 Salaires (${sal.length})</span><span style="color:var(--danger);font-weight:700;">−${fmtNum(sal.reduce((s,c)=>s+(c.montant||0),0))} MRU</span>
+      <span>📊 Actionnaires (${act.length})</span><span style="color:var(--danger);font-weight:700;">−${fmtNum(act.reduce((s,c)=>s+(c.montant||0),0))} MRU</span>
+      <span>🛒 Achats (${ach.length})</span><span style="color:var(--danger);font-weight:700;">−${fmtNum(ach.reduce((s,c)=>s+(c.montant||0),0))} MRU</span>
+      <span>🏛️ Taxes (${tax.length})</span><span style="color:var(--danger);font-weight:700;">−${fmtNum(tax.reduce((s,c)=>s+(c.montant||0),0))} MRU</span>
+      <span style="font-weight:700;border-top:1px solid var(--brand-border);padding-top:4px;">Total (${all.length} op.)</span>
+      <span style="font-weight:800;color:var(--danger);border-top:1px solid var(--brand-border);padding-top:4px;">−${fmtNum(total)} MRU</span>
+    </div>`;
+}
+
+function exportCompta(format){
+  const debut=document.getElementById('expDateDebut')?.value||'';
+  const fin=document.getElementById('expDateFin')?.value||today();
+  const incSal=document.getElementById('expSal')?.checked!==false;
+  const incAct=document.getElementById('expAct')?.checked!==false;
+  const incAch=document.getElementById('expAch')?.checked!==false;
+  const incTax=document.getElementById('expTax')?.checked!==false;
+
+  let all=getCompta().filter(c=>(!debut||c.date>=debut)&&(!fin||c.date<=fin));
+  if(!incSal) all=all.filter(c=>c.type!=='sal');
+  if(!incAct) all=all.filter(c=>c.type!=='act');
+  if(!incAch) all=all.filter(c=>c.type!=='ach');
+  if(!incTax) all=all.filter(c=>c.type!=='tax');
+  if(!all.length){ toast('Aucune donnée pour cette période.'); return; }
+
+  const total=all.reduce((s,c)=>s+(c.montant||0),0);
+
+  if(format==='csv'){
+    const header='Type,Titre,Montant (MRU),Mois,Date,Commentaire,Par';
+    const rows=all.map(c=>[c.typeLabel||c.type,`"${c.titre||''}"`,c.montant||0,moisLabel(c.mois||''),c.date||'',`"${c.comment||''}"`,`"${c.par||''}"`].join(','));
+    const csv=[header,...rows,'','TOTAL,,'+total].join('\n');
+    const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=`lebroud_compta_${debut||'all'}_${fin}.csv`; a.click();
+    URL.revokeObjectURL(url);
+    toast('CSV exporté ✓');
+  } else {
+    // Excel (XLS HTML format — s'ouvre dans Excel)
+    let rows='';
+    all.forEach(c=>{
+      const bg=c.type==='sal'?'#D5F5E3':c.type==='act'?'#D6EAF8':c.type==='ach'?'#FEF9E7':'#FDEDEC';
+      rows+=`<tr style="background:${bg};">
+        <td>${c.typeLabel||c.type}</td>
+        <td>${c.titre||''}</td>
+        <td style="text-align:right;">${fmtNum(c.montant||0)}</td>
+        <td>${moisLabel(c.mois||'')}</td>
+        <td>${c.date||''}</td>
+        <td>${c.comment||''}</td>
+        <td>${c.par||''}</td>
+      </tr>`;
+    });
+    const xls=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel">
+    <head><meta charset="UTF-8"/></head><body>
+    <h2 style="font-family:Arial;color:#1A5276;">لبرود — Rapport Comptable</h2>
+    <p style="font-family:Arial;">Période : ${debut||'Début'} → ${fin} | Généré le : ${today()}</p>
+    <table border="1" style="font-family:Arial;font-size:12px;border-collapse:collapse;">
+      <tr style="background:#1A5276;color:white;font-weight:bold;">
+        <td>Type</td><td>Titre</td><td>Montant (MRU)</td><td>Mois</td><td>Date</td><td>Commentaire</td><td>Par</td>
+      </tr>
+      ${rows}
+      <tr style="font-weight:bold;background:#1A5276;color:white;">
+        <td colspan="2">TOTAL</td><td style="text-align:right;">${fmtNum(total)} MRU</td><td colspan="4">${all.length} opérations</td>
+      </tr>
+    </table>
+    </body></html>`;
+    const blob=new Blob([xls],{type:'application/vnd.ms-excel;charset=utf-8;'});
+    const url=URL.createObjectURL(blob); const a=document.createElement('a');
+    a.href=url; a.download=`lebroud_compta_${debut||'all'}_${fin}.xls`; a.click();
+    URL.revokeObjectURL(url);
+    toast('Excel exporté ✓');
+  }
+}
+
+function exportData(format){ toast("Utilisez l'onglet Export du comptable pour exporter."); }
+
+
+// ═══════════════════════════════════════════
+//  EXPORT COMPTABLE
+// ═══════════════════════════════════════════
+// expPeriodeActif déjà déclaré
+
+function setExpPeriode(p){
+  expPeriodeActif = p;
+  ['week','month','year','custom'].forEach(x=>{
+    const b=document.getElementById('expBtn-'+x);
+    if(!b) return;
+    b.style.background = (x===p)?'var(--brand)':'var(--brand-pale)';
+    b.style.color = (x===p)?'#fff':'var(--brand)';
+  });
+  const dw = document.getElementById('expDatesWrap');
+  if(dw) dw.style.display = (p==='custom')?'block':'none';
+  if(p!=='custom') buildExpApercu();
+}
+
+function getExpRange(){
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0,10);
+  if(expPeriodeActif==='week'){
+    const d=new Date(); d.setDate(d.getDate()-6);
+    return { debut:d.toISOString().slice(0,10), fin:todayStr, label:'7 derniers jours' };
+  } else if(expPeriodeActif==='month'){
+    return { debut:todayStr.slice(0,7)+'-01', fin:todayStr, label:'Ce mois ('+moisLabel(todayStr.slice(5,7))+')' };
+  } else if(expPeriodeActif==='year'){
+    return { debut:now.getFullYear()+'-01-01', fin:todayStr, label:'Année '+now.getFullYear() };
+  } else {
+    const debut=document.getElementById('expDateDebut')?.value||todayStr.slice(0,7)+'-01';
+    const fin=document.getElementById('expDateFin')?.value||todayStr;
+    return { debut, fin, label:debut+' → '+fin };
+  }
+}
+
+function buildExpApercu(){
+  const {debut,fin,label} = getExpRange();
+  const inclSal = document.getElementById('expSal')?.checked;
+  const inclAct = document.getElementById('expAct')?.checked;
+  const inclAch = document.getElementById('expAch')?.checked;
+  const inclTax = document.getElementById('expTax')?.checked;
+
+  const all = getCompta().filter(c=>c.date>=debut && c.date<=fin);
+  const sal = inclSal ? all.filter(c=>c.type==='sal') : [];
+  const act = inclAct ? all.filter(c=>c.type==='act') : [];
+  const ach = inclAch ? all.filter(c=>c.type==='ach') : [];
+  const tax = inclTax ? all.filter(c=>c.type==='tax') : [];
+
+  const sumSal = sal.reduce((s,c)=>s+(c.montant||0),0);
+  const sumAct = act.reduce((s,c)=>s+(c.montant||0),0);
+  const sumAch = ach.reduce((s,c)=>s+(c.montant||0),0);
+  const sumTax = tax.reduce((s,c)=>s+(c.montant||0),0);
+  const total  = sumSal+sumAct+sumAch+sumTax;
+
+  const ap = document.getElementById('expApercu');
+  if(!ap) return;
+  ap.innerHTML = `
+    <div style="font-weight:700;margin-bottom:8px;font-size:12px;">📅 ${label}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      ${inclSal?`<div>💰 Salaires</div><div style="text-align:right;font-weight:700;color:var(--danger);">−${fmtNum(sumSal)} MRU (${sal.length})</div>`:''}
+      ${inclAct?`<div>📊 Actionnaires</div><div style="text-align:right;font-weight:700;color:var(--danger);">−${fmtNum(sumAct)} MRU (${act.length})</div>`:''}
+      ${inclAch?`<div>🛒 Achats</div><div style="text-align:right;font-weight:700;color:var(--danger);">−${fmtNum(sumAch)} MRU (${ach.length})</div>`:''}
+      ${inclTax?`<div>🏛️ Taxes</div><div style="text-align:right;font-weight:700;color:var(--danger);">−${fmtNum(sumTax)} MRU (${tax.length})</div>`:''}
+      <div style="font-weight:800;border-top:1px solid var(--brand-border);padding-top:6px;margin-top:2px;">TOTAL</div>
+      <div style="text-align:right;font-weight:800;color:var(--danger);border-top:1px solid var(--brand-border);padding-top:6px;">−${fmtNum(total)} MRU</div>
+    </div>`;
+}
+
+function exportCompta(format){
+  const {debut,fin,label} = getExpRange();
+  const inclSal = document.getElementById('expSal')?.checked;
+  const inclAct = document.getElementById('expAct')?.checked;
+  const inclAch = document.getElementById('expAch')?.checked;
+  const inclTax = document.getElementById('expTax')?.checked;
+
+  const all = getCompta().filter(c=>c.date>=debut && c.date<=fin);
+  let rows = [];
+  if(inclSal) rows.push(...all.filter(c=>c.type==='sal'));
+  if(inclAct) rows.push(...all.filter(c=>c.type==='act'));
+  if(inclAch) rows.push(...all.filter(c=>c.type==='ach'));
+  if(inclTax) rows.push(...all.filter(c=>c.type==='tax'));
+  rows.sort((a,b)=>a.date.localeCompare(b.date));
+
+  if(!rows.length){ toast('Aucune donnée pour cette période.'); return; }
+
+  if(format==='xlsx') exportCSV(rows, label);
+  if(format==='word') exportWord(rows, label);
+}
+
+function exportCSV(rows, label){
+  const header = ['Type','Titre','Montant (MRU)','Mois','Date','Commentaire','Par'];
+  const lines  = [header.join(';')];
+  rows.forEach(r=>{
+    lines.push([
+      r.typeLabel||r.type,
+      r.titre||'',
+      r.montant||0,
+      r.mois ? moisLabel(r.mois) : '',
+      r.date||'',
+      (r.comment||'').replace(/;/g,','),
+      r.par||''
+    ].join(';'));
+  });
+  // Totaux
+  const total = rows.reduce((s,r)=>s+(r.montant||0),0);
+  lines.push('');
+  lines.push(['TOTAL','',''+total,'','','',''].join(';'));
+
+  const blob = new Blob(['﻿'+lines.join('\n')], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'lebroud_compta_'+label.replace(/[^a-zA-Z0-9]/g,'_')+'.csv';
+  a.click();
+  toast('Export CSV téléchargé ✓');
+}
+
+function exportWord(rows, label){
+  const total = rows.reduce((s,r)=>s+(r.montant||0),0);
+  const lignes = rows.map(r=>`
+    <tr>
+      <td style="border:1px solid #ccc;padding:6px;">${r.typeLabel||r.type}</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.titre||''}</td>
+      <td style="border:1px solid #ccc;padding:6px;text-align:right;">${fmtNum(r.montant||0)} MRU</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.mois?moisLabel(r.mois):''}</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.date||''}</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.comment||''}</td>
+      <td style="border:1px solid #ccc;padding:6px;">${r.par||''}</td>
+    </tr>`).join('');
+
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"/>
+  <style>body{font-family:Arial,sans-serif;padding:20px;}h1{color:#1A5276;}table{border-collapse:collapse;width:100%;}
+  th{background:#1A5276;color:#fff;padding:8px;border:1px solid #ccc;} .total{font-weight:bold;background:#EBF5FB;}</style>
+  </head><body>
+  <h1>لبرود — Rapport comptable</h1>
+  <p><strong>Période :</strong> ${label} &nbsp;|&nbsp; <strong>Généré le :</strong> ${today()} &nbsp;|&nbsp; <strong>Par :</strong> ${currentUser?.nom||'—'}</p>
+  <table>
+    <thead><tr>
+      <th>Type</th><th>Titre</th><th>Montant</th><th>Mois</th><th>Date</th><th>Commentaire</th><th>Par</th>
+    </tr></thead>
+    <tbody>${lignes}
+      <tr class="total">
+        <td colspan="2" style="border:1px solid #ccc;padding:6px;text-align:right;">TOTAL</td>
+        <td style="border:1px solid #ccc;padding:6px;text-align:right;">${fmtNum(total)} MRU</td>
+        <td colspan="4" style="border:1px solid #ccc;padding:6px;"></td>
+      </tr>
+    </tbody>
+  </table>
+  </body></html>`;
+
+  const blob = new Blob([html], {type:'application/msword'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'lebroud_compta_'+label.replace(/[^a-zA-Z0-9]/g,'_')+'.doc';
+  a.click();
+  toast('Export Word téléchargé ✓');
+}
+
+document.getElementById('loginPw').addEventListener('keydown', e=>{
+  if(e.key==='Enter') doLogin();
+});
+
+// ═══════════════════════════════════════════
+//  SPLASH
+// ═══════════════════════════════════════════
+(function(){
+  const splash = document.getElementById('splashScreen');
+  if(!splash) return;
+  setTimeout(()=>{
+    splash.style.opacity = '0';
+    setTimeout(()=>{ splash.style.display='none'; }, 520);
+  }, 1800);
+})();
+
+// animation déclenchée depuis showScreen directement (voir fonction showScreen plus haut)
+
+// ═══════════════════════════════════════════
+//  NOTIFICATIONS
+// ═══════════════════════════════════════════
+function addNotif(msg, type='info'){
+  const notifs = ls_get(LS.NOTIFS) || [];
+  notifs.unshift({ id:genId(), msg, type, date:today(), heure:nowTime() });
+  if(notifs.length>20) notifs.pop();
+  ls_set(LS.NOTIFS, notifs);
+  renderNotifs();
+}
+function renderNotifs(){
+  const notifs = ls_get(LS.NOTIFS)||[];
+  const banner = document.getElementById('notifBanner');
+  const list   = document.getElementById('notifList');
+  if(!banner||!list) return;
+  if(!notifs.length){ banner.style.display='none'; return; }
+  banner.style.display='block';
+  list.innerHTML = notifs.slice(0,5).map(n=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #F9E79F;">
+      <div style="width:6px;height:6px;background:#F39C12;border-radius:50%;flex-shrink:0;"></div>
+      <div style="flex:1;font-size:12px;color:#7D6608;">${n.msg}</div>
+      <div style="font-size:10px;color:#B7950B;white-space:nowrap;">${n.heure}</div>
+    </div>`).join('');
+}
+function clearNotifs(){ ls_set(LS.NOTIFS,[]); renderNotifs(); }
+
+// ═══════════════════════════════════════════
+//  CONNEXIONS
+// ═══════════════════════════════════════════
+function logConnexion(user){
+  const conns = ls_get(LS.CONNEXIONS)||[];
+  conns.unshift({ id:genId(), nom:user.nom||'Gérant', role:user.role||'gerant', identifiant:user.identifiant||'GERANT', date:today(), heure:nowTime(), photo:user.photo||null });
+  if(conns.length>50) conns.pop();
+  ls_set(LS.CONNEXIONS, conns);
+  if(user.role !== 'gerant') addNotif(`${user.nom} (${getRoleLabel(user.role)}) vient de se connecter`, 'connexion');
+}
+function renderConnexions(){
+  const el = document.getElementById('connexionsList');
+  if(!el) return;
+  const conns = ls_get(LS.CONNEXIONS)||[];
+  if(!conns.length){ el.innerHTML='<div class="empty-state">Aucune connexion enregistrée.</div>'; return; }
+  el.innerHTML = conns.slice(0,10).map(c=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--brand-border);">
+      <div style="width:36px;height:36px;border-radius:10px;flex-shrink:0;overflow:hidden;background:var(--brand);display:flex;align-items:center;justify-content:center;">
+        ${c.photo?`<img src="${c.photo}" style="width:100%;height:100%;object-fit:cover;"/>`:`<span style="font-size:12px;font-weight:700;color:#AED6F1;">${getInitials(c.nom)}</span>`}
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:12px;font-weight:700;color:var(--brand);">${c.nom}</div>
+        <div style="font-size:11px;color:var(--muted);">${getRoleLabel(c.role)} · ${c.identifiant}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:11px;font-weight:600;color:var(--brand);">${c.heure}</div>
+        <div style="font-size:10px;color:var(--muted);">${c.date}</div>
+      </div>
+    </div>`).join('');
+}
+function clearConnexions(){ ls_set(LS.CONNEXIONS,[]); renderConnexions(); toast('Historique effacé'); }
+
+// ═══════════════════════════════════════════
+//  GRAPHIQUE
+// ═══════════════════════════════════════════
+// chartInstance déjà déclaré
+function renderChart(){
+  const canvas = document.getElementById('chartVentes');
+  if(!canvas || typeof Chart === 'undefined') return;
+  const allVentes = ls_get(LS.VENTES)||[];
+  const labels=[], dataKg=[];
+  for(let i=6;i>=0;i--){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const dateStr=d.toISOString().slice(0,10);
+    const label=d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric'});
+    const kg=allVentes.filter(v=>v.date===dateStr).reduce((s,v)=>s+(v.poids||0),0);
+    labels.push(label); dataKg.push(kg);
+  }
+  if(chartInstance){ chartInstance.destroy(); chartInstance=null; }
+  chartInstance = new Chart(canvas.getContext('2d'),{
+    type:'bar',
+    data:{ labels, datasets:[{ label:'kg', data:dataKg, backgroundColor:'rgba(26,82,118,0.75)', borderRadius:6, borderSkipped:false }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, scales:{ x:{ grid:{display:false}, ticks:{font:{size:10},color:'#7FB3D3'} }, y:{ beginAtZero:true, ticks:{font:{size:10},color:'#7FB3D3'} } } }
+  });
+}
+
+
+// ═══════════════════════════════════════════
+//  EXPORT COMPTABLE
+// ═══════════════════════════════════════════
+// expPeriodeActif déjà déclaré
+
+function setExpPeriode(p){
+  expPeriodeActif = p;
+  ['week','month','year','custom'].forEach(x=>{
+    const b=document.getElementById('expBtn-'+x); if(!b) return;
+    b.style.background=(x===p)?'var(--brand)':'var(--brand-pale)';
+    b.style.color=(x===p)?'#fff':'var(--brand)';
+  });
+  const dw=document.getElementById('expDatesWrap');
+  if(dw) dw.style.display=(p==='custom')?'block':'none';
+  const todayStr=today();
+  let debut='', fin=todayStr;
+  if(p==='week'){ const d=new Date(); d.setDate(d.getDate()-6); debut=d.toISOString().slice(0,10); }
+  else if(p==='month'){ debut=todayStr.slice(0,7)+'-01'; }
+  else if(p==='year'){ debut=todayStr.slice(0,4)+'-01-01'; }
+  else if(p==='custom'){
+    debut=document.getElementById('expDateDebut')?.value||'';
+    fin=document.getElementById('expDateFin')?.value||todayStr;
+  }
+  const dd=document.getElementById('expDateDebut'); if(dd&&debut) dd.value=debut;
+  const df=document.getElementById('expDateFin');   if(df) df.value=fin;
+  updateExpApercu(debut, fin);
+}
+
+function updateExpApercu(debut, fin){
+  const el=document.getElementById('expApercu'); if(!el) return;
+  const all=getCompta().filter(c=>(!debut||c.date>=debut)&&(!fin||c.date<=fin));
+  const sal=all.filter(c=>c.type==='sal');
+  const act=all.filter(c=>c.type==='act');
+  const ach=all.filter(c=>c.type==='ach');
+  const tax=all.filter(c=>c.type==='tax');
+  const total=all.reduce((s,c)=>s+(c.montant||0),0);
+  el.innerHTML=`
+    <div style="font-weight:700;margin-bottom:6px;font-size:12px;">📋 ${debut} → ${fin}</div>
+    <div style="display:grid;grid-template-columns:1fr auto;gap:3px;font-size:12px;">
+      <span>💰 Salaires (${sal.length})</span><span style="color:var(--danger);font-weight:700;">−${fmtNum(sal.reduce((s,c)=>s+(c.montant||0),0))} MRU</span>
+      <span>📊 Actionnaires (${act.length})</span><span style="color:var(--danger);font-weight:700;">−${fmtNum(act.reduce((s,c)=>s+(c.montant||0),0))} MRU</span>
+      <span>🛒 Achats (${ach.length})</span><span style="color:var(--danger);font-weight:700;">−${fmtNum(ach.reduce((s,c)=>s+(c.montant||0),0))} MRU</span>
+      <span>🏛️ Taxes (${tax.length})</span><span style="color:var(--danger);font-weight:700;">−${fmtNum(tax.reduce((s,c)=>s+(c.montant||0),0))} MRU</span>
+      <span style="font-weight:700;border-top:1px solid var(--brand-border);padding-top:4px;">Total (${all.length} op.)</span>
+      <span style="font-weight:800;color:var(--danger);border-top:1px solid var(--brand-border);padding-top:4px;">−${fmtNum(total)} MRU</span>
+    </div>`;
+}
+
+function exportCompta(format){
+  const debut=document.getElementById('expDateDebut')?.value||'';
+  const fin=document.getElementById('expDateFin')?.value||today();
+  const incSal=document.getElementById('expSal')?.checked!==false;
+  const incAct=document.getElementById('expAct')?.checked!==false;
+  const incAch=document.getElementById('expAch')?.checked!==false;
+  const incTax=document.getElementById('expTax')?.checked!==false;
+
+  let all=getCompta().filter(c=>(!debut||c.date>=debut)&&(!fin||c.date<=fin));
+  if(!incSal) all=all.filter(c=>c.type!=='sal');
+  if(!incAct) all=all.filter(c=>c.type!=='act');
+  if(!incAch) all=all.filter(c=>c.type!=='ach');
+  if(!incTax) all=all.filter(c=>c.type!=='tax');
+  if(!all.length){ toast('Aucune donnée pour cette période.'); return; }
+
+  const total=all.reduce((s,c)=>s+(c.montant||0),0);
+
+  if(format==='csv'){
+    const header='Type,Titre,Montant (MRU),Mois,Date,Commentaire,Par';
+    const rows=all.map(c=>[c.typeLabel||c.type,`"${c.titre||''}"`,c.montant||0,moisLabel(c.mois||''),c.date||'',`"${c.comment||''}"`,`"${c.par||''}"`].join(','));
+    const csv=[header,...rows,'','TOTAL,,'+total].join('\n');
+    const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=`lebroud_compta_${debut||'all'}_${fin}.csv`; a.click();
+    URL.revokeObjectURL(url);
+    toast('CSV exporté ✓');
+  } else {
+    // Excel (XLS HTML format — s'ouvre dans Excel)
+    let rows='';
+    all.forEach(c=>{
+      const bg=c.type==='sal'?'#D5F5E3':c.type==='act'?'#D6EAF8':c.type==='ach'?'#FEF9E7':'#FDEDEC';
+      rows+=`<tr style="background:${bg};">
+        <td>${c.typeLabel||c.type}</td>
+        <td>${c.titre||''}</td>
+        <td style="text-align:right;">${fmtNum(c.montant||0)}</td>
+        <td>${moisLabel(c.mois||'')}</td>
+        <td>${c.date||''}</td>
+        <td>${c.comment||''}</td>
+        <td>${c.par||''}</td>
+      </tr>`;
+    });
+    const xls=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel">
+    <head><meta charset="UTF-8"/></head><body>
+    <h2 style="font-family:Arial;color:#1A5276;">لبرود — Rapport Comptable</h2>
+    <p style="font-family:Arial;">Période : ${debut||'Début'} → ${fin} | Généré le : ${today()}</p>
+    <table border="1" style="font-family:Arial;font-size:12px;border-collapse:collapse;">
+      <tr style="background:#1A5276;color:white;font-weight:bold;">
+        <td>Type</td><td>Titre</td><td>Montant (MRU)</td><td>Mois</td><td>Date</td><td>Commentaire</td><td>Par</td>
+      </tr>
+      ${rows}
+      <tr style="font-weight:bold;background:#1A5276;color:white;">
+        <td colspan="2">TOTAL</td><td style="text-align:right;">${fmtNum(total)} MRU</td><td colspan="4">${all.length} opérations</td>
+      </tr>
+    </table>
+    </body></html>`;
+    const blob=new Blob([xls],{type:'application/vnd.ms-excel;charset=utf-8;'});
+    const url=URL.createObjectURL(blob); const a=document.createElement('a');
+    a.href=url; a.download=`lebroud_compta_${debut||'all'}_${fin}.xls`; a.click();
+    URL.revokeObjectURL(url);
+    toast('Excel exporté ✓');
+  }
+}
+
+function exportData(format){ toast("Utilisez l'onglet Export du comptable pour exporter."); }
+
+
+// ═══════════════════════════════════════════
+//  SUPABASE — CONFIGURATION
+// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════
+//  FIREBASE — CONFIGURATION & SYNC
+// ═══════════════════════════════════════════
+// firebaseConfig déjà déclaré
+
+// Firebase initialisé plus bas
+
+// ── Helpers Firestore ──
+async function fbSet(collection, id, data){
+  if(!db) return false;
+  try {
+    await db.collection(collection).doc(id).set(data, {merge:true});
+    return true;
+  } catch(e){ console.warn('fbSet:', e); return false; }
+}
+
+async function fbGetAll(collection){
+  try {
+    const snap = await db.collection(collection).get();
+    return snap.docs.map(d => d.data());
+  } catch(e){ console.warn('fbGetAll:', e); return null; }
+}
+
+async function fbDelete(collection, id){
+  try {
+    await db.collection(collection).doc(id).delete();
+    return true;
+  } catch(e){ return false; }
+}
+
+// ── Sync locale + Firebase ──
+async function fbSyncSet(collection, lsKey, items){
+  ls_set(lsKey, items); // toujours sauver local
+  if(!navigator.onLine) return;
+  // Upsert chaque item
+  for(const item of items){
+    const id = item.id || genId();
+    await fbSet(collection, id, item);
+  }
+}
+
+// ── Initialisation — charger données depuis Firebase ──
+async function fbInitSync(){
+  // Initialiser Firebase si pas encore fait
+  if(!db){
+    try {
+      if(typeof firebase !== 'undefined'){
+        if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+      } else {
+        console.warn('Firebase SDK non disponible');
+        return;
+      }
+    } catch(e){ console.warn('Firebase init tardif:', e); return; }
+  }
+  if(!navigator.onLine){
+    console.log('Hors ligne — données locales utilisées');
+    return;
+  }
+  try {
+    // Sync users
+    const users = await fbGetAll('lb_users');
+    if(users && users.length) ls_set(LS.USERS, users);
+
+    // Sync ventes
+    const ventes = await fbGetAll('lb_ventes');
+    if(ventes && ventes.length) ls_set(LS.VENTES, ventes);
+
+    // Sync compta
+    const compta = await fbGetAll('lb_compta');
+    if(compta && compta.length) ls_set(LS.COMPTA, compta);
+
+    // Sync acteurs
+    const acteurs = await fbGetAll('lb_acteurs');
+    if(acteurs && acteurs.length) ls_set(LS.ACTEURS, acteurs);
+
+    // Sync actpay
+    const actpay = await fbGetAll('lb_actpay');
+    if(actpay && actpay.length) ls_set(LS.ACTPAY, actpay);
+
+    // Sync messages
+    const msgs = await fbGetAll('lb_messages');
+    if(msgs && msgs.length) ls_set(LS.MESSAGES, msgs);
+
+    // Sync prix & objectifs
+    const config = await fbGetAll('lb_config');
+    if(config){
+      config.forEach(c=>{
+        if(c.key==='prix') ls_set(LS.PRIX, c.data);
+        if(c.key==='objectifs') ls_set(LS.OBJECTIFS, c.data);
+      });
+    }
+
+    console.log('✅ Firebase sync OK');
+    fbStartRealtime();
+  } catch(e){
+    console.warn('Firebase sync failed, mode local:', e);
+  }
+}
+
+// ── Realtime — écouter les changements ──
+function fbStartRealtime(){
+  // Écouter les nouvelles ventes
+  db.collection('lb_ventes').onSnapshot(snap=>{
+    const ventes = snap.docs.map(d=>d.data());
+    ls_set(LS.VENTES, ventes);
+    if(document.getElementById('venList')) renderVentes();
+    if(document.getElementById('dashVentes')) refreshDashboard();
+  });
+
+  // Écouter les messages
+  db.collection('lb_messages').onSnapshot(snap=>{
+    const msgs = snap.docs.map(d=>d.data());
+    ls_set(LS.MESSAGES, msgs);
+    if(currentChatUserId) renderChatMsgs();
+    updateChatBadges();
+    renderChatConvList();
+  });
+
+  // Écouter les users
+  db.collection('lb_users').onSnapshot(snap=>{
+    const users = snap.docs.map(d=>d.data());
+    ls_set(LS.USERS, users);
+  });
+
+  console.log('✅ Firebase Realtime actif');
+}
+
+// ── Override fonctions clés pour sync Firebase ──
+
+// VENTES
+async function ajouterVente(){
+  const nom   = document.getElementById('venClient')?.value.trim()||'';
+  const tel   = document.getElementById('venTel')?.value.trim()||'';
+  const poids = parseFloat(document.getElementById('venPoids')?.value)||0;
+  const mode  = document.getElementById('venMode')?.value||'';
+  const editId = document.getElementById('venEditId')?.value||'';
+
+  if(!nom||!tel||!poids||!mode){ toast('Remplissez tous les champs.'); return; }
+
+  const prix = ls_get(LS.PRIX);
+  const total = Math.round(poids * (prix?prix.val:0));
+
+  const allVentes = ls_get(LS.VENTES)||[];
+  let v;
+  if(editId){
+    const idx = allVentes.findIndex(x=>x.id===editId);
+    if(idx>=0){ allVentes[idx]={...allVentes[idx], clientNom:nom, clientTel:tel, poids, mode, total}; v=allVentes[idx]; }
+    document.getElementById('venEditId').value='';
+  } else {
+    v = { id:genId(), vendeurId:currentUser.id||'GERANT', vendeurNom:currentUser.nom, clientNom:nom, clientTel:tel, poids, mode, total, date:today(), heure:nowTime() };
+    allVentes.push(v);
+    addNotif(`${currentUser.nom} a vendu ${poids} kg à ${nom} — ${fmtNum(total)} MRU`, 'vente');
+  }
+
+  ls_set(LS.VENTES, allVentes);
+  ['venClient','venTel','venPoids'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  const vm=document.getElementById('venMode'); if(vm) vm.value='';
+  const vtc=document.getElementById('venTotalCalc'); if(vtc) vtc.value='0 MRU';
+  renderVentes();
+  toast('Vente enregistrée : '+fmtNum(total)+' MRU ✓');
+
+  // Sync Firebase
+  if(v) fbSet('lb_ventes', v.id, v);
+}
+
+// MESSAGES
+async function sendMsg(){
+  const input = document.getElementById('chatInputTxt');
+  if(!input) return;
+  const text = input.value.trim();
+  if(!text||!currentChatUserId) return;
+  const myId = currentUser?.id||'GERANT';
+  const msg = {
+    id:genId(), fromId:myId, fromNom:currentUser?.nom||'Gérant',
+    toId:currentChatUserId, text, heure:nowTime(), date:today(), read:false,
+    readBy: currentChatUserId==='PUBLIC'?[myId]:[]
+  };
+  const msgs = getMsgs();
+  msgs.push(msg);
+  ls_set(LS.MESSAGES, msgs);
+  input.value='';
+  renderChatMsgs();
+  // Sync Firebase
+  fbSet('lb_messages', msg.id, msg);
+}
+
+// EMPLOYÉS
+async function saveEmp(){
+  const nom        = document.getElementById('empNom')?.value.trim()||'';
+  const role       = document.getElementById('empRole')?.value||'vendeur';
+  const salaire    = parseInt(document.getElementById('empSalaire')?.value)||0;
+  const identifiant= document.getElementById('empLogin')?.value.trim()||'';
+  const password   = document.getElementById('empPass')?.value.trim()||'';
+  const editId     = document.getElementById('empEditId')?.value||'';
+
+  if(!nom||!identifiant||!password){ toast('Remplissez nom, identifiant et mot de passe.'); return; }
+
+  const users = getUsers();
+  const doublon = users.find(u=>u.identifiant===identifiant && u.id!==editId);
+  if(doublon){ toast('Identifiant déjà utilisé.'); return; }
+
+  let user;
+  if(editId){
+    const idx = users.findIndex(u=>u.id===editId);
+    if(idx>=0){
+      users[idx]={...users[idx], nom, role, salaire, identifiant, password, photo:empPhotoDataUrl||users[idx].photo};
+      user = users[idx];
+    }
+  } else {
+    user = { id:genId(), nom, role, salaire, identifiant, password, photo:empPhotoDataUrl||null };
+    users.push(user);
+  }
+
+  ls_set(LS.USERS, users);
+  resetEmpForm();
+  renderEmpList();
+  toast(editId?'Employé modifié ✓':'Employé ajouté ✓');
+
+  // Sync Firebase
+  if(user) fbSet('lb_users', user.id, user);
+}
+
+// COMPTABILITÉ
+function saveCompta(item){
+  item.id=item.id||genId(); item.date=item.date||today(); item.par=currentUser?.nom||'';
+  const all=ls_get(LS.COMPTA)||[]; all.push(item); ls_set(LS.COMPTA, all);
+  // Sync Firebase
+  fbSet('lb_compta', item.id, item);
+}
+
+// PRIX
+async function savePrix(){
+  const val = parseFloat(document.getElementById('prixInput')?.value);
+  if(!val||val<=0){ toast('Entrez un prix valide.'); return; }
+  const data = {val, date:today()};
+  ls_set(LS.PRIX, data);
+  loadPrixDisplay();
+  toast('Prix mis à jour : '+fmtNum(val)+' MRU/kg ✓');
+  fbSet('lb_config', 'prix', {key:'prix', data});
+}
+
+// CONNEXIONS
+function logConnexion(user){
+  const conns = ls_get(LS.CONNEXIONS)||[];
+  const entry = { id:genId(), nom:user.nom||'Gérant', role:user.role||'gerant', identifiant:user.identifiant||'GERANT', date:today(), heure:nowTime(), photo:user.photo||null };
+  conns.unshift(entry);
+  if(conns.length>50) conns.pop();
+  ls_set(LS.CONNEXIONS, conns);
+  if(user.role!=='gerant') addNotif(`${user.nom} (${getRoleLabel(user.role)}) vient de se connecter`, 'connexion');
+  fbSet('lb_connexions', entry.id, entry);
+}
+
+
+</script>
+</body>
+</html>
