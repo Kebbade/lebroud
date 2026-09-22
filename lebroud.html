@@ -854,7 +854,7 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
     <div class="tb-avatar" id="venAvatar" style="background:linear-gradient(135deg,#1E8449,#27AE60);">V</div>
     <div class="tb-info">
       <div class="tb-name" id="venNomTxt" style="display:flex;align-items:center;gap:5px;">
-        <span style="font-size:14px;">🛒</span> Vendeur
+        <span style="font-size:14px;">🛒</span> <span data-fr="Vendeur" data-ar="بائع">Vendeur</span>
       </div>
       <div class="tb-role" id="venIdTxt"></div>
     </div>
@@ -863,48 +863,51 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A5276" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <div class="chat-badge" id="venChatBadge" style="display:none;">0</div>
       </div>
-      <div class="tb-quit" onclick="confirmLogout()" style="display:flex;align-items:center;gap:4px;"><span>🚪</span><span>Quitter</span></div>
+      <div class="tb-quit" onclick="confirmLogout()" style="display:flex;align-items:center;gap:4px;"><span>🚪</span><span data-fr="Quitter" data-ar="خروج">Quitter</span></div>
     </div>
   </div>
 
   <div class="tab-content" style="display:block;padding:12px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;">
     <div class="card" style="background:linear-gradient(135deg,#EBF5FB,#D6EAF8);">
-      <div class="card-title">Informations du jour</div>
-      <div class="ir"><span class="il">Prix unitaire</span><span class="iv" id="venPrix">— MRU/kg</span></div>
-      <div class="ir"><span class="il">Quota du jour</span><span class="iv" id="venQuota">— kg</span></div>
-      <div class="ir"><span class="il">Vendu aujourd'hui</span><span class="iv" id="venTotal">0 kg</span></div>
-      <div class="ir"><span class="il">CA du jour</span><span class="iv-g" id="venCA">0 MRU</span></div>
+      <div class="card-title" data-fr="Informations du jour" data-ar="معلومات اليوم">Informations du jour</div>
+      <div class="ir"><span class="il" data-fr="Prix unitaire" data-ar="السعر الوحدوي">Prix unitaire</span><span class="iv" id="venPrix">— MRU/kg</span></div>
+      <div class="ir"><span class="il" data-fr="Quota du jour" data-ar="حصة اليوم">Quota du jour</span><span class="iv" id="venQuota">— kg</span></div>
+      <div class="ir"><span class="il" data-fr="Vendu aujourd'hui" data-ar="مبيعات اليوم">Vendu aujourd'hui</span><span class="iv" id="venTotal">0 kg</span></div>
+      <div class="ir"><span class="il" data-fr="CA du jour" data-ar="رقم الأعمال">CA du jour</span><span class="iv-g" id="venCA">0 MRU</span></div>
       <div class="prog-wrap">
-        <div class="prog-hd"><span>Progression quota</span><span id="venPct">0%</span></div>
+        <div class="prog-hd"><span data-fr="Progression quota" data-ar="تقدم الحصة">Progression quota</span><span id="venPct">0%</span></div>
         <div class="prog-bg"><div class="prog-bar" id="venPBar" style="width:0%"></div></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title" id="venFormTitle">Nouvelle vente</div>
+      <div class="card-title" id="venFormTitle" data-fr="Nouvelle vente" data-ar="بيع جديد">Nouvelle vente</div>
       <input type="hidden" id="venEditId"/>
-      <span class="fl">Nom du client</span>
+      <span class="fl" data-fr="Nom du client" data-ar="اسم الزبون">Nom du client</span>
       <input class="fi" id="venClient" placeholder="Ex : Ahmed Ould..."/>
-      <span class="fl">Téléphone client</span>
+      <span class="fl" data-fr="Téléphone client" data-ar="هاتف الزبون">Téléphone client</span>
       <input class="fi" id="venTel" type="tel" placeholder="Ex : 36 00 00 00"/>
-      <span class="fl">Poids (kg)</span>
+      <span class="fl" data-fr="Poids (kg)" data-ar="الوزن (كغ)">Poids (kg)</span>
       <input class="fi" id="venPoids" type="number" placeholder="Ex : 50" oninput="calcVenteTotal()"/>
-      <span class="fl">Prix de vente (MRU/kg)</span>
+      <span class="fl" data-fr="Prix de vente (MRU/kg)" data-ar="سعر البيع (أوقية/كغ)">Prix de vente (MRU/kg)</span>
       <input class="fi" id="venPrixKg" type="number" placeholder="Ex : 25" oninput="calcVenteTotal()"/>
-      <div style="font-size:11px;color:var(--muted);margin-top:-8px;margin-bottom:8px;">Référence gérant : <span id="venPrixRef">—</span></div>
-      <span class="fl">Total calculé</span>
+      <div style="font-size:11px;color:var(--muted);margin-top:-8px;margin-bottom:8px;"><span data-fr="Référence gérant : " data-ar="سعر المدير : ">Référence gérant : </span><span id="venPrixRef">—</span></div>
+      <span class="fl" data-fr="Total calculé" data-ar="المجموع">Total calculé</span>
       <input class="fi fi-ro" id="venTotalCalc" value="0 MRU" readonly/>
-      <span class="fl">Mode de paiement</span>
+      <span class="fl" data-fr="Mode de paiement" data-ar="طريقة الدفع">Mode de paiement</span>
       <select class="fi" id="venMode">
-        <option value="">-- Sélectionner --</option>
+        <option value="" data-fr="-- Sélectionner --" data-ar="-- اختر --">-- Sélectionner --</option>
         <option>Cash</option><option>Bankily</option><option>BCIPay</option>
         <option>Masrivi</option><option>Sedad</option><option>Autre</option>
       </select>
-      <button class="btn-primary" onclick="ajouterVente()">Valider la vente</button>
-      <button class="btn-secondary" id="venCancelBtn" style="display:none;" onclick="cancelVenteEdit()">Annuler modification</button>
+      <button class="btn-primary" onclick="ajouterVente()" data-fr="Valider la vente" data-ar="تسجيل البيع">Valider la vente</button>
+      <button class="btn-secondary" id="venCancelBtn" style="display:none;" onclick="cancelVenteEdit()" data-fr="Annuler modification" data-ar="إلغاء التعديل">Annuler modification</button>
     </div>
 
-    <div class="card"><div class="card-title">📋 Ventes du jour</div><div id="venList"><div class="empty-state">Aucune vente enregistrée.</div></div></div>
+    <div class="card">
+      <div class="card-title" data-fr="📋 Ventes du jour" data-ar="📋 مبيعات اليوم">📋 Ventes du jour</div>
+      <div id="venList"><div class="empty-state" data-fr="Aucune vente enregistrée." data-ar="لا توجد مبيعات مسجلة.">Aucune vente enregistrée.</div></div>
+    </div>
   </div>
 </div>
 
@@ -2407,7 +2410,7 @@ function ajouterVente(){
   const mode = document.getElementById('venMode').value;
   const editId = document.getElementById('venEditId').value;
 
-  if(!nom||!tel||!poids||!mode){ toast('Remplissez tous les champs.'); return; }
+  if(!nom||!tel||!poids||!mode){ toast(lang==='ar' ? 'يرجى ملء جميع الحقول.' : 'Remplissez tous les champs.'); return; }
 
   const prixSaisi = parseFloat(document.getElementById('venPrixKg')?.value)||0;
   const prixRef = ls_get(LS.PRIX);
@@ -2428,13 +2431,13 @@ function ajouterVente(){
   document.getElementById('venMode').value='';
   document.getElementById('venTotalCalc').value='0 MRU';
   renderVentes();
-  toast('Vente enregistrée : '+fmtNum(total)+' MRU');
+  toast((lang==='ar' ? 'تم تسجيل البيع : ' : 'Vente enregistrée : ')+fmtNum(total)+' MRU');
 }
 
 function renderVentes(){
   const ventes = getVentesToday();
   const el = document.getElementById('venList');
-  if(!ventes.length){ el.innerHTML='<div class="empty-state">Aucune vente enregistrée.</div>'; updateVenteStats(); return; }
+  if(!ventes.length){ el.innerHTML='<div class="empty-state">'+(lang==='ar'?'لا توجد مبيعات مسجلة.':'Aucune vente enregistrée.')+'</div>'; updateVenteStats(); return; }
   el.innerHTML = ventes.map(v=>`
     <div style="padding:10px 0;border-bottom:1px solid var(--brand-border);">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;">
@@ -2474,11 +2477,11 @@ function editVente(id){
 }
 
 function deleteVente(id){
-  showModal('Supprimer cette vente ?', 'Cette action est irréversible. Confirmer ?', '#C0392B', 'Supprimer', ()=>{
+  showModal(lang==='ar'?'حذف هذا البيع ؟':'Supprimer cette vente ?', lang==='ar'?'هذا الإجراء لا يمكن التراجع عنه. تأكيد ؟':'Cette action est irréversible. Confirmer ?', '#C0392B', lang==='ar'?'حذف':'Supprimer', ()=>{
     ls_set(LS.VENTES, (ls_get(LS.VENTES)||[]).filter(v=>v.id!==id));
     renderVentes();
     if(db) db.collection('lb_ventes').doc(id).delete();
-    toast('Vente supprimée');
+    toast(lang==='ar' ? 'تم حذف البيع' : 'Vente supprimée');
   });
 }
 
@@ -4617,7 +4620,7 @@ async function ajouterVente(){
   const mode  = document.getElementById('venMode')?.value||'';
   const editId = document.getElementById('venEditId')?.value||'';
 
-  if(!nom||!tel||!poids||!mode){ toast('Remplissez tous les champs.'); return; }
+  if(!nom||!tel||!poids||!mode){ toast(lang==='ar' ? 'يرجى ملء جميع الحقول.' : 'Remplissez tous les champs.'); return; }
 
   const prixSaisiF = parseFloat(document.getElementById('venPrixKg')?.value)||0;
   const prixRefF = ls_get(LS.PRIX);
@@ -4641,7 +4644,7 @@ async function ajouterVente(){
   const vm=document.getElementById('venMode'); if(vm) vm.value='';
   const vtc=document.getElementById('venTotalCalc'); if(vtc) vtc.value='0 MRU';
   renderVentes();
-  toast('Vente enregistrée : '+fmtNum(total)+' MRU ✓');
+  toast((lang==='ar' ? 'تم تسجيل البيع : ' : 'Vente enregistrée : ')+fmtNum(total)+' MRU ✓');
 
   // Sync Firebase
   if(v) fbSet('lb_ventes', v.id, v);
