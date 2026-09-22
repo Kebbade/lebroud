@@ -33,7 +33,7 @@
 html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo',sans-serif;color:var(--text);overflow:hidden;}
 .page{display:none;position:absolute;top:0;left:0;width:100%;height:100%;flex-direction:column;}
 .page.active{display:flex;}
-.tab-content{display:none;padding:12px;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;flex:1;min-height:0;}
+.tab-content{display:none;padding:12px;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;flex:1;}
 .tab-content.on{display:block;}
 
 /* ===== MODAL GLOBAL ===== */
@@ -564,10 +564,10 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
 <!-- ===================== GÉRANT PAGE ===================== -->
 <div id="gerantPage" class="page">
   <div class="topbar">
-    <div class="tb-avatar" id="gerAvatar" style="background:linear-gradient(135deg,#1A5276,#2980B9);padding:0;overflow:hidden;"><img src="data:image/jpeg;base64,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" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/></div>
+    <div class="tb-avatar" id="gerAvatar" style="background:linear-gradient(135deg,#1A5276,#2980B9);">G</div>
     <div class="tb-info">
       <div class="tb-name" style="display:flex;align-items:center;gap:5px;">
-        <span style="font-size:14px;">👔</span> Ismail Kebbade
+        <span style="font-size:14px;">👔</span> Gérant
       </div>
       <div class="tb-role" id="gerIdTxt">GERANT · <span id="gerDate"></span></div>
     </div>
@@ -582,14 +582,8 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
   <div class="tabs-wrap">
     <span class="tab-btn on"  onclick="showGerTab('dash',this)">🏠 Dashboard</span>
     <span class="tab-btn"     onclick="showGerTab('ai',this)">🤖 Assistant</span>
-    <span class="tab-btn"     onclick="showGerTab('bilan',this)">📈 Bilan</span>
-    <span class="tab-btn"     onclick="showGerTab('invest',this)">💼 Investissement</span>
-    <span class="tab-btn"     onclick="showGerTab('offres',this)">🏷️ Offres</span>
-    <span class="tab-btn"     onclick="showGerTab('diesel',this)">⛽ Diesel</span>
     <span class="tab-btn"     onclick="showGerTab('prix',this)">⚙️ Réglages</span>
     <span class="tab-btn"     onclick="showGerTab('emp',this)">👥 Employés</span>
-    <span class="tab-btn"     onclick="showGerTab('clients',this)">👤 Clients</span>
-    <span class="tab-btn"     onclick="showGerTab('distrib',this)">🏪 Distributeurs</span>
     <span class="tab-btn"     onclick="showGerTab('act',this)">📊 Actionnaires</span>
     <span class="tab-btn"     onclick="showGerTab('ops',this)">📋 Opérations</span>
     <span class="tab-btn"     onclick="showGerTab('exp',this)">📤 Export</span>
@@ -611,21 +605,6 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
       <div class="stat-card"><div class="stat-lbl">💵 CA</div><div class="stat-val" id="dashCA">0 <span class="stat-unit">MRU</span></div><div class="stat-trend t-nt" id="dashCATrend">—</div></div>
       <div class="stat-card"><div class="stat-lbl"><span data-fr="Production" data-ar="الإنتاج">Production</span></div><div class="stat-val" id="dashProd">0 <span class="stat-unit">kg</span></div><div class="stat-trend t-nt">machine</div></div>
       <div class="stat-card"><div class="stat-lbl"><span data-fr="Employés actifs" data-ar="الموظفون النشطون">Employés actifs</span></div><div class="stat-val" id="dashEmps">0</div><div class="stat-trend t-nt">enregistrés</div></div>
-    </div>
-    <!-- STOCK RESTANT -->
-    <div class="card" style="background:linear-gradient(135deg,#E8F8F5,#D1F2EB);border:1.5px solid #A9DFBF;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-        <div class="card-title" style="margin:0;color:#1E8449;">📦 Stock restant</div>
-        <div id="stockBadge" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#1E8449;color:#fff;">OK</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
-        <div style="background:rgba(255,255,255,0.7);border-radius:12px;padding:8px 4px;"><div style="font-size:10px;color:#7FB3D3;">⚙️ Produit</div><div style="font-size:15px;font-weight:900;color:#1A5276;" id="stockProd">0 kg</div></div>
-        <div style="background:rgba(255,255,255,0.7);border-radius:12px;padding:8px 4px;"><div style="font-size:10px;color:#7FB3D3;">🛒 Vendu</div><div style="font-size:15px;font-weight:900;color:#C0392B;" id="stockVendu">0 kg</div></div>
-        <div style="background:rgba(255,255,255,0.7);border-radius:12px;padding:8px 4px;"><div style="font-size:10px;color:#7FB3D3;">📦 Restant</div><div style="font-size:15px;font-weight:900;" id="stockRestant">0 kg</div></div>
-      </div>
-      <div style="margin-top:8px;"><div style="display:flex;justify-content:space-between;font-size:11px;color:#1E8449;margin-bottom:3px;"><span>Ecoulé</span><span id="stockPct">0%</span></div>
-        <div style="background:rgba(255,255,255,0.5);border-radius:20px;height:6px;overflow:hidden;"><div id="stockPBar" style="height:100%;border-radius:20px;background:linear-gradient(90deg,#27AE60,#F39C12);width:0%;transition:width 0.4s;"></div></div>
-      </div>
     </div>
     <!-- GRAPHIQUE -->
     <div class="card">
@@ -682,227 +661,19 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
     <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:6px;">L'assistant conseille — vous décidez toujours 👔</div>
   </div>
 
-  <!-- BILAN GERANT -->
-  <div id="ger-bilan" class="tab-content">
-    <div class="card" style="padding:12px;"><div style="display:flex;gap:6px;">
-      <button onclick="setBilanPeriode('month',this)" id="gerBilBtn-month" style="flex:1;padding:7px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Ce mois</button>
-      <button onclick="setBilanPeriode('year',this)" id="gerBilBtn-year" style="flex:1;padding:7px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Annee</button>
-      <button onclick="setBilanPeriode('all',this)" id="gerBilBtn-all" style="flex:1;padding:7px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Tout</button>
-    </div><div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center;" id="gerBilPeriodeLabel">Ce mois</div></div>
-    <div class="card" style="background:linear-gradient(135deg,#0D3B5C,#1A5276);padding:16px;">
-      <div style="color:rgba(255,255,255,0.7);font-size:11px;">CA</div><div style="color:#fff;font-size:28px;font-weight:900;" id="gerBilCA">0 MRU</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;"><div style="color:rgba(255,255,255,0.6);font-size:10px;">Vendu</div><div style="color:#fff;font-weight:800;" id="gerBilKgVendu">0 kg</div></div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;"><div style="color:rgba(255,255,255,0.6);font-size:10px;">Produit</div><div style="color:#fff;font-weight:800;" id="gerBilKgProd">0 kg</div></div>
-      </div>
-    </div>
-    <div class="card"><div class="card-title">Depenses</div>
-      <div class="ir"><span class="il">Salaires</span><span style="color:var(--danger);font-weight:700;" id="gerBilSal">0 MRU</span></div>
-      <div class="ir"><span class="il">Achats</span><span style="color:var(--danger);font-weight:700;" id="gerBilAch">0 MRU</span></div>
-      <div class="ir"><span class="il">Taxes</span><span style="color:var(--danger);font-weight:700;" id="gerBilTax">0 MRU</span></div>
-      <div class="ir"><span class="il">Avances</span><span style="color:var(--danger);font-weight:700;" id="gerBilAct">0 MRU</span></div>
-      <div style="border-top:2px solid var(--brand-border);margin-top:6px;padding-top:6px;"><div class="ir"><span class="il" style="font-weight:800;">Total</span><span style="color:var(--danger);font-weight:900;" id="gerBilDep">0 MRU</span></div></div>
-    </div>
-    <div class="card" style="background:linear-gradient(135deg,#E8F8F5,#D1F2EB);border:1.5px solid #A9DFBF;">
-      <div class="card-title" style="color:#1E8449;">Benefice net</div>
-      <div style="text-align:center;padding:8px 0;font-size:30px;font-weight:900;" id="gerBilBenef">0 MRU</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
-        <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);">Marge</div><div style="font-size:15px;font-weight:900;color:#1E8449;" id="gerBilMarge">0%</div></div>
-        <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);">Cout/kg</div><div style="font-size:15px;font-weight:900;color:var(--brand);" id="gerBilCoutKg">0</div></div>
-        <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);">ROI</div><div style="font-size:15px;font-weight:900;color:#8E44AD;" id="gerBilROI">0%</div></div>
-      </div>
-    </div>
-    <div class="card" style="background:linear-gradient(135deg,#EBF5FB,#D6EAF8);border:1.5px solid var(--brand-border);">
-      <div class="card-title">Valeur stock</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
-        <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px;"><div style="font-size:10px;color:var(--muted);">Quantite</div><div style="font-weight:900;color:var(--brand);" id="gerBilStockKg">0 kg</div></div>
-        <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px;"><div style="font-size:10px;color:var(--muted);">Prix/kg</div><div style="font-weight:900;color:var(--brand);" id="gerBilPrixKg">0</div></div>
-        <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px;"><div style="font-size:10px;color:var(--muted);">Valeur</div><div style="font-weight:900;color:#1E8449;" id="gerBilStockVal">0</div></div>
-      </div>
-    </div>
-    <div class="card"><div class="card-title">Rapport</div>
-      <div style="background:var(--brand-pale);border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:var(--brand);line-height:1.7;" id="gerBilRapportPreview">-</div>
-      <button class="btn-primary" onclick="exportBilan('word','ger')" style="margin-bottom:6px;">Telecharger Word</button>
-      <button class="btn-secondary" onclick="exportBilan('csv','ger')">Telecharger CSV</button>
-    </div>
-
-    <!-- COMPARAISON MOIS PAR MOIS -->
-    <div class="card" style="border:1.5px solid var(--brand-border);">
-      <div class="card-title">📊 Comparaison mois par mois</div>
-      <div id="comparaisonMois"></div>
-    </div>
-
-    <!-- GRAPHIQUE 6 DERNIERS MOIS -->
-    <div class="card">
-      <div class="card-title">📈 Évolution sur 6 mois</div>
-      <div id="evolution6mois" style="overflow-x:auto;"></div>
-    </div>
-
-  </div>
-
-  <!-- INVESTISSEMENT -->
-  <div id="ger-invest" class="tab-content">
-    <div class="card" style="background:linear-gradient(135deg,#2C3E50,#3D5166);padding:16px;">
-      <div style="color:rgba(255,255,255,0.7);font-size:11px;">Capital investi</div>
-      <div style="color:#fff;font-size:28px;font-weight:900;" id="investTotal">0 MRU</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px;">
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;text-align:center;"><div style="color:rgba(255,255,255,0.6);font-size:10px;">ROI</div><div style="color:#fff;font-weight:900;" id="investROI">0%</div></div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;text-align:center;"><div style="color:rgba(255,255,255,0.6);font-size:10px;">Recupere</div><div style="color:#fff;font-weight:900;" id="investRecup">0</div></div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;text-align:center;"><div style="color:rgba(255,255,255,0.6);font-size:10px;">Restant</div><div style="color:#fff;font-weight:900;" id="investRestant">0</div></div>
-      </div>
-    </div>
-    <div class="card" style="background:linear-gradient(135deg,#E8F8F5,#D1F2EB);border:1.5px solid #A9DFBF;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><div class="card-title" style="margin:0;color:#1E8449;">Rentabilisation</div><div id="investBadge" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#95A5A6;color:#fff;">En cours</div></div>
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:#1E8449;margin-bottom:4px;"><span id="investPctLabel">0%</span><span id="investDateEst">-</span></div>
-      <div style="background:rgba(255,255,255,0.5);border-radius:20px;height:10px;overflow:hidden;"><div id="investPBar" style="height:100%;border-radius:20px;background:linear-gradient(90deg,#27AE60,#F39C12);width:0%;"></div></div>
-      <div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center;" id="investConseil">-</div>
-    </div>
-    <div class="card">
-      <div class="card-title" id="investFormTitle">Ajouter une depense initiale</div>
-      <input type="hidden" id="investEditId"/>
-      <span class="fl">Description</span>
-      <input class="fi" id="investDesc" placeholder="Ex : Machine a glacons 650kg"/>
-      <span class="fl">Categorie</span>
-      <select class="fi" id="investCat">
-        <option value="machine">Machine / Equipement</option>
-        <option value="groupe">Groupe electrogene</option>
-        <option value="infra">Infrastructure</option>
-        <option value="transport">Transport</option>
-        <option value="loyer">Loyer / Terrain</option>
-        <option value="autre">Autre</option>
-      </select>
-      <span class="fl">Montant (MRU)</span>
-      <input class="fi" id="investMontant" type="number" placeholder="Ex : 54600"/>
-      <span class="fl">Date achat</span>
-      <input class="fi" id="investDate" type="date"/>
-      <span class="fl">Note (optionnel)</span>
-      <input class="fi" id="investNote" placeholder="Ex : ELY foreign trade"/>
-      <button class="btn-primary" onclick="saveInvest()" style="margin-top:8px;">Enregistrer</button>
-      <button class="btn-secondary" id="investCancelBtn" onclick="cancelInvestEdit()" style="display:none;margin-top:6px;">Annuler</button>
-    </div>
-    <div class="card"><div class="card-title">Depenses enregistrees</div><div id="investList"><div class="empty-state">Aucune depense.</div></div></div>
-  </div>
-
-  <!-- OFFRES -->
-  <!-- DIESEL -->
-  <div id="ger-diesel" class="tab-content">
-
-    <!-- Config prix litre -->
-    <div class="card" style="background:linear-gradient(135deg,#FEF9E7,#FDEBD0);border:1.5px solid #F39C12;">
-      <div class="card-title" style="color:#E67E22;">⛽ Configuration diesel</div>
-      <span class="fl">Prix du litre (MRU)</span>
-      <input class="fi" id="dieselPrixLitre" type="number" placeholder="Ex : 35" oninput="saveDieselConfig()"/>
-      <span class="fl">Consommation estimée/jour (litres)</span>
-      <input class="fi" id="dieselConsomEst" type="number" placeholder="Ex : 25" oninput="saveDieselConfig()"/>
-      <div style="font-size:11px;color:var(--muted);margin-top:6px;" id="dieselCoutEstime"></div>
-    </div>
-
-    <!-- Résumé mois -->
-    <div class="card" style="background:linear-gradient(135deg,#2C3E50,#3D5166);padding:16px;">
-      <div style="color:rgba(255,255,255,0.7);font-size:11px;margin-bottom:4px;">⛽ Coût diesel ce mois</div>
-      <div style="color:#fff;font-size:28px;font-weight:900;" id="dieselCoutMois">0 MRU</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px;">
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;text-align:center;">
-          <div style="color:rgba(255,255,255,0.6);font-size:10px;">Litres ce mois</div>
-          <div style="color:#fff;font-weight:900;" id="dieselLitresMois">0 L</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;text-align:center;">
-          <div style="color:rgba(255,255,255,0.6);font-size:10px;">Coût/kg produit</div>
-          <div style="color:#fff;font-weight:900;" id="dieselCoutKg">0 MRU</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;text-align:center;">
-          <div style="color:rgba(255,255,255,0.6);font-size:10px;">% du CA</div>
-          <div style="color:#fff;font-weight:900;" id="dieselPctCA">0%</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Saisie journalière -->
-    <div class="card">
-      <div class="card-title">📝 Saisie journalière</div>
-      <span class="fl">Date</span>
-      <input class="fi" id="dieselDate" type="date"/>
-      <span class="fl">Litres consommés</span>
-      <input class="fi" id="dieselLitres" type="number" placeholder="Ex : 25"/>
-      <span class="fl">Note (optionnel)</span>
-      <input class="fi" id="dieselNote" placeholder="Ex : groupe 12h, panne 2h..."/>
-      <button class="btn-primary" onclick="saveDiesel()" style="margin-top:8px;">⛽ Enregistrer</button>
-    </div>
-
-    <!-- Résumé sessions opérateur -->
-    <div class="card">
-      <div class="card-title">📊 Sessions énergie (opérateur)</div>
-      <div id="dieselSessions"><div class="empty-state">Aucune session enregistrée.</div></div>
-    </div>
-
-    <!-- Historique -->
-    <div class="card">
-      <div class="card-title">📋 Historique diesel</div>
-      <div style="display:flex;gap:6px;margin-bottom:10px;">
-        <select class="fi" id="dieselMoisFilter" onchange="renderDieselHistorique()" style="flex:1;margin:0;">
-          <option value="01">Janvier</option><option value="02">Février</option><option value="03">Mars</option>
-          <option value="04">Avril</option><option value="05">Mai</option><option value="06">Juin</option>
-          <option value="07">Juillet</option><option value="08">Août</option><option value="09">Septembre</option>
-          <option value="10">Octobre</option><option value="11">Novembre</option><option value="12">Décembre</option>
-        </select>
-        <select class="fi" id="dieselAnneeFilter" onchange="renderDieselHistorique()" style="flex:1;margin:0;"></select>
-      </div>
-      <div id="dieselHistorique"><div class="empty-state">Aucune saisie.</div></div>
-    </div>
-
-  </div>
-
-  <div id="ger-offres" class="tab-content">
-    <div class="card">
-      <div class="card-title" id="offreFormTitle">Creer une offre</div>
-      <input type="hidden" id="offreEditId"/>
-      <span class="fl">Nom de l'offre</span>
-      <input class="fi" id="offreNom" placeholder="Ex : Promo Ramadan"/>
-      <span class="fl">Type</span>
-      <select class="fi" id="offreType" onchange="onOffreTypeChange()">
-        <option value="pct">Reduction en % (ex: -10%)</option>
-        <option value="prix_fixe">Prix fixe MRU/kg</option>
-        <option value="1pour1">1kg achete = 1kg gratuit</option>
-      </select>
-      <div id="offreValWrap">
-        <span class="fl" id="offreValLabel">Valeur (%)</span>
-        <input class="fi" id="offreVal" type="number" placeholder="Ex : 10"/>
-      </div>
-      <span class="fl">Date debut</span>
-      <input class="fi" id="offreDateDebut" type="date"/>
-      <span class="fl">Date fin (optionnel)</span>
-      <input class="fi" id="offreDateFin" type="date"/>
-      <span class="fl">Description (optionnel)</span>
-      <input class="fi" id="offreDesc" placeholder="Ex : Valable pendant Ramadan"/>
-      <button class="btn-primary" onclick="saveOffre()" style="margin-top:10px;">Enregistrer l'offre</button>
-      <button class="btn-secondary" id="offreCancelBtn" onclick="cancelOffreEdit()" style="display:none;margin-top:6px;">Annuler</button>
-    </div>
-    <div class="card" style="background:linear-gradient(135deg,#FEF9E7,#FDEBD0);border:1.5px solid #F39C12;">
-      <div class="card-title" style="color:#E67E22;">Fidelite automatique</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.7;">Apres <b>10 achats</b> dans le mois : le client reçoit gratuitement <b>son plus petit achat historique</b> (max 5kg).<br>Ex: historique 2kg/5kg/1kg → offre = <b>1kg gratuit</b>. Gros client (min 6kg+) → <b>5kg offerts</b>.<br>Le cycle repart a zero apres chaque achat fidelite.</div>
-    </div>
-    <div class="card"><div class="card-title">Offres creees</div><div id="offreList"><div class="empty-state">Aucune offre.</div></div></div>
-  </div>
-
   <div id="ger-prix" class="tab-content">
 
     <!-- Prix de vente -->
     <div class="card">
       <div class="card-title">💵 Prix de vente</div>
+      <!-- Affichage prix actuel -->
       <div style="background:linear-gradient(135deg,#EBF5FB,#D6EAF8);border-radius:14px;padding:16px;margin-bottom:14px;text-align:center;">
         <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Prix actuel du kg</div>
         <div style="font-size:32px;font-weight:900;color:var(--brand);" id="prixActuel">— MRU/kg</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;" id="prixDepuis"></div>
       </div>
       <span class="fl">Nouveau prix (MRU/kg)</span>
       <input class="fi" id="prixInput" type="number" placeholder="Ex : 30"/>
       <button class="btn-primary" onclick="savePrix()">💾 Enregistrer le prix</button>
-    </div>
-
-    <!-- Historique des prix -->
-    <div class="card">
-      <div class="card-title">📈 Historique des prix</div>
-      <div id="prixHistorique"><div class="empty-state">Aucun changement de prix enregistré.</div></div>
     </div>
 
     <!-- Objectifs quotidiens -->
@@ -971,102 +742,6 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
   </div>
 
   <!-- ACTIONNAIRES -->
-  <!-- CARNET CLIENTS -->
-  <div id="ger-clients" class="tab-content">
-
-    <!-- Recherche -->
-    <div class="card" style="padding:10px 14px;">
-      <input class="fi" id="clientSearch" placeholder="🔍 Rechercher un client..." oninput="renderCarnetClients()" style="margin:0;"/>
-    </div>
-
-    <!-- Stats globales -->
-    <div class="card" style="background:linear-gradient(135deg,#0D3B5C,#1A5276);padding:16px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;">
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;">Total clients</div>
-          <div style="color:#fff;font-size:20px;font-weight:900;" id="clientsTotalNb">0</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;">
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;">Actifs ce mois</div>
-          <div style="color:#fff;font-size:20px;font-weight:900;" id="clientsActifsMois">0</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;">
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;">Fidèles (10+)</div>
-          <div style="color:#fff;font-size:20px;font-weight:900;" id="clientsFideles">0</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Relance automatique -->
-    <div class="card" style="border:1.5px solid #E74C3C;">
-      <div class="card-title" style="color:#E74C3C;">📣 Relance clients inactifs</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Clients n'ayant pas acheté depuis :</div>
-      <div style="display:flex;gap:6px;margin-bottom:10px;">
-        <button onclick="setRelanceSeuil(7,this)" id="relBtn-7" style="flex:1;padding:6px;border-radius:20px;border:1.5px solid #E74C3C;background:#FDEDEC;color:#C0392B;font-size:11px;font-weight:700;cursor:pointer;">7 jours</button>
-        <button onclick="setRelanceSeuil(14,this)" id="relBtn-14" style="flex:1;padding:6px;border-radius:20px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">14 jours</button>
-        <button onclick="setRelanceSeuil(30,this)" id="relBtn-30" style="flex:1;padding:6px;border-radius:20px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">30 jours</button>
-      </div>
-      <div id="relanceList"><div class="empty-state">Sélectionnez un seuil.</div></div>
-    </div>
-
-    <!-- Filtre -->
-    <div class="card" style="padding:10px 14px;">
-      <div style="display:flex;gap:6px;flex-wrap:wrap;">
-        <button onclick="setClientFiltre('tous',this)" id="cfBtn-tous" style="flex:1;padding:6px;border-radius:20px;border:1.5px solid var(--brand);background:var(--brand);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Tous</button>
-        <button onclick="setClientFiltre('actifs',this)" id="cfBtn-actifs" style="flex:1;padding:6px;border-radius:20px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Actifs</button>
-        <button onclick="setClientFiltre('fideles',this)" id="cfBtn-fideles" style="flex:1;padding:6px;border-radius:20px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Fidèles ⭐</button>
-        <button onclick="setClientFiltre('inactifs',this)" id="cfBtn-inactifs" style="flex:1;padding:6px;border-radius:20px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Inactifs ⚠️</button>
-      </div>
-    </div>
-
-    <!-- Liste clients -->
-    <div class="card">
-      <div class="card-title">📋 Liste des clients</div>
-      <div id="clientsList"><div class="empty-state">Aucun client trouvé.</div></div>
-    </div>
-
-  </div>
-
-  <!-- DETAIL CLIENT (modal) -->
-  <div id="clientDetailModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9000;overflow-y:auto;">
-    <div style="background:var(--bg);border-radius:20px 20px 0 0;margin-top:60px;padding:20px;min-height:80vh;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-        <div style="font-size:16px;font-weight:900;color:var(--brand);" id="clientDetailNom">Client</div>
-        <button onclick="closeClientDetail()" style="background:none;border:none;font-size:24px;cursor:pointer;">✕</button>
-      </div>
-      <div id="clientDetailContent"></div>
-    </div>
-  </div>
-
-  <!-- DISTRIBUTEURS (lecture seule gérant) -->
-  <div id="ger-distrib" class="tab-content">
-
-    <div class="card" style="background:linear-gradient(135deg,#FEF9E7,#FDEBD0);border:1.5px solid #F39C12;padding:10px 14px;">
-      <div style="font-size:12px;color:#E67E22;">👁️ Vue lecture seule — Gestion dans Comptable → 🏪 Distributeurs</div>
-    </div>
-
-    <!-- Stats globales -->
-    <div class="card" style="background:linear-gradient(135deg,#0D3B5C,#1A5276);padding:16px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;">
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;">Distributeurs</div>
-          <div style="color:#fff;font-size:20px;font-weight:900;" id="gerDistribNb">0</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;">
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;">Total dû</div>
-          <div style="color:#fff;font-size:16px;font-weight:900;" id="gerDistribTotalDu">0 MRU</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;">
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;">Bouclés</div>
-          <div style="color:#fff;font-size:20px;font-weight:900;" id="gerDistribBoucles">0</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="gerDistribList"><div class="empty-state">Aucun distributeur.</div></div>
-
-  </div>
-
   <div id="ger-act" class="tab-content">
     <div class="card">
       <div class="card-title" id="actFormTitle"><span data-fr="Ajouter un actionnaire" data-ar="إضافة مساهم">Ajouter un actionnaire</span></div>
@@ -1199,9 +874,6 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
       <div class="ir"><span class="il">Quota du jour</span><span class="iv" id="venQuota">— kg</span></div>
       <div class="ir"><span class="il">Vendu aujourd'hui</span><span class="iv" id="venTotal">0 kg</span></div>
       <div class="ir"><span class="il">CA du jour</span><span class="iv-g" id="venCA">0 MRU</span></div>
-      <div class="ir"><span class="il">📦 Stock</span><span class="iv" id="venStockRestant" style="font-weight:800;color:#1E8449;">— kg</span></div>
-      <div id="venOffresActives" style="display:none;margin:8px 0;"></div>
-      <div id="venOffreAppliquee" style="display:none;border-radius:10px;padding:8px;margin-bottom:6px;font-size:12px;font-weight:700;text-align:center;border:1px solid #F39C12;background:#FEF9E7;color:#E67E22;"></div>
       <div class="prog-wrap">
         <div class="prog-hd"><span>Progression quota</span><span id="venPct">0%</span></div>
         <div class="prog-bg"><div class="prog-bar" id="venPBar" style="width:0%"></div></div>
@@ -1214,9 +886,12 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
       <span class="fl">Nom du client</span>
       <input class="fi" id="venClient" placeholder="Ex : Ahmed Ould..."/>
       <span class="fl">Téléphone client</span>
-      <input class="fi" id="venTel" type="tel" placeholder="Ex : 36 00 00 00" oninput="if(typeof calcVenteTotalAvecOffre==='function')calcVenteTotalAvecOffre()"/>
+      <input class="fi" id="venTel" type="tel" placeholder="Ex : 36 00 00 00"/>
       <span class="fl">Poids (kg)</span>
       <input class="fi" id="venPoids" type="number" placeholder="Ex : 50" oninput="calcVenteTotal()"/>
+      <span class="fl">Prix de vente (MRU/kg)</span>
+      <input class="fi" id="venPrixKg" type="number" placeholder="Ex : 25" oninput="calcVenteTotal()"/>
+      <div style="font-size:11px;color:var(--muted);margin-top:-8px;margin-bottom:8px;">Référence gérant : <span id="venPrixRef">—</span></div>
       <span class="fl">Total calculé</span>
       <input class="fi fi-ro" id="venTotalCalc" value="0 MRU" readonly/>
       <span class="fl">Mode de paiement</span>
@@ -1225,24 +900,7 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
         <option>Cash</option><option>Bankily</option><option>BCIPay</option>
         <option>Masrivi</option><option>Sedad</option><option>Autre</option>
       </select>
-
-      <!-- PHOTO JUSTIFICATIF -->
-      <span class="fl">📷 Photo justificatif (optionnel)</span>
-      <div style="margin-top:4px;">
-        <input type="file" id="venPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="onVenPhotoSelected(event)"/>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <button type="button" onclick="document.getElementById('venPhotoInput').click()"
-            style="flex:1;padding:10px;border-radius:12px;border:2px dashed var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:12px;font-weight:700;cursor:pointer;">
-            📷 Prendre une photo
-          </button>
-          <button type="button" id="venPhotoDeleteBtn" onclick="deleteVenPhoto()" style="display:none;background:#E74C3C;color:#fff;border:none;border-radius:20px;padding:8px 12px;font-size:12px;cursor:pointer;">✕</button>
-        </div>
-        <div id="venPhotoPreview" style="display:none;margin-top:8px;text-align:center;">
-          <img id="venPhotoImg" src="" style="max-width:100%;max-height:200px;border-radius:12px;border:2px solid var(--brand-border);object-fit:cover;"/>
-        </div>
-      </div>
-
-      <button class="btn-primary" onclick="ajouterVente()" style="margin-top:10px;">Valider la vente</button>
+      <button class="btn-primary" onclick="ajouterVente()">Valider la vente</button>
       <button class="btn-secondary" id="venCancelBtn" style="display:none;" onclick="cancelVenteEdit()">Annuler modification</button>
     </div>
 
@@ -1274,67 +932,41 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
       <div class="card-title">⚙️ Production du jour</div>
       <div style="text-align:center;padding:12px 0 8px;">
         <div style="font-size:48px;font-weight:900;font-family:monospace;color:var(--brand);letter-spacing:3px;" id="opTimer">00:00:00</div>
+        
       </div>
       <div class="ir"><span class="il"><span data-fr="Objectif" data-ar="الهدف">Objectif</span></span><span class="iv" id="opObjectif">650 kg</span></div>
       <div class="ir"><span class="il"><span data-fr="Produit" data-ar="المنتج">Produit</span></span><span class="iv" id="opKgVal">0 kg</span></div>
-      <div class="ir"><span class="il"><span data-fr="Statut machine" data-ar="حالة الآلة">Statut machine</span></span><span class="iv" id="opStatus" style="color:var(--muted);">En attente</span></div>
-      <div class="ir"><span class="il">⚡ Source énergie</span><span class="iv" id="opSourceLabel" style="color:var(--muted);">—</span></div>
-
-      <!-- SOURCE D'ENERGIE - obligatoire avant démarrage -->
-      <div id="opSourceWrap" style="margin:10px 0;padding:10px;background:rgba(255,255,255,0.6);border-radius:12px;">
-        <div style="font-size:12px;font-weight:700;color:var(--brand);margin-bottom:8px;">⚡ Source d'énergie (obligatoire)</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-          <button onclick="selectSource('somelec',this)" id="srcBtn-somelec"
-            style="padding:12px 6px;border-radius:12px;border:2px solid #2980B9;background:#EBF5FB;color:#1A5276;font-size:12px;font-weight:800;cursor:pointer;">
-            ⚡ Réseau<br><span style="font-size:10px;font-weight:400;">SOMELEC</span>
-          </button>
-          <button onclick="selectSource('groupe',this)" id="srcBtn-groupe"
-            style="padding:12px 6px;border-radius:12px;border:2px solid #E67E22;background:#FEF9E7;color:#E67E22;font-size:12px;font-weight:800;cursor:pointer;">
-            ⛽ Groupe<br><span style="font-size:10px;font-weight:400;">Électrogène</span>
-          </button>
-        </div>
-        <div id="opSourceError" style="display:none;color:#E74C3C;font-size:11px;font-weight:700;margin-top:6px;text-align:center;">⚠️ Sélectionnez une source avant de démarrer !</div>
-      </div>
-
+      <div class="ir"><span class="il"><span data-fr="Statut machine" data-ar="حالة الآلة">Statut machine</span></span><span class="iv" id="opStatus" style="color:var(--muted);"><span data-fr="En attente" data-ar="في الانتظار">En attente</span></span></div>
       <div class="prog-wrap">
-        <div class="prog-hd"><span>Progression objectif</span><span id="opPct">0%</span></div>
+        <div class="prog-hd"><span><span data-fr="Progression objectif" data-ar="تقدم الهدف">Progression objectif</span></span><span id="opPct">0%</span></div>
         <div class="prog-bg"><div class="prog-bar" id="opPBar" style="width:0%"></div></div>
       </div>
       <div class="op-btns">
-        <button class="op-btn op-btn-g" id="opBtnStart" onclick="opStart()">Démarrer</button>
-        <button class="op-btn op-btn-r" id="opBtnStop"  onclick="opAskStop()" disabled>Arrêter</button>
-        <button class="op-btn op-btn-b" id="opBtnFin"   onclick="opAskFin()">Fin journée</button>
+        <button class="op-btn op-btn-g" id="opBtnStart" onclick="opStart()"><span data-fr="Démarrer" data-ar="بدء">Démarrer</span></button>
+        <button class="op-btn op-btn-r" id="opBtnStop"  onclick="opAskStop()" disabled><span data-fr="Arrêter" data-ar="إيقاف">Arrêter</span></button>
+        <button class="op-btn op-btn-b" id="opBtnFin"   onclick="opAskFin()"><span data-fr="Fin journée" data-ar="نهاية اليوم">Fin journée</span></button>
       </div>
     </div>
 
     <div class="card">
       <div class="card-title">🔴 Cause d'arrêt</div>
-      <span class="fl">Sélectionner la cause</span>
+      <span class="fl"><span data-fr="Sélectionner la cause" data-ar="اختيار السبب">Sélectionner la cause</span></span>
       <select class="fi" id="opCauseSelect" onchange="opToggleAutre()">
         <option value="">-- Sélectionner --</option>
-        <option value="fin_normale">✅ Fin de production normale</option>
-        <option value="basculement_somelec">🔄 Basculement vers SOMELEC</option>
-        <option value="coupure_somelec">⚡ Coupure SOMELEC → Groupe</option>
-        <option value="manque_eau">💧 Manque d'eau</option>
-        <option value="maintenance">🔧 Maintenance / Panne</option>
-        <option value="nettoyage">🧹 Nettoyage</option>
+        <option>Coupure d'électricité</option>
+        <option>Manque d'eau</option>
+        <option>Maintenance</option>
+        <option>Nettoyage</option>
         <option value="Autre">Autre (préciser)</option>
       </select>
       <div id="opAutreWrap" style="display:none;margin-top:6px;">
         <span class="fl">Préciser</span>
         <input class="fi" id="opCauseAutre" placeholder="Ex : panne moteur..."/>
       </div>
-      <!-- Saisie carburant réel si source = groupe -->
-      <div id="opCarburantWrap" style="display:none;margin-top:8px;padding:10px;background:#FEF9E7;border-radius:10px;border:1px solid #F39C12;">
-        <div style="font-size:12px;font-weight:700;color:#E67E22;margin-bottom:6px;">⛽ Carburant consommé (groupe)</div>
-        <span class="fl">Litres réels (optionnel)</span>
-        <input class="fi" id="opLitresReels" type="number" placeholder="Ex : 12 (laisser vide pour estimation auto)"/>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;" id="opCarburantEstime"></div>
-      </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Historique des arrêts</div>
+      <div class="card-title"><span data-fr="Historique des arrêts" data-ar="سجل التوقفات">Historique des arrêts</span></div>
       <div id="opArretsList"><div class="empty-state">Aucun arrêt enregistré.</div></div>
     </div>
   </div>
@@ -1360,10 +992,7 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
   </div>
   <div class="tabs-wrap">
     <span class="tab-btn on" onclick="showCompTab('dash',this)">📊 Dashboard</span>
-    <span class="tab-btn"    onclick="showCompTab('bilan',this)">📈 Bilan</span>
     <span class="tab-btn"    onclick="showCompTab('sal',this)">💰 Salaires</span>
-    <span class="tab-btn"    onclick="showCompTab('presence',this)">🕐 Présence</span>
-    <span class="tab-btn"    onclick="showCompTab('distrib',this)">🏪 Distributeurs</span>
     <span class="tab-btn"    onclick="showCompTab('act',this)">📊 Actionnaires</span>
     <span class="tab-btn"    onclick="showCompTab('ach',this)">🛒 Achats</span>
     <span class="tab-btn"    onclick="showCompTab('tax',this)">🏛️ Taxes</span>
@@ -1406,69 +1035,8 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
     </div>
   </div>
 
-  <div id="comp-bilan" class="tab-content">
-    <div class="card" style="padding:12px;"><div style="display:flex;gap:6px;">
-      <button onclick="setBilanPeriode('month',this)" id="bilBtn-month" style="flex:1;padding:7px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Ce mois</button>
-      <button onclick="setBilanPeriode('year',this)" id="bilBtn-year" style="flex:1;padding:7px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Annee</button>
-      <button onclick="setBilanPeriode('all',this)" id="bilBtn-all" style="flex:1;padding:7px;border-radius:10px;border:1.5px solid var(--brand-border);background:var(--brand-pale);color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;">Tout</button>
-    </div><div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center;" id="bilPeriodeLabel">Ce mois</div></div>
-    <div class="card" style="background:linear-gradient(135deg,#0D3B5C,#1A5276);padding:16px;">
-      <div style="color:rgba(255,255,255,0.7);font-size:11px;">CA</div><div style="color:#fff;font-size:28px;font-weight:900;" id="bilCA">0 MRU</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;"><div style="color:rgba(255,255,255,0.6);font-size:10px;">Vendu</div><div style="color:#fff;font-weight:800;" id="bilKgVendu">0 kg</div></div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;"><div style="color:rgba(255,255,255,0.6);font-size:10px;">Produit</div><div style="color:#fff;font-weight:800;" id="bilKgProd">0 kg</div></div>
-      </div>
-    </div>
-    <div class="card"><div class="card-title">Depenses</div>
-      <div class="ir"><span class="il">Salaires</span><span style="color:var(--danger);font-weight:700;" id="bilSal">0 MRU</span></div>
-      <div class="ir"><span class="il">Achats</span><span style="color:var(--danger);font-weight:700;" id="bilAch">0 MRU</span></div>
-      <div class="ir"><span class="il">Taxes</span><span style="color:var(--danger);font-weight:700;" id="bilTax">0 MRU</span></div>
-      <div class="ir"><span class="il">Avances</span><span style="color:var(--danger);font-weight:700;" id="bilAct">0 MRU</span></div>
-      <div style="border-top:2px solid var(--brand-border);margin-top:6px;padding-top:6px;"><div class="ir"><span class="il" style="font-weight:800;">Total</span><span style="color:var(--danger);font-weight:900;" id="bilDep">0 MRU</span></div></div>
-    </div>
-    <div class="card" style="background:linear-gradient(135deg,#E8F8F5,#D1F2EB);border:1.5px solid #A9DFBF;">
-      <div class="card-title" style="color:#1E8449;">Benefice net</div>
-      <div style="text-align:center;padding:8px 0;font-size:30px;font-weight:900;" id="bilBenef">0 MRU</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
-        <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);">Marge</div><div style="font-size:15px;font-weight:900;color:#1E8449;" id="bilMarge">0%</div></div>
-        <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);">Cout/kg</div><div style="font-size:15px;font-weight:900;color:var(--brand);" id="bilCoutKg">0</div></div>
-        <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);">ROI</div><div style="font-size:15px;font-weight:900;color:#8E44AD;" id="bilROI">0%</div></div>
-      </div>
-    </div>
-    <div class="card"><div class="card-title">Rapport</div>
-      <div style="background:var(--brand-pale);border-radius:10px;padding:10px;margin-bottom:10px;font-size:11px;color:var(--brand);line-height:1.7;" id="bilRapportPreview">-</div>
-      <button class="btn-primary" onclick="exportBilan('word','comp')" style="margin-bottom:6px;">Telecharger Word</button>
-      <button class="btn-secondary" onclick="exportBilan('csv','comp')">Telecharger CSV</button>
-    </div>
-  </div>
   <!-- SALAIRES -->
   <div id="comp-sal" class="tab-content">
-
-    <!-- Fiche de paie automatique -->
-    <div class="card" style="background:linear-gradient(135deg,#EBF5FB,#D6EAF8);border:1.5px solid var(--brand-border);">
-      <div class="card-title">🧾 Fiches de paie automatiques</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Générer la fiche de paie d'un employé pour un mois donné</div>
-      <span class="fl">Employé</span>
-      <select class="fi" id="ficheEmpSelect"></select>
-      <span class="fl">Mois</span>
-      <select class="fi" id="ficheMoisSelect">
-        <option value="01">Janvier</option><option value="02">Février</option><option value="03">Mars</option>
-        <option value="04">Avril</option><option value="05">Mai</option><option value="06">Juin</option>
-        <option value="07">Juillet</option><option value="08">Août</option><option value="09">Septembre</option>
-        <option value="10">Octobre</option><option value="11">Novembre</option><option value="12">Décembre</option>
-      </select>
-      <span class="fl">Année</span>
-      <input class="fi" id="ficheAnnee" type="number" placeholder="Ex : 2026"/>
-      <button class="btn-primary" onclick="genererFichePaie()" style="margin-top:8px;">🧾 Générer la fiche de paie</button>
-    </div>
-
-    <!-- Aperçu fiche de paie -->
-    <div id="fichePreviewCard" style="display:none;" class="card">
-      <div class="card-title">Aperçu fiche de paie</div>
-      <div id="fichePreviewContent"></div>
-      <button class="btn-primary" onclick="telechargerFichePaie()" style="margin-top:10px;">📥 Télécharger PDF/Word</button>
-    </div>
-
     <!-- Formulaire -->
     <div class="card">
       <div class="card-title">💰 Paiement salaire</div>
@@ -1496,107 +1064,7 @@ html,body{height:100%;margin:0;padding:0;background:var(--bg);font-family:'Cairo
     </div>
   </div>
 
-  <!-- PRESENCE & RETARDS -->
-  <div id="comp-presence" class="tab-content">
-    <div class="card">
-      <div class="card-title">🕐 Enregistrer la présence</div>
-      <span class="fl">Date</span>
-      <input class="fi" id="presDate" type="date"/>
-      <span class="fl">Employé</span>
-      <select class="fi" id="presEmpSelect"></select>
-      <span class="fl">Statut</span>
-      <select class="fi" id="presStatut">
-        <option value="present">✅ Présent</option>
-        <option value="absent">❌ Absent</option>
-        <option value="retard">⏰ Retard</option>
-        <option value="conge">🏖️ Congé autorisé</option>
-        <option value="maladie">🤒 Maladie</option>
-      </select>
-      <span class="fl">Note (optionnel)</span>
-      <input class="fi" id="presNote" placeholder="Ex : retard de 30 min, justifié..."/>
-      <button class="btn-primary" onclick="savePresence()" style="margin-top:8px;">✅ Enregistrer</button>
-    </div>
-    <div class="card" style="background:linear-gradient(135deg,#EBF5FB,#D6EAF8);border:1.5px solid var(--brand-border);">
-      <div class="card-title">📊 Résumé du mois</div>
-      <div style="display:flex;gap:6px;margin-bottom:10px;">
-        <select class="fi" id="presMoisFilter" onchange="renderPresenceMois()" style="flex:1;margin:0;">
-          <option value="01">Janvier</option><option value="02">Février</option><option value="03">Mars</option>
-          <option value="04">Avril</option><option value="05">Mai</option><option value="06">Juin</option>
-          <option value="07">Juillet</option><option value="08">Août</option><option value="09">Septembre</option>
-          <option value="10">Octobre</option><option value="11">Novembre</option><option value="12">Décembre</option>
-        </select>
-        <select class="fi" id="presAnneeFilter" onchange="renderPresenceMois()" style="flex:1;margin:0;"></select>
-      </div>
-      <div id="presResume"></div>
-    </div>
-    <div class="card">
-      <div class="card-title">📋 Historique</div>
-      <div id="presHistorique"><div class="empty-state">Aucune présence enregistrée.</div></div>
-    </div>
-  </div>
-
   <!-- ACTIONNAIRES -->
-  <!-- DISTRIBUTEURS -->
-  <div id="comp-distrib" class="tab-content">
-
-    <!-- Stats globales -->
-    <div class="card" style="background:linear-gradient(135deg,#0D3B5C,#1A5276);padding:16px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;">
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;">Distributeurs</div>
-          <div style="color:#fff;font-size:20px;font-weight:900;" id="distribNb">0</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;">
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;">Total dû</div>
-          <div style="color:#fff;font-size:16px;font-weight:900;" id="distribTotalDu">0 MRU</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:8px;">
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;">Bouclés</div>
-          <div style="color:#fff;font-size:20px;font-weight:900;" id="distribBoucles">0</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Formulaire nouveau marché -->
-    <div class="card">
-      <div class="card-title" id="distribFormTitle">➕ Nouveau marché distributeur</div>
-      <input type="hidden" id="distribEditId"/>
-      <span class="fl">Nom de la boutique / distributeur</span>
-      <input class="fi" id="distribNom" placeholder="Ex : Boutique Al Amal"/>
-      <span class="fl">Téléphone (optionnel)</span>
-      <input class="fi" id="distribTel" type="tel" placeholder="Ex : 36 00 00 00"/>
-      <span class="fl">Quantité par livraison (kg)</span>
-      <input class="fi" id="distribKg" type="number" placeholder="Ex : 100" oninput="calcDistribTotal()"/>
-      <span class="fl">Fréquence de livraison</span>
-      <select class="fi" id="distribFreq" onchange="calcDistribTotal()">
-        <option value="jour">Par jour</option>
-        <option value="semaine">Par semaine</option>
-        <option value="mois">Par mois</option>
-        <option value="unique">Commande unique</option>
-      </select>
-      <span class="fl">Nombre de livraisons</span>
-      <input class="fi" id="distribNbLiv" type="number" placeholder="Ex : 30 (jours) / 4 (semaines) / 1" oninput="calcDistribTotal()"/>
-      <span class="fl">Prix du kg (MRU)</span>
-      <input class="fi" id="distribPrix" type="number" placeholder="Ex : 25" oninput="calcDistribTotal()"/>
-      <div id="distribTotalCalc" style="display:none;background:linear-gradient(135deg,#EBF5FB,#D6EAF8);border-radius:12px;padding:12px;margin:8px 0;text-align:center;">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Montant total du marché</div>
-        <div style="font-size:24px;font-weight:900;color:var(--brand);" id="distribTotalVal">0 MRU</div>
-      </div>
-      <span class="fl">Avance initiale (MRU)</span>
-      <input class="fi" id="distribAvance" type="number" placeholder="Ex : 2000" oninput="calcDistribTotal()"/>
-      <span class="fl">Date du marché</span>
-      <input class="fi" id="distribDate" type="date"/>
-      <span class="fl">Note (optionnel)</span>
-      <input class="fi" id="distribNote" placeholder="Ex : livraison chaque matin"/>
-      <button class="btn-primary" onclick="saveDistrib()" style="margin-top:8px;">💾 Enregistrer le marché</button>
-      <button class="btn-secondary" id="distribCancelBtn" onclick="cancelDistribEdit()" style="display:none;margin-top:6px;">Annuler</button>
-    </div>
-
-    <!-- Liste distributeurs -->
-    <div id="distribList"></div>
-
-  </div>
-
   <div id="comp-act" class="tab-content">
     <div class="card"><div class="card-title">📊 État des actionnaires</div><div id="compActList"><div class="empty-state">Aucun actionnaire enregistré par le gérant.</div></div></div>
     <div class="card">
@@ -1896,7 +1364,7 @@ function showScreen(id){
 //  TABS GÉRANT + COMPTABLE
 // ═══════════════════════════════════════════
 function showGerTab(name, btn){
-  ['dash','ai','bilan','invest','offres','diesel','prix','emp','clients','distrib','act','ops','exp'].forEach(t=>{
+  ['dash','ai','prix','emp','act','ops','exp'].forEach(t=>{
     const el = document.getElementById('ger-'+t);
     if(el) el.style.display = (t===name) ? 'block' : 'none';
   });
@@ -1905,14 +1373,6 @@ function showGerTab(name, btn){
   if(name==='dash'){ renderNotifs(); renderConnexions(); setTimeout(renderChart,200); }
   if(name==='ops'){ populateOpEmp(); setOpPeriode('today'); }
   if(name==='ai'){ initAIChat(); }
-  if(name==='bilan'){ if(typeof refreshBilanGer==='function') refreshBilanGer(); if(typeof renderComparaisonMois==='function') renderComparaisonMois(); }
-  if(name==='invest'){ if(typeof renderInvestList==='function') renderInvestList(); }
-  if(name==='clients'){ if(typeof renderCarnetClients==='function') renderCarnetClients(); if(typeof renderRelanceList==='function') setRelanceSeuil(7,document.getElementById('relBtn-7')); }
-  if(name==='distrib'){ if(typeof renderDistribGer==='function') renderDistribGer(); }
-  if(name==='offres'){ if(typeof renderOffreList==='function') renderOffreList(); var dd=document.getElementById('offreDateDebut');if(dd&&!dd.value)dd.value=today(); }
-  if(name==='diesel'){ if(typeof initDiesel==='function') initDiesel(); }
-  if(name==='prix'){ if(typeof renderPrixHistorique==='function') renderPrixHistorique(); }
-  if(btn) btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
 }
 
 // État filtre ops
@@ -2066,17 +1526,14 @@ function refreshOps(){
   el.innerHTML = rows.map(r=>`<div style="padding:10px 0;border-bottom:1px solid var(--brand-border);">${r.html}</div>`).join('');
 }
 function showCompTab(name, btn){
-  ['dash','bilan','sal','presence','distrib','act','ach','tax','exp'].forEach(t=>{
+  ['dash','sal','act','ach','tax','exp'].forEach(t=>{
     const el = document.getElementById('comp-'+t);
     if(el) el.style.display = (t===name) ? 'block' : 'none';
   });
   document.querySelectorAll('#comptablePage .tab-btn').forEach(b=>b.classList.remove('on'));
   if(btn) btn.classList.add('on');
   if(name==='dash') refreshCompDash();
-  if(name==='bilan'){ if(typeof refreshBilan==='function') refreshBilan(); }
-  if(name==='sal'){ renderHistSal(); if(typeof initFichePaie==='function') initFichePaie(); }
-  if(name==='presence'){ if(typeof initPresence==='function') initPresence(); }
-  if(name==='distrib'){ if(typeof initDistrib==='function') initDistrib(); }
+  if(name==='sal') renderHistSal();
   if(name==='act'){ refreshCompActList(); renderHistAct(); }
   if(name==='ach') renderHistAch();
   if(name==='tax') renderHistTax();
@@ -2209,7 +1666,7 @@ function setLang(l){
 // ═══════════════════════════════════════════
 //  LOGIN
 // ═══════════════════════════════════════════
-const ADMIN = { id:'GERANT', pass:'lebroud2026', nom:'Ismail Kebbade', role:'gerant' };
+const ADMIN = { id:'GERANT', pass:'lebroud2026', nom:'Gérant', role:'gerant' };
 
 function getUsers(){ return ls_get(LS.USERS) || []; }
 
@@ -2259,7 +1716,7 @@ async function doLogin(){
 
   // Admin
   if(id.toUpperCase() === ADMIN.id && pass === ADMIN.pass){
-    currentUser = { nom:'Ismail Kebbade', role:'gerant', identifiant:'GERANT', photo:'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAB4AG4DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD6JNJmkJooEPFLTRTqAErhviN8RdP8HIsAj+2ak67lhVsLGOgZz/Qc/Su5A3HbzzxxXxfrem6hqni3U7W1llvEjuXTziu04DYDEdulNW3YWb0Rt6t8WfE11dGUa1cwgvuWK3ARUU9uOv41Pofxc8UafeLJLqT39vuG6K7AYMO4BxkfUU60+D99PCGN3HG/UE9P8axdY+HWtaepCeXKVzwrjn3GaXtqb0uX7Gp2PqLwb4r07xbpK3umOQynbPA5G+BvRh/Ijgit2vlr4C6ld6L8RLfT7nzI1vVa1kRhjJwSh/Aj9TX1LTaICkpaSkA09aaacaaaQyzRSUtMQopc8UgpaACPlwPevnPwBPFpV94in1NcRx3RgLbcsWDNkAdSe9fRgBPAOCeh9K8QGn3Gox6gHeO2vZrqSWVkGAZMAE/jgmsa8ko2fU3oRbfMuhs2PjbSLmX7NFb3Mbr3liKZ+maxfEni+1DiGHTbm4Ocfuk6fVjxVTQPD+oy+IrQ37skCSZbcxy6Dk8nt7+9ZHiXQrptUljjmZ7ZZjJGu7gD+vofpXMowvq9DsXPbRakLxSXXjXwnqlpBNETfRROCvzId4647EE19JN1NfOt/ZJZaCkTysGWVWUq3IJBAOfbOa+hLTH2K2ILEeSnLHJ+6OvvXTRnzKy6HJiIOL5n1JSabmlNNrY5wNNNKTTSaQy1RS0lMQuaUGkpwFACr1FeU+KoG0fxHIkwWOC5HnQtuzuOTn6HkcV6Xf6jDY7QwaSRmC7Ex8vuxPCj6/hmvLvjfNdah4ftZLeJFmtZTINjbsZGCpPuP1xWNWKmrG9Hmi7rY4nxd4utjA8FhcTyanG4JVGwmB2PqK5vRfGE1jPIusRz+ZK/Dh8qPoK5fT9ZRZJywWG4di3mFfmB/Gn3+u409kkuftU8nAbYBtFZ+y+zY6fa6XueuaFZxeL9fh0uCcxwiNppZAu7AGP8cV7wFCKqjooAH4V80/CDUb7SLy4vkK+dNDiRGGVCZBUH3JBNewWXxG0prgW+rMLCY4wzZ8s5/wBo1dLlh7pjWjOfvdDtDTTSW88NzAs1tKk0Tch42DA/iKRjW5yjSaTNI1JSGXc0Dmm04lURnc7UUFmPoB1piIb67jsYPOmV2XcFwgyef6e9c/qWq6vOXSxhgs48YDzne5/AEAVgN4vW+v54LuM2+3LCJ8ZVOm8EcOh/vDp3GOayNZ1PVrKeaKFRLbAAxETIrFT/ALy7QBwMk5PvWMpvoddOlG12aMuk6ldXGbq/cx7suEcJyPUqNx+gI+tWtWiW6jubScboJ1KkenoR71y0HiLVRHuNq7yFSp8iWGYL7s+4AH8DWNqni/X726ksLaz06ymb5BOJ2uZAP7wSMEZ/rUI3XKlY8/8AFnhM2uoyI0Dyc5EkfUj3HY1jaVosRJuIY2kSM/6yQ4RT/X6V3kfhm/027juLmS5lErjzWlhCFs/Vyw/LNaWuaAz2yxW08wUyZZRKIwABwoypGOewpuT2uJQi9bDfDUthDpDfY7hZZWb96SNp3enP9Kn1CezkWFZipmY9EYliB7DkisSXwWklt+83Oc979/5bMflUZ8HRxQqqGNY8YKC5m2k+uPX8fwqLI05pWtY7fSfFWmafLthmW3mOAQriNsepUkHH4V6T4a1mXU18yVl+zuNsRIAZj3ORxg9q8h07QrGJ4YCQFghzkquxSxO5/mBP3QQcnJzzWpN4nlvbiPTPDsIMa/IHwfLAHHAX5mx6DCjuewpO2xjUjzKzR7Qy03Aqj4duJrnR4DdtuukGyVioXcR3wCQM+mavMDmt07nE1Z2ZaFZGt65aWU62TzD7Syh2RPmZV7EqOcE+gPStdRk1wPi3SLHX57xp3BaN/LVgA+wgdiOVP0IpVHZF0Yc0jK8TafZX6rLuEEgbzI5UbaA/qGH3GPr0PRgetc94f8RS29xd6VqSFZ4UO5UUsjEH7ygZwp7jopz2IqGZdQ0OK5jeW7u4gD+7kHmCQDqFb7wP1DD19a5+/t4NWu7SSN8iUA/f2kHbwdy8jK45HBx3rA7ErM9Ki1XSJ2RJZLKRNm5VbaQp9uMCqn9oWT6kJoJg2RtCwxs38hXDQ6NqCyRZ1G/IBwSL8gAf98Vt2nhQzSb7q7nmjxnEt9Kw/JQv86RrZ9iTxjrdudTs7Y5RmmRcSOiHqP4Sd36Vm+INfgsbUSSvFGDIYx5rMoOBnspqC80GyttWia3ihUwyKx8qAKTg55Zix/WtbVEgv7RFXehLlvkIUnjv60mFpHJf8JpaFCv2i0b6PKf/AGnUS+LfNVljWSXPI8uzlf8AXIrZh0tAxUvcn/tsR/KmyaTDhxJG5287nkY8fiaLofLLuc+13fatfRwXHm2tvKAZDK+HManJIjU4UYz97J5rudI1K30y1kkYgSuAZWwqiJP4VJ4C/TgVyGtSLbR2kWnJC08j+WEjwM55ycc44GeM/wA63dE8KSXk0cutuJQvz4cAKg/2U+6v1OW96e5KTT01PRvh14kXUtSltFikWOS3E8cgjbY2Djhzjdwew7d671uK8y8OXtjZ619uh8sIH8klELHZjB+YA/z7V6c4545rWk7qxx4mHLO/ch1ycQaVPglXkUxqR1GR1/CvHZoNU0+4kk0+8uGj67ZHaUH8fvr+TivQfGs8c97b2e0sIVLsVYggt249h+tcVqrfZiPKm3nrsl4P4MP6isalVc1ux04amlDXdmHf+L4jGIdRjWOYkAHjlu21x8pPsdp9q89tb2W38VSSWQLWcMxfywjkruHzBVXrySdpxzXWeIp47+G4Bt2eWOJpHwgLBFBJLHoV+uRXE+HPMY280So0cUiJMp4wueufTGR+FaQV1zBVdpKNz0Gy8VJnm3lORjP2K4/wrQPjBobdvJsr48YUrpsn55ZgKsWkdl9myDGAB1Erf41h3M+nT32JGtcA42u4P8yai6Kal3Mm41zVJ7pmW1lTd0865it//HRub9arte6uqgBbXk9RqMv+FdFHqFlHuWKWIbWwBAuf/QRRc6qiwkj7UTnj91J/hSv5C5X1kcw8utSnpaj/ALa3Un8gBUT2eqTkGSWGPsTHac/nK1bcurxbA7pNz/eXA/M4rDv/ABBaxv8ALLbqf7pmDMfwTcaauyWkt2EEc2k39pd3l3NJDHIMqxjVcHjOFHOM+tdVHe6nr6lLBTBbMchnQcjsxB6exb8F715vrWrvqMDQxxyfPhQwiZQD25bH8q9J8MeJbaXT4Y7UILhFxIrdIj0Oe5JP/wCuiWiuyqcl8NzesfB8UiI1+7Xcg4/eFpP54UD6LXqXhmbzNIiiJy1v+5zkHIA4PHtivMr0PcWymSeWU9SrPtH/AHyMCuj+E0wA1TT1AUq6zqPYjaf5D86mjUvOxOJinC6KT6mtxfSzTuN8rljz69B/SrTWllqERSdFcejV5Nd6xPZSquqQzWc4JXMi4BI9D0IrU07xaUCncGX1BrllzXOiKTWh3M2jiw8L+ItO0q1V5dUt2j815DuU44XP93rx6mvKvCmh6lpL3FtqVnLAJiQX2NgcYHPTv1HvXfWni+GQAFypHetnT9eWdwQ6tVxxEox5XsZugubnW54obK+SR0+2SBc44SLJ/Ermup8P+ANf1FBcm9urSDtI8oUkf7MYTmvXE1hZOJIF3LyMqCPqDWbqmtQJHtum8tZTtDxZZs/0pvEN7IPZGNd+Ebe5tI7XV0gl+zQrElyl09sXUd3AwM+5zXK33wxguIZLnR5Iru3H3Q7OS+Ou1i4DfkK7G+uvEMEB/sySx1CAj5f9I8mTHoVcYJ/GqlhrOqqIF1TRpYIiDuICbvwK8fjUqpJaovki+h5LceHLO3ZllhiV1OCDDgg/8CJxUUVtEnyRI+R0VML/AOggV7c1zp0hWaayhlmUYDyIHIH1NZWqajEFL28McCnn5UC/yqvrPkP2S6Hnmj+Gb68uUcW4toVYMZZUwfwHU11+ieF9J0JZJIg0tzIdzyyHJJ9h0A5qvNrxHG/J9zWdPru8kF6zlUlIapxvc3L2+RchRTNB199G1J7xX274jFx35U/0rjr7W4k4aQZ9Aean8PvFr15Jb3E8ljbxx7xM0LPubIGAAPQk5qqd4tMVXlcWmejavpgaYwmEFM/MGHX6is1PCWlXNygayRCT96ImMn8jRRXmVG4P3XY0jqtTD1PwdGJpTZ313Au8qgJV+PxGarReFNdtpWl0/WYSy8gTQlc49waKKf1ipFbj9mma2nXfiiFANRsUuVOcNaygHHrg1U1vV5IXQ3EFzFyCQ0RT+Yx+RoorWjWdSWqJkuXYbdeJ9Ju7S3t7e1aGdV2zSRT58xs9dvQflVhPEVnZ+VcPqGoJbRMF27UJLdgAOSOPSiiuzlVyFJ2IE1+5ngAstOu7uU871TagP1OKzLu08V6kcOttZRk+pZqKK4aleVN2SNFHmWolt4Lu2bdeau4PcRQZ/UmtOHwXpwx9okv5z/tHAP4CiisXiKkupXJFGtZeG9GtQNml5b+80YY/qa37CwtFB2WTKMdlUf1oopJuT1ZMtFof/9k=' };
+    currentUser = { nom:'Gérant', role:'gerant', identifiant:'GERANT' };
     ls_set(LS.CURRENT, currentUser);
     logConnexion(currentUser);
     enterRole('gerant'); return;
@@ -2298,10 +1755,9 @@ function enterRole(role){
     case 'operateur': initOperateur(); showScreen('operateur'); break;
     case 'comptable': initComptable(); showScreen('comptable'); break;
     default:
-      document.getElementById('loginError').textContent = 'Role inconnu.';
+      document.getElementById('loginError').textContent = 'Rôle inconnu.';
       document.getElementById('loginError').style.display='block';
   }
-  if(typeof lebroudExtras==='function') setTimeout(function(){lebroudExtras(role);},100);
 }
 
 function confirmLogout(){ doLogout(); }
@@ -2473,21 +1929,17 @@ function getBusinessContext(){
 
   var ventes = ls_get(LS.VENTES)||[];
   var ventesAujourd = ventes.filter(function(v){return v.date===today_str;});
-  var ventesMois = ventes.filter(function(v){return v.date&&v.date.startsWith(mois);});
+  var ventesMois = ventes.filter(function(v){return v.date && v.date.startsWith(mois);});
   var kgAujourd = ventesAujourd.reduce(function(s,v){return s+(v.poids||0);},0);
   var caAujourd = ventesAujourd.reduce(function(s,v){return s+(v.total||0);},0);
   var kgMois = ventesMois.reduce(function(s,v){return s+(v.poids||0);},0);
   var caMois = ventesMois.reduce(function(s,v){return s+(v.total||0);},0);
-  var caTotal = ventes.reduce(function(s,v){return s+(v.total||0);},0);
-  var kgTotal = ventes.reduce(function(s,v){return s+(v.poids||0);},0);
 
   var prod = ls_get(LS.PROD)||[];
+  var prodAujourd = prod.filter(function(p){return p.date===today_str&&!p.live;});
   var prodMois = prod.filter(function(p){return p.date&&p.date.startsWith(mois)&&!p.live;});
-  var prodAll = prod.filter(function(p){return !p.live;});
-  var kgProdAujourd = prod.filter(function(p){return p.date===today_str&&!p.live;}).reduce(function(s,p){return s+(p.kg||0);},0);
+  var kgProdAujourd = prodAujourd.reduce(function(s,p){return s+(p.kg||0);},0);
   var kgProdMois = prodMois.reduce(function(s,p){return s+(p.kg||0);},0);
-  var kgProdTotal = prodAll.reduce(function(s,p){return s+(p.kg||0);},0);
-  var kgStockRestant = Math.max(0, kgProdTotal - kgTotal);
 
   var compta = ls_get(LS.COMPTA)||[];
   var comptaMois = compta.filter(function(c){return c.date&&c.date.startsWith(mois);});
@@ -2497,127 +1949,49 @@ function getBusinessContext(){
   var avances = comptaMois.filter(function(c){return c.type==='act';}).reduce(function(s,c){return s+(c.montant||0);},0);
   var totalDep = salaires+achats+taxes+avances;
   var benefice = caMois - totalDep;
-  var depTotal = compta.reduce(function(s,c){return s+(c.montant||0);},0);
-  var benefTotal = caTotal - depTotal;
 
   var users = ls_get(LS.USERS)||[];
   var acteurs = ls_get(LS.ACTEURS)||[];
   var prix = ls_get(LS.PRIX);
   var obj = ls_get(LS.OBJECTIFS);
 
-  // Investissements
-  var invests = ls_get('lb_invest_v1')||[];
-  var capitalTotal = invests.reduce(function(s,i){return s+(i.montant||0);},0);
-  var capitalRecup = Math.max(0, benefTotal);
-  var roiPct = capitalTotal>0 ? Math.round(capitalRecup/capitalTotal*100) : 0;
-
-  // Offres actives
-  var offresActives = (ls_get('lb_offres_v1')||[]).filter(function(o){
-    if(!o.active) return false;
-    var n=today_str;
-    if(o.debut&&n<o.debut) return false;
-    if(o.fin&&n>o.fin) return false;
-    return true;
-  });
-
   // Performance par vendeur
   var perfVendeurs = {};
   ventesMois.forEach(function(v){
-    if(!perfVendeurs[v.vendeurNom]) perfVendeurs[v.vendeurNom]={kg:0,ca:0,nb:0};
-    perfVendeurs[v.vendeurNom].kg+=v.poids||0;
-    perfVendeurs[v.vendeurNom].ca+=v.total||0;
-    perfVendeurs[v.vendeurNom].nb+=1;
+    if(!perfVendeurs[v.vendeurNom]) perfVendeurs[v.vendeurNom] = {kg:0,ca:0,nb:0};
+    perfVendeurs[v.vendeurNom].kg += v.poids||0;
+    perfVendeurs[v.vendeurNom].ca += v.total||0;
+    perfVendeurs[v.vendeurNom].nb += 1;
   });
 
-  // Top clients du mois
-  var clientsMois = {};
-  ventesMois.forEach(function(v){
-    var k=v.clientNom+' ('+v.clientTel+')';
-    if(!clientsMois[k])clientsMois[k]={kg:0,ca:0,nb:0};
-    clientsMois[k].kg+=v.poids||0;
-    clientsMois[k].ca+=v.total||0;
-    clientsMois[k].nb+=1;
-  });
-  var topClients = Object.keys(clientsMois).sort(function(a,b){return clientsMois[b].ca-clientsMois[a].ca;}).slice(0,5);
-
-  // Detail employes
-  var employesDetail = users.map(function(u){
-    return u.nom+' ('+u.role+', '+fmtNum(u.salaire||0)+' MRU/mois)';
-  }).join(', ');
-
-  // Detail actionnaires
-  var actionnairesList = acteurs.map(function(a){
-    return a.nom+' ('+a.parts+'%, avances: '+fmtNum(a.avances||0)+' MRU)';
-  }).join(', ');
-
-  return 'CONTEXTE COMPLET ENTREPRISE لبرود — ' + today_str + '\n'
-    + '=== INFORMATIONS GENERALES ===\n'
-    + 'Activite: Fabrique de glacons, Aouin, Mauritanie\n'
-    + 'Capacite machine: 650 kg/24h\n'
-    + 'Prix du kg: ' + (prix?prix.val:'non defini') + ' MRU\n'
-    + 'Objectif ventes/jour: ' + (obj?obj.ventes:'non defini') + ' kg\n'
-    + 'Objectif production/jour: ' + (obj?obj.prod:'non defini') + ' kg\n'
-    + '\n=== EMPLOYES ('+users.length+') ===\n'
-    + (employesDetail||'Aucun') + '\n'
-    + '\n=== ACTIONNAIRES ('+acteurs.length+') ===\n'
-    + (actionnairesList||'Aucun') + '\n'
-    + '\n=== STOCK ===\n'
-    + 'Total produit (historique): ' + fmtNum(kgProdTotal) + ' kg\n'
-    + 'Total vendu (historique): ' + fmtNum(kgTotal) + ' kg\n'
-    + 'Stock restant: ' + fmtNum(kgStockRestant) + ' kg\n'
-    + '\n=== INVESTISSEMENTS INITIAUX ===\n'
-    + 'Capital total investi: ' + fmtNum(capitalTotal) + ' MRU\n'
-    + invests.map(function(i){return '  - '+i.desc+': '+fmtNum(i.montant)+' MRU ('+i.date+')';}).join('\n') + '\n'
-    + 'Capital recupere via benefices: ' + fmtNum(capitalRecup) + ' MRU\n'
-    + 'ROI actuel: ' + roiPct + '%\n'
+  return 'CONTEXTE ENTREPRISE لبرود — ' + today_str + '\n'
+    + '=== INFORMATIONS GÉNÉRALES ===\n'
+    + 'Activité: Fabrique de glaçons, Aouïn, Mauritanie\n'
+    + 'Capacité machine: 650 kg/24h\n'
+    + 'Prix du kg: ' + (prix?prix.val:'non défini') + ' MRU\n'
+    + 'Objectif ventes/jour: ' + (obj?obj.ventes:'non défini') + ' kg\n'
+    + 'Objectif production/jour: ' + (obj?obj.prod:'non défini') + ' kg\n'
+    + 'Employés: ' + users.length + ' (dont ' + users.filter(function(u){return u.role==='vendeur';}).length + ' vendeurs)\n'
+    + 'Actionnaires: ' + acteurs.length + '\n'
     + '\n=== AUJOURD\'HUI (' + today_str + ') ===\n'
-    + 'Ventes: ' + fmtNum(kgAujourd) + ' kg — ' + fmtNum(caAujourd) + ' MRU (' + ventesAujourd.length + ' ventes)\n'
-    + 'Production: ' + fmtNum(kgProdAujourd) + ' kg\n'
+    + 'Ventes: ' + kgAujourd + ' kg — ' + caAujourd + ' MRU (' + ventesAujourd.length + ' ventes)\n'
+    + 'Production: ' + kgProdAujourd + ' kg\n'
     + '\n=== CE MOIS (' + mois + ') ===\n'
-    + 'CA: ' + fmtNum(caMois) + ' MRU | Kg vendus: ' + fmtNum(kgMois) + ' kg | Kg produits: ' + fmtNum(kgProdMois) + ' kg\n'
-    + 'Salaires: ' + fmtNum(salaires) + ' MRU | Achats: ' + fmtNum(achats) + ' MRU | Taxes: ' + fmtNum(taxes) + ' MRU | Avances: ' + fmtNum(avances) + ' MRU\n'
-    + 'Total depenses: ' + fmtNum(totalDep) + ' MRU\n'
-    + 'Benefice net ce mois: ' + fmtNum(benefice) + ' MRU\n'
-    + '\n=== HISTORIQUE TOTAL ===\n'
-    + 'CA total depuis debut: ' + fmtNum(caTotal) + ' MRU\n'
-    + 'Depenses totales: ' + fmtNum(depTotal) + ' MRU\n'
-    + 'Benefice cumule: ' + fmtNum(benefTotal) + ' MRU\n'
+    + 'CA total: ' + caMois + ' MRU\n'
+    + 'Kg vendus: ' + kgMois + ' kg\n'
+    + 'Kg produits: ' + kgProdMois + ' kg\n'
+    + 'Salaires: ' + salaires + ' MRU\n'
+    + 'Achats: ' + achats + ' MRU\n'
+    + 'Taxes: ' + taxes + ' MRU\n'
+    + 'Avances actionnaires: ' + avances + ' MRU\n'
+    + 'Total dépenses: ' + totalDep + ' MRU\n'
+    + 'Bénéfice net: ' + benefice + ' MRU\n'
     + '\n=== PERFORMANCE VENDEURS (ce mois) ===\n'
     + Object.keys(perfVendeurs).map(function(n){
         var p=perfVendeurs[n];
-        return n+': '+fmtNum(p.kg)+'kg — '+fmtNum(p.ca)+' MRU ('+p.nb+' ventes)';
-      }).join('\n') + '\n'
-    + '\n=== TOP 5 CLIENTS (ce mois) ===\n'
-    + topClients.map(function(k){
-        var c=clientsMois[k];
-        return k+': '+fmtNum(c.kg)+'kg — '+fmtNum(c.ca)+' MRU ('+c.nb+' achats)';
-      }).join('\n') + '\n'
-    + '\n=== DIESEL CE MOIS ===\n'
-    + (function(){
-        var cfg=typeof getDieselConfig==='function'?getDieselConfig():{prixLitre:0,consomEst:0};
-        var mois=today().slice(0,7);
-        var diesels=(ls_get('lb_diesel_v1')||[]).filter(function(d){return d.date&&d.date.startsWith(mois);});
-        var litres=diesels.reduce(function(s,d){return s+(d.litres||0);},0);
-        var cout=Math.round(litres*(cfg.prixLitre||0));
-        return 'Prix litre: '+fmtNum(cfg.prixLitre)+' MRU | Conso estimee: '+fmtNum(cfg.consomEst)+' L/jour\n'
-          +'Litres ce mois: '+fmtNum(litres)+' L | Cout diesel: '+fmtNum(cout)+' MRU\n';
-      })()
-    + '\n=== HISTORIQUE DES PRIX ===\n'
-    + 'Prix actuel: ' + (prix?fmtNum(prix.val)+' MRU/kg (depuis '+prix.date+')':'non defini') + '\n'
-    + (function(){
-        var h=ls_get('lb_prix_historique')||[];
-        if(!h.length) return 'Aucun changement de prix enregistre.\n';
-        return h.slice(0,5).map(function(p){
-          return fmtNum(p.prix)+' MRU/kg ('+p.dateDebut+' au '+p.dateFin+') — '+fmtNum(p.kgVendus)+'kg vendus, '+fmtNum(p.caRealise)+' MRU';
-        }).join('\n')+'\n';
-      })()
-    + '\n=== OFFRES ACTIVES ===\n'
-    + (offresActives.length ? offresActives.map(function(o){
-        var r=o.type==='pct'?'-'+o.val+'%':o.type==='prix_fixe'?fmtNum(o.val)+' MRU/kg':'1kg=1kg';
-        return o.nom+' ('+r+', jusqu\'au '+(o.fin||'toujours')+')';
-      }).join('\n') : 'Aucune offre active') + '\n'
-    + '\n=== INSTRUCTIONS ===\n'
-    + 'Tu es un conseiller financier expert pour cette fabrique. Utilise TOUTES ces donnees pour donner des conseils precis et chiffres. Cite les montants exacts. Propose des actions concretes et demande toujours validation au gerant.';
+        return n+': '+p.kg+'kg — '+p.ca+' MRU ('+p.nb+' ventes)';
+      }).join('\n')
+    + '\n\nIMPORTANT: Tu es un conseiller. Tu analyses, tu suggères, tu expliques. Tu ne prends JAMAIS de décisions à la place du gérant. Toujours proposer des options et demander sa validation.';
 }
 
 function askAI(question){
@@ -2642,51 +2016,40 @@ async function sendAI(){
   var context = getBusinessContext();
   aiHistory.push({role:'user', content: question});
 
-  // Construire l'historique pour Gemini
-  var systemPrompt = 'Tu es un assistant intelligent pour la fabrique de glacons Lebroud en Mauritanie. Tu analyses les donnees reelles et tu conseilles le gerant avec des recommandations precises et chiffrees. Tu parles en francais. Sois concis et pratique. Utilise des emojis.\n\n' + context;
-
-  var GROQ_KEY = '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';
-  var GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
-
-  var messages = [
-    {role:'system', content: systemPrompt}
-  ];
+  var messages = [{role:'user', content: context + '\n\n---\nQuestion du gérant: ' + question}];
   if(aiHistory.length > 1){
-    for(var i=0; i<aiHistory.length-1; i++) messages.push(aiHistory[i]);
+    messages = [];
+    messages.push({role:'user', content: context});
+    messages.push({role:'assistant', content: 'Compris ! Je suis votre assistant لبرود avec accès à toutes vos données. Comment puis-je vous aider ?'});
+    for(var i=0; i<aiHistory.length; i++){
+      messages.push(aiHistory[i]);
+    }
   }
-  messages.push({role:'user', content: question});
 
   try {
-    var response = await fetch(GROQ_URL, {
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + GROQ_KEY
-      },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
-        temperature: 0.7,
+        system: 'Tu es un assistant intelligent pour une fabrique de glaçons en Mauritanie. Tu analyses les données, conseilles le gérant et proposes des recommandations claires. Tu parles en français. Tu ne prends JAMAIS de décisions à la place du gérant. Tu proposes toujours des options et demandes validation. Sois concis, précis et pratique. Utilise des emojis pour rendre les réponses lisibles.',
         messages: messages
       })
     });
-
     var data = await response.json();
     removeAILoading();
-
-    if(data.choices && data.choices[0] && data.choices[0].message){
-      var reply = data.choices[0].message.content;
+    if(data.content && data.content[0]){
+      var reply = data.content[0].text;
       aiHistory.push({role:'assistant', content: reply});
       if(aiHistory.length > 10) aiHistory = aiHistory.slice(-10);
       addAIMessage('assistant', reply);
-    } else if(data.error){
-      addAIMessage('assistant', 'Erreur : ' + data.error.message);
     } else {
-      addAIMessage('assistant', 'Reponse invalide. Reessayez.');
+      addAIMessage('assistant', 'Désolé, une erreur est survenue. Réessayez dans quelques secondes.');
     }
   } catch(e) {
     removeAILoading();
-    addAIMessage('assistant', 'Erreur : ' + e.message);
+    addAIMessage('assistant', 'Impossible de contacter l\'assistant. Vérifiez votre connexion internet.');
   }
 }
 
@@ -2707,34 +2070,11 @@ function loadPrixDisplay(){
 function savePrix(){
   const val = parseFloat(document.getElementById('prixInput').value);
   if(!val||val<=0){ toast('Entrez un prix valide.'); return; }
-
-  // Sauvegarder dans l'historique avant de changer
-  var ancienPrix = ls_get(LS.PRIX);
-  var historique = ls_get('lb_prix_historique')||[];
-  if(ancienPrix && ancienPrix.val){
-    // Calculer impact : ventes du mois avec l'ancien prix
-    var moisAncien = ancienPrix.date ? ancienPrix.date.slice(0,7) : '';
-    var ventesAncien = (ls_get(LS.VENTES)||[]).filter(function(v){
-      return moisAncien && v.date && v.date.startsWith(moisAncien);
-    });
-    var kgAncien = ventesAncien.reduce(function(s,v){return s+(v.poids||0);},0);
-    var caAncien = ventesAncien.reduce(function(s,v){return s+(v.total||0);},0);
-    historique.unshift({
-      prix: ancienPrix.val,
-      dateDebut: ancienPrix.date,
-      dateFin: today(),
-      kgVendus: kgAncien,
-      caRealise: caAncien,
-      nbVentes: ventesAncien.length
-    });
-    ls_set('lb_prix_historique', historique);
-  }
-
   const data = {val, date:today()};
   ls_set(LS.PRIX, data);
   loadPrixDisplay();
-  if(typeof renderPrixHistorique==='function') renderPrixHistorique();
   toast('Prix enregistré : '+fmtNum(val)+' MRU/kg ✓');
+  // Sync Firebase — visible immédiatement chez tous les employés
   if(db) fbSet('lb_config', 'prix', {key:'prix', data});
 }
 
@@ -3025,6 +2365,7 @@ function loadVendeurInfos(){
   const prix = ls_get(LS.PRIX);
   const obj = ls_get(LS.OBJECTIFS);
   document.getElementById('venPrix').textContent = prix ? fmtNum(prix.val)+' MRU/kg' : '— MRU/kg';
+  const refEl = document.getElementById('venPrixRef'); if(refEl) refEl.textContent = prix ? fmtNum(prix.val)+' MRU/kg' : '—';
   document.getElementById('venQuota').textContent = obj ? fmtNum(obj.ventes)+' kg' : '— kg';
   updateVenteStats();
 }
@@ -3044,15 +2385,19 @@ function updateVenteStats(){
   document.getElementById('venCA').textContent = fmtNum(totalCA)+' MRU';
   document.getElementById('venPct').textContent = pct+'%';
   document.getElementById('venPBar').style.width = pct+'%';
-  if(typeof refreshStock==='function') refreshStock();
 }
 
 function calcVenteTotal(){
-  if(typeof calcVenteTotalAvecOffre==='function'){calcVenteTotalAvecOffre();return;}
-  const poids=parseFloat(document.getElementById('venPoids').value)||0;
-  const prix=ls_get(LS.PRIX);const prixVal=prix?prix.val:0;
-  const total=Math.round(poids*prixVal);
-  const el=document.getElementById('venTotalCalc');if(el)el.value=fmtNum(total)+' MRU';
+  const poids = parseFloat(document.getElementById('venPoids')?.value)||0;
+  const prixSaisi = parseFloat(document.getElementById('venPrixKg')?.value)||0;
+  const prixRef = ls_get(LS.PRIX);
+  const prixVal = prixSaisi > 0 ? prixSaisi : (prixRef ? prixRef.val : 0);
+  const total = Math.round(poids * prixVal);
+  const el = document.getElementById('venTotalCalc');
+  if(el) el.value = fmtNum(total)+' MRU';
+  // Mettre à jour référence gérant
+  const refEl = document.getElementById('venPrixRef');
+  if(refEl) refEl.textContent = prixRef ? fmtNum(prixRef.val)+' MRU/kg' : '—';
 }
 
 function ajouterVente(){
@@ -3064,21 +2409,22 @@ function ajouterVente(){
 
   if(!nom||!tel||!poids||!mode){ toast('Remplissez tous les champs.'); return; }
 
-  const prix = ls_get(LS.PRIX);
-  const prixVal = prix ? prix.val : 0;
+  const prixSaisi = parseFloat(document.getElementById('venPrixKg')?.value)||0;
+  const prixRef = ls_get(LS.PRIX);
+  const prixVal = prixSaisi > 0 ? prixSaisi : (prixRef ? prixRef.val : 0);
   const total = Math.round(poids * prixVal);
 
   const allVentes = ls_get(LS.VENTES)||[];
   if(editId){
     const idx = allVentes.findIndex(v=>v.id===editId);
-    if(idx>=0) allVentes[idx] = {...allVentes[idx], clientNom:nom, clientTel:tel, poids, mode, total};
+    if(idx>=0) allVentes[idx] = {...allVentes[idx], clientNom:nom, clientTel:tel, poids, prixKg:prixVal, mode, total};
     document.getElementById('venEditId').value = '';
   } else {
-    allVentes.push({ id:genId(), vendeurId:currentUser.id, vendeurNom:currentUser.nom, clientNom:nom, clientTel:tel, poids, mode, total, date:today(), heure:nowTime() });
+    allVentes.push({ id:genId(), vendeurId:currentUser.id, vendeurNom:currentUser.nom, clientNom:nom, clientTel:tel, poids, prixKg:prixVal, mode, total, date:today(), heure:nowTime() });
     addNotif(`${currentUser.nom} a vendu ${poids} kg à ${nom} — ${fmtNum(total)} MRU`, 'vente');
   }
   ls_set(LS.VENTES, allVentes);
-  ['venClient','venTel','venPoids'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  ['venClient','venTel','venPoids','venPrixKg'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
   document.getElementById('venMode').value='';
   document.getElementById('venTotalCalc').value='0 MRU';
   renderVentes();
@@ -3094,9 +2440,8 @@ function renderVentes(){
       <div style="display:flex;justify-content:space-between;align-items:flex-start;">
         <div style="flex:1;min-width:0;">
           <div style="font-size:13px;font-weight:700;color:var(--brand);">👤 ${v.clientNom}</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px;">📞 ${v.clientTel} · ${v.poids} kg · ${v.mode}</div>
-          <div style="font-size:10px;color:var(--muted);">${v.heure||''}${v.offreLabel?' · 🏷️ '+v.offreLabel:''}</div>
-          ${v.photo?`<div style="margin-top:6px;"><img src="${v.photo}" onclick="viewVenPhoto('${v.id}')" style="height:50px;width:70px;object-fit:cover;border-radius:8px;border:1.5px solid var(--brand-border);cursor:pointer;"/><span style="font-size:10px;color:var(--muted);margin-left:6px;">📷 Justif.</span></div>`:''}
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">📞 ${v.clientTel} · ${v.poids} kg · ${v.prixKg ? fmtNum(v.prixKg)+' MRU/kg · ' : ''}${v.mode}</div>
+          <div style="font-size:10px;color:var(--muted);">${v.heure||''}</div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;">
           <div style="font-size:14px;font-weight:800;color:var(--accent);">${fmtNum(v.total)} MRU</div>
@@ -3122,8 +2467,10 @@ function editVente(id){
   document.getElementById('venClient').value = v.clientNom;
   document.getElementById('venTel').value = v.clientTel;
   document.getElementById('venPoids').value = v.poids;
+  document.getElementById('venPrixKg').value = v.prixKg||'';
   document.getElementById('venMode').value = v.mode;
   document.getElementById('venEditId').value = v.id;
+  calcVenteTotal();
 }
 
 function deleteVente(id){
@@ -3189,51 +2536,15 @@ function opRefreshUI(){
   document.getElementById('opPBar').style.width = pct+'%';
 }
 
-var opSourceActuelle = null; // 'somelec' ou 'groupe'
-var opSessionStart = null;   // timestamp debut session actuelle
-var LS_OP_SESSIONS = 'lb_op_sessions_v1';
-
-function selectSource(source, btn){
-  opSourceActuelle = source;
-  // Style boutons
-  ['somelec','groupe'].forEach(function(s){
-    var b = document.getElementById('srcBtn-'+s);
-    if(!b) return;
-    if(s===source){
-      b.style.boxShadow = '0 0 0 3px '+(s==='somelec'?'#2980B9':'#E67E22');
-      b.style.transform = 'scale(1.04)';
-    } else {
-      b.style.boxShadow = 'none';
-      b.style.transform = 'scale(1)';
-    }
-  });
-  var err = document.getElementById('opSourceError');
-  if(err) err.style.display = 'none';
-  // Afficher source dans le statut
-  var lbl = document.getElementById('opSourceLabel');
-  if(lbl) lbl.textContent = source==='somelec' ? '⚡ Réseau SOMELEC' : '⛽ Groupe électrogène';
-  if(lbl) lbl.style.color = source==='somelec' ? '#2980B9' : '#E67E22';
-}
-
 function opStart(){
   if(opTimer.running) return;
-
-  // BLOQUER si pas de source sélectionnée
-  if(!opSourceActuelle){
-    var err = document.getElementById('opSourceError');
-    if(err){ err.style.display='block'; }
-    toast('⚠️ Sélectionnez la source d\'énergie avant de démarrer !');
-    return;
-  }
-
   opTimer.running = true;
-  opSessionStart = Date.now();
+  // Sauvegarder timestamp pour calculer le temps même si app fermée
   if(!opTimer.startTime) opTimer.startTime = Date.now() - (opTimer.secs * 1000);
   localStorage.setItem('lb_op_startTime', opTimer.startTime);
   localStorage.setItem('lb_op_running', 'true');
-  localStorage.setItem('lb_op_source', opSourceActuelle);
-
-  opTimer.iv = setInterval(function(){
+  opTimer.iv = setInterval(()=>{
+    // Recalculer depuis le timestamp réel (résiste à la mise en veille)
     if(opTimer.startTime){
       opTimer.secs = Math.floor((Date.now() - opTimer.startTime) / 1000);
     } else {
@@ -3242,18 +2553,24 @@ function opStart(){
     opRefreshUI();
     if(opTimer.secs % 60 === 0) opSyncLive();
   }, 1000);
-
-  document.getElementById('opStatus').textContent = 'En production ('+(opSourceActuelle==='somelec'?'SOMELEC':'Groupe')+')';
-  document.getElementById('opStatus').style.color = opSourceActuelle==='somelec'?'#2980B9':'#E67E22';
+  document.getElementById('opStatus').textContent = 'En production';
+  document.getElementById('opStatus').style.color = 'var(--vert)';
   document.getElementById('opBtnStart').disabled = true;
   document.getElementById('opBtnStop').disabled = false;
-
-  // Masquer la sélection source pendant la production
-  var sw = document.getElementById('opSourceWrap');
-  if(sw) sw.style.display = 'none';
-
   opSyncLive();
-  toast((opSourceActuelle==='somelec'?'⚡ SOMELEC':'⛽ Groupe')+' — Production démarrée');
+}
+
+async function opSyncLive(){
+  if(!db) return;
+  const kg = Math.floor(opTimer.secs / OP_SPK);
+  const liveEntry = {
+    id: 'live_' + (currentUser?.id||'op'),
+    operateurId: currentUser?.id||'',
+    operateurNom: currentUser?.nom||'Opérateur',
+    kg, date: today(), heure: nowTime(),
+    live: true
+  };
+  try { await fbSet('lb_prod', liveEntry.id, liveEntry); } catch(e){}
 }
 
 function opStop(){
@@ -3261,142 +2578,40 @@ function opStop(){
   opTimer.startTime=null;
   localStorage.removeItem('lb_op_startTime');
   localStorage.removeItem('lb_op_running');
-  localStorage.removeItem('lb_op_source');
   document.getElementById('opStatus').textContent = 'Arrêtée';
   document.getElementById('opStatus').style.color = 'var(--rouge)';
   document.getElementById('opBtnStart').disabled = false;
   document.getElementById('opBtnStop').disabled = true;
-  // Réafficher sélection source
-  var sw = document.getElementById('opSourceWrap');
-  if(sw) sw.style.display = 'block';
-}
-
-function opToggleAutre(){
-  var cause = (document.getElementById('opCauseSelect')||{}).value;
-  var aw = document.getElementById('opAutreWrap');
-  if(aw) aw.style.display = cause==='Autre'?'block':'none';
-
-  // Afficher saisie carburant si source=groupe
-  var cw = document.getElementById('opCarburantWrap');
-  var ce = document.getElementById('opCarburantEstime');
-  if(cw){
-    var showCarb = opSourceActuelle==='groupe' && cause && cause!=='';
-    cw.style.display = showCarb ? 'block' : 'none';
-    if(showCarb && ce){
-      // Estimation auto basée sur durée
-      var cfg = typeof getDieselConfig==='function' ? getDieselConfig() : {prixLitre:0, consomEst:0};
-      var heures = opTimer.secs / 3600;
-      var consomH = (cfg.consomEst||0) / 12; // 12h = conso journalière estimée
-      var litresEst = Math.round(heures * consomH * 10) / 10;
-      var coutEst = Math.round(litresEst * (cfg.prixLitre||0));
-      ce.textContent = 'Estimation auto : '+litresEst+' L ≈ '+fmtNum(coutEst)+' MRU ('+Math.round(heures*10)/10+'h de groupe)';
-    }
-  }
 }
 
 function opAskStop(){
   if(!opTimer.running) return;
-  var cause = document.getElementById('opCauseSelect').value;
-  var autre = document.getElementById('opCauseAutre').value.trim();
+  const cause = document.getElementById('opCauseSelect').value;
+  const autre = document.getElementById('opCauseAutre').value.trim();
   if(!cause){ toast('Sélectionnez une cause d\'arrêt.'); return; }
   if(cause==='Autre'&&!autre){ toast('Précisez la cause.'); return; }
-  var causeFinal = cause==='Autre' ? autre : cause;
-
-  // Litres réels si groupe
-  var litresReels = parseFloat((document.getElementById('opLitresReels')||{}).value)||null;
-  var cfg = typeof getDieselConfig==='function' ? getDieselConfig() : {prixLitre:0, consomEst:0};
-  var heures = opTimer.secs / 3600;
-  var consomH = (cfg.consomEst||0) / 12;
-  var litresEst = Math.round(heures * consomH * 10) / 10;
-  var litresFinal = litresReels || litresEst;
-
-  var causeLabels = {
-    fin_normale:'✅ Fin de production normale',
-    basculement_somelec:'🔄 Basculement vers SOMELEC',
-    coupure_somelec:'⚡ Coupure SOMELEC → Groupe',
-    manque_eau:'💧 Manque d\'eau',
-    maintenance:'🔧 Maintenance / Panne',
-    nettoyage:'🧹 Nettoyage'
-  };
-  var causeTxt = causeLabels[causeFinal]||causeFinal;
-
-  showModal('Arrêter la machine ?', causeTxt+' — Confirmer ?', '#C0392B', 'Confirmer', function(){
-    // Sauvegarder session carburant si groupe
-    if(opSourceActuelle==='groupe' && litresFinal>0){
-      var diesels = ls_get(LS_DIESEL)||[];
-      var cout = Math.round(litresFinal*(cfg.prixLitre||0));
-      var rec = {id:genId(), date:today(), litres:litresFinal, cout:cout, heures:Math.round(heures*10)/10, source:'groupe', note:'Session opérateur ('+causeTxt+')', manuel:!!litresReels};
-      diesels.push(rec);
-      ls_set(LS_DIESEL, diesels);
-      if(db) fbSet('lb_diesel', rec.id, rec);
-    }
-
-    // Sauvegarder session source
-    var sessions = ls_get(LS_OP_SESSIONS)||[];
-    sessions.push({
-      id:genId(), date:today(),
-      heureDebut: opSessionStart ? new Date(opSessionStart).toTimeString().slice(0,5) : nowTime(),
-      heureFin: nowTime(),
-      dureeMin: Math.round(opTimer.secs/60),
-      source: opSourceActuelle,
-      cause: causeTxt,
-      litres: opSourceActuelle==='groupe'?litresFinal:0
-    });
-    ls_set(LS_OP_SESSIONS, sessions);
-
+  const causeFinal = cause==='Autre' ? autre : cause;
+  showModal('Arrêter la machine ?', 'Cause : "'+causeFinal+'" — Confirmer l\'arrêt ?', '#C0392B', 'Confirmer', ()=>{
     opStop();
-    opTimer.arrets.push({ id:genId(), heure:nowTime(), cause:causeTxt, source:opSourceActuelle });
+    opTimer.arrets.push({ id:genId(), heure:nowTime(), cause:causeFinal });
     opRenderArrets();
     document.getElementById('opCauseSelect').value='';
     document.getElementById('opCauseAutre').value='';
-    document.getElementById('opAutreWrap').style.display='none';
-    var cw=document.getElementById('opCarburantWrap');if(cw)cw.style.display='none';
-    var lr=document.getElementById('opLitresReels');if(lr)lr.value='';
-
-    // Si basculement SOMELEC → proposer redémarrage sur SOMELEC
-    if(cause==='basculement_somelec'){
-      opSourceActuelle='somelec';
-      selectSource('somelec',null);
-      toast('🔄 Basculé vers SOMELEC — Redémarrez sur le réseau');
-    } else if(cause==='coupure_somelec'){
-      opSourceActuelle='groupe';
-      selectSource('groupe',null);
-      toast('⚡ Coupure SOMELEC — Redémarrez sur le groupe');
-    } else {
-      opSourceActuelle=null;
-      // Reset source selection
-      ['somelec','groupe'].forEach(function(s){var b=document.getElementById('srcBtn-'+s);if(b){b.style.boxShadow='none';b.style.transform='scale(1)';}});
-      var lbl=document.getElementById('opSourceLabel');if(lbl){lbl.textContent='—';lbl.style.color='var(--muted)';}
-    }
+     document.getElementById('opAutreWrap').style.display='none';
   });
 }
 
-async function opSyncLive(){
-  if(!db) return;
-  var kg = Math.floor(opTimer.secs / OP_SPK);
-  var liveEntry = {
-    id: 'live_'+(currentUser&&currentUser.id?currentUser.id:'op'),
-    operateurId: currentUser&&currentUser.id?currentUser.id:'',
-    operateurNom: currentUser&&currentUser.nom?currentUser.nom:'Opérateur',
-    source: opSourceActuelle||'inconnu',
-    kg: kg, date: today(), heure: nowTime(), live: true
-  };
-  try{ await fbSet('lb_prod', liveEntry.id, liveEntry); }catch(e){}
-}
-
 function opAskFin(){
-  showModal('Fin de journée ?', 'Les données seront archivées et le timer remis à zéro. Confirmer ?', '#1A5276', 'Confirmer', function(){
+  showModal('Fin de journée ?', 'Les données seront archivées et le timer remis à zéro. Confirmer ?', '#1A5276', 'Confirmer', ()=>{
     opStop();
     const kg = Math.floor(opTimer.secs / OP_SPK);
-    const entry = { id:genId(), operateurId:currentUser.id, operateurNom:currentUser.nom, kg, arrets:opTimer.arrets.length, source:opSourceActuelle||'inconnu', date:today(), heure:nowTime() };
+    const entry = { id:genId(), operateurId:currentUser.id, operateurNom:currentUser.nom, kg, arrets:opTimer.arrets.length, date:today(), heure:nowTime() };
     const prod = ls_get(LS.PROD)||[];
     prod.push(entry);
     ls_set(LS.PROD, prod);
+    // Sync Firebase
     if(db) fbSet('lb_prod', entry.id, entry);
     opTimer.secs=0; opTimer.arrets=[];
-    opSourceActuelle=null;
-    ['somelec','groupe'].forEach(function(s){var b=document.getElementById('srcBtn-'+s);if(b){b.style.boxShadow='none';b.style.transform='scale(1)';}});
-    var lbl=document.getElementById('opSourceLabel');if(lbl){lbl.textContent='—';lbl.style.color='var(--muted)';}
     opRefreshUI(); opRenderArrets();
     document.getElementById('opStatus').textContent = 'Journée archivée';
     document.getElementById('opStatus').style.color = 'var(--bleu)';
@@ -4010,7 +3225,7 @@ function getConversations(){
   // Tous les utilisateurs sauf moi
   const allUsers = [...users];
   if(currentUser.role !== 'gerant'){
-    allUsers.push({ id:'GERANT', nom:'Ismail Kebbade', role:'gerant', identifiant:'GERANT', photo:'data:image/jpeg;base64,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' });
+    allUsers.push({ id:'GERANT', nom:'Gérant', role:'gerant', identifiant:'GERANT' });
   }
 
   allUsers.forEach(u=>{
@@ -4122,17 +3337,10 @@ function openChatConv(userId){
     if(userId===PUBLIC_ID){
       if(m.toId===PUBLIC_ID){
         const rb = m.readBy||[];
-        if(!rb.includes(myId)){
-          const updated = {...m, readBy:[...rb, myId]};
-          if(db) db.collection('lb_messages').doc(m.id).update({readBy:[...rb, myId]}).catch(()=>{});
-          return updated;
-        }
+        if(!rb.includes(myId)) return {...m, readBy:[...rb, myId]};
       }
     } else {
-      if(m.fromId===userId && m.toId===myId && !m.read){
-        if(db) db.collection('lb_messages').doc(m.id).update({read:true}).catch(()=>{});
-        return {...m, read:true};
-      }
+      if(m.fromId===userId && m.toId===myId) return {...m, read:true};
     }
     return m;
   });
@@ -5411,8 +4619,10 @@ async function ajouterVente(){
 
   if(!nom||!tel||!poids||!mode){ toast('Remplissez tous les champs.'); return; }
 
-  const prix = ls_get(LS.PRIX);
-  const total = Math.round(poids * (prix?prix.val:0));
+  const prixSaisiF = parseFloat(document.getElementById('venPrixKg')?.value)||0;
+  const prixRefF = ls_get(LS.PRIX);
+  const prixValF = prixSaisiF > 0 ? prixSaisiF : (prixRefF ? prixRefF.val : 0);
+  const total = Math.round(poids * prixValF);
 
   const allVentes = ls_get(LS.VENTES)||[];
   let v;
@@ -5421,13 +4631,13 @@ async function ajouterVente(){
     if(idx>=0){ allVentes[idx]={...allVentes[idx], clientNom:nom, clientTel:tel, poids, mode, total}; v=allVentes[idx]; }
     document.getElementById('venEditId').value='';
   } else {
-    v = { id:genId(), vendeurId:currentUser.id||'GERANT', vendeurNom:currentUser.nom, clientNom:nom, clientTel:tel, poids, mode, total, date:today(), heure:nowTime() };
+    v = { id:genId(), vendeurId:currentUser.id||'GERANT', vendeurNom:currentUser.nom, clientNom:nom, clientTel:tel, poids, prixKg:prixValF, mode, total, date:today(), heure:nowTime() };
     allVentes.push(v);
     addNotif(`${currentUser.nom} a vendu ${poids} kg à ${nom} — ${fmtNum(total)} MRU`, 'vente');
   }
 
   ls_set(LS.VENTES, allVentes);
-  ['venClient','venTel','venPoids'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  ['venClient','venTel','venPoids','venPrixKg'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
   const vm=document.getElementById('venMode'); if(vm) vm.value='';
   const vtc=document.getElementById('venTotalCalc'); if(vtc) vtc.value='0 MRU';
   renderVentes();
@@ -5531,1757 +4741,6 @@ function logConnexion(user){
   ls_set(LS.CONNEXIONS, conns);
   if(user.role!=='gerant') addNotif(`${user.nom} (${getRoleLabel(user.role)}) vient de se connecter`, 'connexion');
   fbSet('lb_connexions', entry.id, entry);
-}
-
-
-
-// ══════════════════════════════════════════
-//  TOUTES LES NOUVELLES FONCTIONNALITES
-// ══════════════════════════════════════════
-
-// --- STOCK RESTANT ---
-function refreshStock(){
-  var allProd = ls_get(LS.PROD)||[];
-  // Production archivée
-  var prod = allProd.filter(function(p){return !p.live;});
-  // Production en cours (live) — ajouter les kg déjà produits
-  var liveProd = allProd.filter(function(p){return p.live;});
-  var ventes = ls_get(LS.VENTES)||[];
-
-  var kgP = prod.reduce(function(s,p){return s+(p.kg||0);},0);
-  // Ajouter kg live
-  var kgLive = liveProd.reduce(function(s,p){return s+(p.kg||0);},0);
-  var kgPTotal = kgP + kgLive;
-
-  var kgV = ventes.reduce(function(s,v){return s+(v.poids||0);},0);
-  var kgR = Math.max(0, kgPTotal - kgV);
-  var pct = kgPTotal>0 ? Math.min(100, Math.round(kgV/kgPTotal*100)) : 0;
-  var col = kgR<=0?'#E74C3C':kgR<50?'#E67E22':'#1E8449';
-  var badge = kgR<=0?'Epuise':kgR<50?'Bas':'OK';
-
-  function s(id,v){var el=document.getElementById(id);if(el)el.textContent=v;}
-  s('stockProd', fmtNum(kgPTotal)+' kg'+(kgLive>0?' (dont '+fmtNum(kgLive)+'kg en cours)':''));
-  s('stockVendu', fmtNum(kgV)+' kg');
-  s('stockRestant', fmtNum(kgR)+' kg');
-  s('stockPct', pct+'%');
-  var er=document.getElementById('stockRestant');if(er)er.style.color=col;
-  var eb=document.getElementById('stockBadge');if(eb){eb.textContent=badge+(kgLive>0?' 🔄':'');eb.style.background=col;}
-  var ep=document.getElementById('stockPBar');if(ep)ep.style.width=pct+'%';
-  var evs=document.getElementById('venStockRestant');if(evs){evs.textContent=fmtNum(kgR)+' kg';evs.style.color=col;}
-}
-
-// --- BILAN ---
-var bilanPeriode='month';
-var LS_INVEST='lb_invest_v1';
-
-function setBilanPeriode(p,btn){
-  bilanPeriode=p;
-  ['month','year','all'].forEach(function(x){
-    ['bilBtn-','gerBilBtn-'].forEach(function(pre){
-      var b=document.getElementById(pre+x);if(!b)return;
-      b.style.background=(x===p)?'var(--brand)':'var(--brand-pale)';
-      b.style.color=(x===p)?'#fff':'var(--brand)';
-    });
-  });
-  refreshBilan(); refreshBilanGer();
-}
-
-function getBilanRange(){
-  var now=today(),mois=now.slice(0,7),annee=now.slice(0,4);
-  if(bilanPeriode==='month')return{label:'Ce mois',filter:function(d){return d&&d.startsWith(mois);}};
-  if(bilanPeriode==='year')return{label:'Annee '+annee,filter:function(d){return d&&d.startsWith(annee);}};
-  return{label:'Tout',filter:function(d){return !!d;}};
-}
-
-function _calcBilan(){
-  var r=getBilanRange(),f=r.filter,label=r.label;
-  var ventes=(ls_get(LS.VENTES)||[]).filter(function(v){return f(v.date);});
-  var prod=(ls_get(LS.PROD)||[]).filter(function(p){return !p.live&&f(p.date);});
-  var compta=(ls_get(LS.COMPTA)||[]).filter(function(c){return f(c.date);});
-  var prix=ls_get(LS.PRIX);
-  var ca=ventes.reduce(function(s,v){return s+(v.total||0);},0);
-  var kgV=ventes.reduce(function(s,v){return s+(v.poids||0);},0);
-  var kgP=prod.reduce(function(s,p){return s+(p.kg||0);},0);
-  var sal=compta.filter(function(c){return c.type==='sal';}).reduce(function(s,c){return s+(c.montant||0);},0);
-  var ach=compta.filter(function(c){return c.type==='ach';}).reduce(function(s,c){return s+(c.montant||0);},0);
-  var tax=compta.filter(function(c){return c.type==='tax';}).reduce(function(s,c){return s+(c.montant||0);},0);
-  var act=compta.filter(function(c){return c.type==='act';}).reduce(function(s,c){return s+(c.montant||0);},0);
-  var dieselCfg=typeof getDieselConfig==='function'?getDieselConfig():{prixLitre:0};
-  var dieselL=(ls_get(LS_DIESEL)||[]).filter(function(d){return f(d.date);}).reduce(function(s,d){return s+(d.litres||0);},0);
-  var diesel=Math.round(dieselL*(dieselCfg.prixLitre||0));
-  var dep=sal+ach+tax+act+diesel, benef=ca-dep;
-  var marge=ca>0?Math.round(benef/ca*100):0, coutKg=kgP>0?Math.round(dep/kgP):0;
-  var allP=(ls_get(LS.PROD)||[]).filter(function(p){return !p.live;});
-  var allV=ls_get(LS.VENTES)||[];
-  var stockKg=Math.max(0,allP.reduce(function(s,p){return s+(p.kg||0);},0)-allV.reduce(function(s,v){return s+(v.poids||0);},0));
-  var prixVal=prix?prix.val:0, stockVal=Math.round(stockKg*prixVal);
-  var invest=(ls_get(LS_INVEST)||[]).reduce(function(s,i){return s+(i.montant||0);},0);
-  var caAll=(ls_get(LS.VENTES)||[]).reduce(function(s,v){return s+(v.total||0);},0);
-  var depAll=(ls_get(LS.COMPTA)||[]).reduce(function(s,c){return s+(c.montant||0);},0);
-  var recup=Math.max(0,caAll-depAll), restInv=Math.max(0,invest-recup);
-  var roi=invest>0?Math.round(recup/invest*100):0;
-  var mN=today().slice(0,7);
-  var vM=(ls_get(LS.VENTES)||[]).filter(function(v){return v.date&&v.date.startsWith(mN);});
-  var cM=(ls_get(LS.COMPTA)||[]).filter(function(c){return c.date&&c.date.startsWith(mN);});
-  var benM=vM.reduce(function(s,v){return s+(v.total||0);},0)-cM.reduce(function(s,c){return s+(c.montant||0);},0);
-  var rentabStr='-';
-  if(invest>0&&restInv<=0)rentabStr='Atteinte!';
-  else if(benM>0&&restInv>0){var mR=Math.ceil(restInv/benM);var d=new Date();d.setMonth(d.getMonth()+mR);rentabStr=moisLabel(String(d.getMonth()+1).padStart(2,'0'))+' '+d.getFullYear()+' (~'+mR+' mois)';}
-  return{label:label,ca:ca,kgV:kgV,kgP:kgP,sal:sal,ach:ach,tax:tax,act:act,dep:dep,benef:benef,marge:marge,coutKg:coutKg,stockKg:stockKg,prixVal:prixVal,stockVal:stockVal,roi:roi,rentabStr:rentabStr};
-}
-
-function _applyBilan(pre,d){
-  function s(id,v){var el=document.getElementById(pre+id);if(el)el.textContent=v;}
-  var lbl=document.getElementById(pre+'PeriodeLabel');if(lbl)lbl.textContent='Periode : '+d.label;
-  s('CA',fmtNum(d.ca)+' MRU'); s('KgVendu',fmtNum(d.kgV)+' kg'); s('KgProd',fmtNum(d.kgP)+' kg');
-  s('Sal',fmtNum(d.sal)+' MRU'); s('Ach',fmtNum(d.ach)+' MRU'); s('Tax',fmtNum(d.tax)+' MRU');
-  s('Act',fmtNum(d.act)+' MRU'); s('Dep',fmtNum(d.dep)+' MRU');  s('StockKg',fmtNum(d.stockKg)+' kg'); s('PrixKg',fmtNum(d.prixVal)+' MRU'); s('StockVal',fmtNum(d.stockVal)+' MRU');
-  s('CoutKg',fmtNum(d.coutKg)+' MRU'); s('ROI',d.roi+'%');
-  var benEl=document.getElementById(pre+'Benef'),marEl=document.getElementById(pre+'Marge');
-  if(benEl){benEl.textContent=(d.benef>=0?'+':'')+fmtNum(d.benef)+' MRU';benEl.style.color=d.benef>=0?'#1E8449':'#E74C3C';}
-  if(marEl){marEl.textContent=d.marge+'%';marEl.style.color=d.marge>=0?'#1E8449':'#E74C3C';}
-  var prev=document.getElementById(pre+'RapportPreview');
-  if(prev)prev.innerHTML='<b>BILAN '+d.label+'</b><br>CA: '+fmtNum(d.ca)+' MRU | Prod: '+fmtNum(d.kgP)+'kg | Vendu: '+fmtNum(d.kgV)+'kg<br>Dep: '+fmtNum(d.dep)+' MRU | Benef: '+(d.benef>=0?'+':'')+fmtNum(d.benef)+' MRU | Marge: '+d.marge+'%<br>Stock: '+fmtNum(d.stockKg)+' kg = '+fmtNum(d.stockVal)+' MRU';
-}
-
-function refreshBilan(){_applyBilan('bil',_calcBilan());}
-function refreshBilanGer(){_applyBilan('gerBil',_calcBilan());}
-
-function exportBilan(format,role){
-  var d=_calcBilan();
-  if(format==='csv'){
-    var lines=['BILAN - '+d.label,'CA;'+d.ca+' MRU','Vendu;'+d.kgV+' kg','Produit;'+d.kgP+' kg','Salaires;'+d.sal+' MRU','Achats;'+d.ach+' MRU','Taxes;'+d.tax+' MRU','Avances;'+d.act+' MRU','Depenses;'+d.dep+' MRU','Benefice;'+d.benef+' MRU','Marge;'+d.marge+'%','Stock;'+d.stockKg+' kg'];
-    var blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8'});
-    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='bilan_'+today()+'.csv';a.click();toast('CSV telecharge');
-  } else {
-    var h='<html><body><h1>Bilan '+d.label+'</h1><table border=1><tr><th>Indicateur</th><th>Valeur</th></tr><tr><td>CA</td><td>'+fmtNum(d.ca)+' MRU</td></tr><tr><td>Benefice</td><td>'+(d.benef>=0?'+':'')+fmtNum(d.benef)+' MRU</td></tr><tr><td>Marge</td><td>'+d.marge+'%</td></tr><tr><td>Stock</td><td>'+fmtNum(d.stockKg)+' kg</td></tr></table></body></html>';
-    var blob=new Blob([h],{type:'application/msword'});
-    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='bilan_'+today()+'.doc';a.click();toast('Word telecharge');
-  }
-}
-
-// --- INVESTISSEMENT ---
-var INVEST_CATS={machine:'Machine',groupe:'Groupe electrogene',infra:'Infrastructure',transport:'Transport',loyer:'Loyer/Terrain',autre:'Autre'};
-function getInvest(){return ls_get(LS_INVEST)||[];}
-
-function saveInvest(){
-  var desc=((document.getElementById('investDesc')||{}).value||'').trim();
-  var cat=(document.getElementById('investCat')||{}).value||'autre';
-  var montant=parseFloat((document.getElementById('investMontant')||{}).value)||0;
-  var date=(document.getElementById('investDate')||{}).value||today();
-  var note=((document.getElementById('investNote')||{}).value||'').trim();
-  var editId=((document.getElementById('investEditId')||{}).value||'');
-  if(!desc||!montant){toast('Remplissez description et montant.');return;}
-  var all=getInvest();
-  if(editId){var idx=all.findIndex(function(i){return i.id===editId;});if(idx>=0)all[idx]=Object.assign({},all[idx],{desc:desc,cat:cat,montant:montant,date:date,note:note});}
-  else{var item={id:genId(),desc:desc,cat:cat,montant:montant,date:date,note:note};all.push(item);if(db)fbSet('lb_invest',item.id,item);}
-  ls_set(LS_INVEST,all);cancelInvestEdit();renderInvestList();toast('Depense enregistree : '+fmtNum(montant)+' MRU');
-}
-
-function cancelInvestEdit(){
-  ['investDesc','investMontant','investNote','investEditId'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
-  var c=document.getElementById('investCat');if(c)c.value='machine';
-  var d=document.getElementById('investDate');if(d)d.value=today();
-  var b=document.getElementById('investCancelBtn');if(b)b.style.display='none';
-  var t=document.getElementById('investFormTitle');if(t)t.textContent='Ajouter une depense initiale';
-}
-
-function editInvest(id){
-  var item=getInvest().find(function(i){return i.id===id;});if(!item)return;
-  document.getElementById('investDesc').value=item.desc||'';
-  document.getElementById('investCat').value=item.cat||'autre';
-  document.getElementById('investMontant').value=item.montant||'';
-  document.getElementById('investDate').value=item.date||today();
-  document.getElementById('investNote').value=item.note||'';
-  document.getElementById('investEditId').value=id;
-  var b=document.getElementById('investCancelBtn');if(b)b.style.display='block';
-  var t=document.getElementById('investFormTitle');if(t)t.textContent='Modifier la depense';
-}
-
-function deleteInvest(id){
-  showModal('Supprimer?','Supprimer cette depense?','#C0392B','Supprimer',function(){
-    ls_set(LS_INVEST,getInvest().filter(function(i){return i.id!==id;}));
-    if(db)db.collection('lb_invest').doc(id).delete();
-    renderInvestList();toast('Supprime');
-  });
-}
-
-function renderInvestList(){
-  var all=getInvest().sort(function(a,b){return (a.date||'').localeCompare(b.date||'');});
-  var total=all.reduce(function(s,i){return s+(i.montant||0);},0);
-  var caAll=(ls_get(LS.VENTES)||[]).reduce(function(s,v){return s+(v.total||0);},0);
-  var depAll=(ls_get(LS.COMPTA)||[]).reduce(function(s,c){return s+(c.montant||0);},0);
-  var recup=Math.max(0,caAll-depAll),restant=Math.max(0,total-recup);
-  var pct=total>0?Math.min(100,Math.round(recup/total*100)):0;
-  var mN=today().slice(0,7);
-  var vM=(ls_get(LS.VENTES)||[]).filter(function(v){return v.date&&v.date.startsWith(mN);});
-  var cM=(ls_get(LS.COMPTA)||[]).filter(function(c){return c.date&&c.date.startsWith(mN);});
-  var benM=vM.reduce(function(s,v){return s+(v.total||0);},0)-cM.reduce(function(s,c){return s+(c.montant||0);},0);
-  var dateEst='-',conseil='';
-  if(total>0&&restant<=0){dateEst='Atteinte!';}
-  else if(benM>0&&restant>0){var mR=Math.ceil(restant/benM);var d=new Date();d.setMonth(d.getMonth()+mR);dateEst=moisLabel(String(d.getMonth()+1).padStart(2,'0'))+' '+d.getFullYear();conseil=mR<=6?'Proche!':mR<=12?'Bon rythme.':'Optimisez.';}
-  function s(id,v){var el=document.getElementById(id);if(el)el.textContent=v;}
-  s('investTotal',fmtNum(total)+' MRU');s('investROI',(total>0?Math.round(recup/total*100):0)+'%');
-  s('investRecup',fmtNum(recup)+' MRU');s('investRestant',fmtNum(restant)+' MRU');
-  s('investPctLabel',pct+'% recupere');s('investDateEst','Est.: '+dateEst);s('investConseil',conseil);
-  var pb=document.getElementById('investPBar');if(pb)pb.style.width=pct+'%';
-  var badge=document.getElementById('investBadge');
-  if(badge){if(restant<=0&&total>0){badge.textContent='Rentabilise';badge.style.background='#1E8449';}else{badge.textContent=pct+'% recupere';badge.style.background='#95A5A6';}}
-  var el=document.getElementById('investList');if(!el)return;
-  if(!all.length){el.innerHTML='<div class="empty-state">Aucune depense.</div>';return;}
-  el.innerHTML=all.map(function(i){return '<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--brand-border);"><div style="flex:1;"><div style="font-size:13px;font-weight:700;">'+(INVEST_CATS[i.cat]||'')+'  '+i.desc+'</div><div style="font-size:11px;color:var(--muted);">'+(i.date||'')+(i.note?' - '+i.note:'')+'</div></div><div style="text-align:right;flex-shrink:0;margin-left:10px;"><div style="font-size:14px;font-weight:900;color:var(--danger);">'+fmtNum(i.montant)+' MRU</div><div style="display:flex;gap:6px;margin-top:4px;"><button onclick="editInvest(\''+i.id+'\')" style="background:none;border:none;font-size:14px;cursor:pointer;">✏️</button><button onclick="deleteInvest(\''+i.id+'\')" style="background:none;border:none;font-size:14px;cursor:pointer;">🗑️</button></div></div></div>';}).join('');
-}
-
-// --- OFFRES (crees par le gerant) ---
-var LS_OFFRES='lb_offres_v1';
-function getOffres(){return ls_get(LS_OFFRES)||[];}
-
-function onOffreTypeChange(){
-  var type=(document.getElementById('offreType')||{}).value;
-  var wrap=document.getElementById('offreValWrap');
-  var lbl=document.getElementById('offreValLabel');
-  var inp=document.getElementById('offreVal');
-  if(type==='1pour1'){if(wrap)wrap.style.display='none';}
-  else{
-    if(wrap)wrap.style.display='block';
-    if(lbl)lbl.textContent=type==='pct'?'Valeur (%)':'Prix fixe (MRU/kg)';
-    if(inp)inp.placeholder=type==='pct'?'Ex : 10':'Ex : 5';
-  }
-}
-
-function saveOffre(){
-  var nom=((document.getElementById('offreNom')||{}).value||'').trim();
-  var type=(document.getElementById('offreType')||{}).value||'pct';
-  var val=parseFloat((document.getElementById('offreVal')||{}).value)||0;
-  var debut=(document.getElementById('offreDateDebut')||{}).value||today();
-  var fin=(document.getElementById('offreDateFin')||{}).value||'';
-  var desc=((document.getElementById('offreDesc')||{}).value||'').trim();
-  var editId=((document.getElementById('offreEditId')||{}).value||'');
-  if(!nom){toast('Donnez un nom a l\'offre.');return;}
-  if(type!=='1pour1'&&!val){toast('Saisissez la valeur.');return;}
-  var all=getOffres();
-  var item={id:editId||genId(),nom:nom,type:type,val:val,debut:debut,fin:fin,desc:desc,active:true,creeLe:today()};
-  if(editId){var idx=all.findIndex(function(o){return o.id===editId;});if(idx>=0)all[idx]=Object.assign({},all[idx],item);}
-  else{all.push(item);}
-  ls_set(LS_OFFRES,all);
-  if(db)fbSet('lb_offres',item.id,item);
-  cancelOffreEdit();renderOffreList();refreshVenOffres();
-  toast('Offre "'+nom+'" enregistree!');
-}
-
-function cancelOffreEdit(){
-  ['offreNom','offreVal','offreDesc','offreDateDebut','offreDateFin','offreEditId'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
-  var t=document.getElementById('offreType');if(t)t.value='pct';
-  var b=document.getElementById('offreCancelBtn');if(b)b.style.display='none';
-  var ft=document.getElementById('offreFormTitle');if(ft)ft.textContent='Creer une offre';
-  onOffreTypeChange();
-}
-
-function editOffre(id){
-  var item=getOffres().find(function(o){return o.id===id;});if(!item)return;
-  document.getElementById('offreNom').value=item.nom||'';
-  document.getElementById('offreType').value=item.type||'pct';
-  document.getElementById('offreVal').value=item.val||'';
-  document.getElementById('offreDateDebut').value=item.debut||'';
-  document.getElementById('offreDateFin').value=item.fin||'';
-  document.getElementById('offreDesc').value=item.desc||'';
-  document.getElementById('offreEditId').value=id;
-  var b=document.getElementById('offreCancelBtn');if(b)b.style.display='block';
-  var ft=document.getElementById('offreFormTitle');if(ft)ft.textContent='Modifier l\'offre';
-  onOffreTypeChange();
-}
-
-function toggleOffre(id){
-  var all=getOffres();
-  var idx=all.findIndex(function(o){return o.id===id;});if(idx<0)return;
-  all[idx].active=!all[idx].active;
-  ls_set(LS_OFFRES,all);
-  if(db)fbSet('lb_offres',all[idx].id,all[idx]);
-  renderOffreList();refreshVenOffres();
-  toast(all[idx].active?'Offre activee':'Offre desactivee');
-}
-
-function deleteOffre(id){
-  showModal('Supprimer?','Supprimer cette offre?','#C0392B','Supprimer',function(){
-    ls_set(LS_OFFRES,getOffres().filter(function(o){return o.id!==id;}));
-    if(db)db.collection('lb_offres').doc(id).delete();
-    renderOffreList();refreshVenOffres();toast('Offre supprimee');
-  });
-}
-
-function isOffreActive(o){
-  if(!o.active)return false;
-  var now=today();
-  if(o.debut&&now<o.debut)return false;
-  if(o.fin&&now>o.fin)return false;
-  return true;
-}
-
-function getOffresActives(){
-  return getOffres().filter(function(o){return isOffreActive(o);});
-}
-
-function renderOffreList(){
-  var el=document.getElementById('offreList');if(!el)return;
-  var all=getOffres().sort(function(a,b){return (b.creeLe||'').localeCompare(a.creeLe||'');});
-  if(!all.length){el.innerHTML='<div class="empty-state">Aucune offre.</div>';return;}
-  var colors={'pct':'#27AE60','prix_fixe':'#2980B9','1pour1':'#E74C3C'};
-  el.innerHTML=all.map(function(o){
-    var actif=isOffreActive(o);
-    var statBg=actif?'#1E8449':'#95A5A6';
-    var statTxt=actif?'Active':o.active?'Hors periode':'Desactivee';
-    var resume=o.type==='pct'?'-'+o.val+'%':o.type==='prix_fixe'?fmtNum(o.val)+' MRU/kg':'1kg=1kg gratuit';
-    var periode=o.debut?(o.debut+(o.fin?' au '+o.fin:'')):'';
-    return '<div style="padding:12px 0;border-bottom:1px solid var(--brand-border);">'
-      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
-      +'<div style="flex:1;">'
-      +'<div style="font-size:14px;font-weight:800;color:var(--brand);">'+o.nom+'</div>'
-      +'<div style="font-size:12px;color:var(--muted);margin-top:2px;">'+resume+(periode?' | '+periode:'')+'</div>'
-      +(o.desc?'<div style="font-size:11px;color:var(--muted);">'+o.desc+'</div>':'')
-      +'</div>'
-      +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;margin-left:8px;">'
-      +'<span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;background:'+statBg+';color:#fff;">'+statTxt+'</span>'
-      +'<div style="display:flex;gap:4px;">'
-      +'<button onclick="toggleOffre(\''+o.id+'\')" style="background:none;border:none;font-size:16px;cursor:pointer;">'+(o.active?'⏸':'▶')+'</button>'
-      +'<button onclick="editOffre(\''+o.id+'\')" style="background:none;border:none;font-size:16px;cursor:pointer;">✏️</button>'
-      +'<button onclick="deleteOffre(\''+o.id+'\')" style="background:none;border:none;font-size:16px;cursor:pointer;">🗑️</button>'
-      +'</div></div></div></div>';
-  }).join('');
-}
-
-function refreshVenOffres(){
-  var actives=getOffresActives();
-  var banner=document.getElementById('venOffresActives');
-  if(!banner)return;
-  if(!actives.length){banner.style.display='none';return;}
-  var colors=['#27AE60','#2980B9','#8E44AD','#E74C3C','#E67E22'];
-  banner.style.display='block';
-  banner.innerHTML=actives.map(function(o,i){
-    var col=colors[i%colors.length];
-    var resume=o.type==='pct'?'-'+o.val+'% sur le prix':o.type==='prix_fixe'?fmtNum(o.val)+' MRU/kg':'1kg achete = 1kg gratuit';
-    return '<div style="border-radius:12px;padding:10px 14px;text-align:center;margin-bottom:6px;background:linear-gradient(135deg,'+col+','+col+'cc);">'
-      +'<div style="font-size:13px;font-weight:900;color:#fff;">🏷️ '+o.nom+'</div>'
-      +'<div style="font-size:11px;color:rgba(255,255,255,0.9);margin-top:2px;">'+resume+'</div>'
-      +(o.fin?'<div style="font-size:10px;color:rgba(255,255,255,0.75);margin-top:2px;">Jusqu\'au '+o.fin+'</div>':'')
-      +'</div>';
-  }).join('');
-}
-
-// --- FIDELITE : compter les achats payants du cycle courant ---
-// Logique : on parcourt les ventes du mois triees par date/heure
-// Quand on trouve une vente marquee fidelite=true, le cycle repart a zero
-// On retourne le nombre d achats payants dans le cycle actuel
-function getFideliteNb(tel){
-  if(!tel)return 0;
-  var mois=today().slice(0,7);
-  var ventes=(ls_get(LS.VENTES)||[])
-    .filter(function(v){return v.clientTel===tel&&v.date&&v.date.startsWith(mois);})
-    .sort(function(a,b){
-      var da=(a.date||'')+' '+(a.heure||'');
-      var db2=(b.date||'')+' '+(b.heure||'');
-      return da<db2?-1:da>db2?1:0;
-    });
-  var cycle=0;
-  ventes.forEach(function(v){
-    if(v.fidelite===true){ cycle=0; }
-    else { cycle++; }
-  });
-  return cycle;
-}
-
-// Retourne la quantite offerte pour la fidelite :
-// = plus petit achat historique du client, plafonné à 5kg
-function getFideliteKgOffert(tel){
-  if(!tel) return 5;
-  var tousAchats=(ls_get(LS.VENTES)||[]).filter(function(v){
-    return v.clientTel===tel && !v.fidelite && v.poids>0;
-  });
-  if(!tousAchats.length) return 5;
-  var plusPetit=Math.min.apply(null, tousAchats.map(function(v){ return v.poidsAchat||v.poids||0; }));
-  return Math.min(5, plusPetit);
-}
-
-// --- CALCUL TOTAL AVEC OFFRES + FIDELITE ---
-function calcVenteTotalAvecOffre(){
-  var poids=parseFloat(((document.getElementById('venPoids')||{}).value)||0)||0;
-  var tel=((document.getElementById('venTel')||{}).value||'').trim();
-  var prix=ls_get(LS.PRIX);
-  var prixVal=prix?prix.val:0;
-  var appl=document.getElementById('venOffreAppliquee');
-
-  // Calculer fidelite
-  var nb=getFideliteNb(tel);
-  var fidelite=(tel&&nb>=10);
-  var kgOffertFidelite=fidelite?getFideliteKgOffert(tel):0;
-
-  // Afficher progression fidelite des saisie du telephone
-  if(tel&&!poids){
-    if(appl){
-      if(fidelite){
-        appl.style.display='block';appl.style.color='#1E8449';appl.style.background='#E8F8F5';appl.style.border='1px solid #A9DFBF';
-        appl.textContent='⭐ Client fidele : '+nb+' achats - '+fmtNum(kgOffertFidelite)+' kg OFFERTS sur ce achat!';
-      } else if(nb>0){
-        appl.style.display='block';appl.style.color='#2980B9';appl.style.background='#EBF5FB';appl.style.border='1px solid #AED6F1';
-        appl.textContent='⭐ Fidelite : '+nb+'/10 achats ce mois (encore '+(10-nb)+' pour obtenir offre)';
-      } else {
-        appl.style.display='none';
-      }
-    }
-    var elT=document.getElementById('venTotalCalc');if(elT)elT.value='0 MRU';
-    return;
-  }
-
-  if(!poids||!prixVal){
-    var elT2=document.getElementById('venTotalCalc');if(elT2)elT2.value='0 MRU';
-    if(appl&&!tel)appl.style.display='none';
-    return;
-  }
-
-  // Etape 1 : Fidelite - offrir le plus petit achat historique (max 5kg)
-  var labelParts=[];
-  var poidsPayant=poids;
-
-  if(fidelite){
-    var kgOfferts=Math.min(kgOffertFidelite, poids);
-    poidsPayant=Math.max(0, poids-kgOfferts);
-    if(poidsPayant===0){
-      labelParts.push('Fidelite: '+fmtNum(poids)+'kg OFFERTS ⭐ (0 MRU)');
-    } else {
-      labelParts.push('Fidelite: '+fmtNum(kgOfferts)+'kg offerts ⭐ (paie '+fmtNum(poidsPayant)+'kg)');
-    }
-  }
-
-  // Etape 2 : Meilleure offre gerant sur poidsPayant
-  var totalBase=Math.round(poidsPayant*prixVal);
-  var meilleurTotal=totalBase;
-  var meilleureLabel='';
-  var poidsBonus=0; // kg supplementaires offerts (1pour1)
-
-  if(poidsPayant>0){
-    getOffresActives().forEach(function(o){
-      var t,lb,bonus=0;
-      if(o.type==='pct'){
-        t=Math.round(poidsPayant*prixVal*(1-o.val/100));lb=o.nom+' (-'+o.val+'%)';
-      } else if(o.type==='prix_fixe'){
-        t=Math.round(poidsPayant*o.val);lb=o.nom+' ('+fmtNum(o.val)+' MRU/kg)';
-      } else if(o.type==='1pour1'){
-        t=Math.round(poidsPayant*prixVal);bonus=poidsPayant;lb=o.nom+' (+'+fmtNum(poidsPayant)+'kg gratuit)';
-      } else return;
-      // Prendre l offre la plus avantageuse
-      if(t<meilleurTotal||(bonus>poidsBonus&&t<=meilleurTotal)){
-        meilleurTotal=t;meilleureLabel=lb;poidsBonus=bonus;
-      }
-    });
-    if(meilleureLabel)labelParts.push(meilleureLabel);
-  }
-
-  // Total final
-  var totalFinal=meilleurTotal;
-  var poidsReel=poids+poidsBonus; // kg reels remis au client
-  var offreLabel=labelParts.join(' + ');
-
-  // Affichage
-  var elT3=document.getElementById('venTotalCalc');if(elT3)elT3.value=fmtNum(totalFinal)+' MRU';
-
-  if(appl){
-    if(offreLabel){
-      appl.style.display='block';appl.style.color='#E67E22';appl.style.background='#FEF9E7';appl.style.border='1px solid #F39C12';
-      appl.textContent='🏷️ '+offreLabel+(poidsReel>poids?' → '+fmtNum(poidsReel)+'kg au client':'');
-    } else if(nb>0&&tel){
-      appl.style.display='block';appl.style.color='#2980B9';appl.style.background='#EBF5FB';appl.style.border='1px solid #AED6F1';
-      appl.textContent='⭐ Fidelite: '+nb+'/10 achats (encore '+(10-nb)+' pour 5kg offerts)';
-    } else {
-      appl.style.display='none';
-    }
-  }
-
-  // Stocker pour ajouterVente
-  var pe=document.getElementById('venPoids');
-  if(pe){
-    pe.dataset.poidsReel=poidsReel;
-    pe.dataset.totalFinal=totalFinal;
-    pe.dataset.offreLabel=offreLabel;
-    pe.dataset.isFidelite=fidelite?'1':'0';
-  }
-}
-
-// --- PATCH ajouterVente pour sauvegarder fidelite + offre ---
-// On surcharge ajouterVente ici car elle est declaree avant dans le fichier original
-// En JS, la derniere declaration de function l'emporte (hoisting)
-function ajouterVente(){
-  var nom=(document.getElementById('venClient')||{value:''}).value.trim();
-  var tel=(document.getElementById('venTel')||{value:''}).value.trim();
-  var poids=parseFloat((document.getElementById('venPoids')||{value:0}).value)||0;
-  var mode=(document.getElementById('venMode')||{value:''}).value;
-  var editId=((document.getElementById('venEditId')||{}).value||'');
-
-  if(!nom||!tel||!poids||!mode){toast('Remplissez tous les champs.');return;}
-
-  // Recuperer donnees offres
-  var pe=document.getElementById('venPoids');
-  var poidsReel=parseFloat((pe&&pe.dataset.poidsReel)||poids)||poids;
-  var totalFinal=parseFloat((pe&&pe.dataset.totalFinal)||0)||Math.round(poids*(ls_get(LS.PRIX)?ls_get(LS.PRIX).val:0));
-  var offreLabel=(pe&&pe.dataset.offreLabel)||'';
-  var isFidelite=(pe&&pe.dataset.isFidelite)==='1';
-  if(pe){pe.dataset.poidsReel='';pe.dataset.totalFinal='';pe.dataset.offreLabel='';pe.dataset.isFidelite='';}
-
-  var allVentes=ls_get(LS.VENTES)||[];
-  if(editId){
-    var idx=allVentes.findIndex(function(v){return v.id===editId;});
-    if(idx>=0)allVentes[idx]=Object.assign({},allVentes[idx],{clientNom:nom,clientTel:tel,poids:poidsReel,poidsAchat:poids,mode:mode,total:totalFinal});
-    document.getElementById('venEditId').value='';
-  } else {
-    var v={
-      id:genId(),
-      vendeurId:currentUser.id,vendeurNom:currentUser.nom,
-      clientNom:nom,clientTel:tel,
-      poids:poidsReel,poidsAchat:poids,
-      mode:mode,total:totalFinal,
-      offreLabel:offreLabel||null,
-      fidelite:isFidelite?true:null,
-      photo:_venPhotoBase64||null,
-      date:today(),heure:nowTime()
-    };
-    allVentes.push(v);
-    var ofStr=offreLabel?' ('+offreLabel+')':'';
-    addNotif(currentUser.nom+' a vendu '+fmtNum(poidsReel)+'kg a '+nom+' - '+fmtNum(totalFinal)+' MRU'+ofStr,'vente');
-  }
-
-  ls_set(LS.VENTES,allVentes);
-  ['venClient','venTel','venPoids'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
-  var vm=document.getElementById('venMode');if(vm)vm.value='';
-  var vtc=document.getElementById('venTotalCalc');if(vtc)vtc.value='0 MRU';
-  var appl=document.getElementById('venOffreAppliquee');if(appl)appl.style.display='none';
-  if(typeof resetVenPhoto==='function') resetVenPhoto();
-
-  renderVentes();
-  var msg=offreLabel?'Vente: '+fmtNum(totalFinal)+' MRU | '+offreLabel:'Vente: '+fmtNum(totalFinal)+' MRU';
-  if(poidsReel>poids)msg+=' (+'+fmtNum(poidsReel-poids)+'kg offerts)';
-  toast(msg);
-}
-
-// --- EXTRAS POST-LOGIN ---
-function saveApiKey(){
-  var key = ((document.getElementById('aiApiKeyInput')||{}).value||'').trim();
-  var status = document.getElementById('aiApiKeyStatus');
-  if(!key){ if(status){status.textContent='Saisissez une clé.';status.style.color='#E74C3C';} return; }
-  if(!key.startsWith('sk-ant-')){
-    if(status){status.textContent='Clé invalide (doit commencer par sk-ant-).';status.style.color='#E74C3C';}
-    return;
-  }
-  ls_set('lb_ai_key', key);
-  if(status){status.textContent='✅ Clé enregistrée sur cet appareil.';status.style.color='#1E8449';}
-  toast('Clé API enregistrée ! L\'assistant IA est maintenant actif.');
-}
-
-function loadApiKeyDisplay(){
-  var key = ls_get('lb_ai_key')||'';
-  var inp = document.getElementById('aiApiKeyInput');
-  var status = document.getElementById('aiApiKeyStatus');
-  if(key && inp) inp.value = key;
-  if(status){
-    if(key){ status.textContent='✅ Clé active — assistant IA opérationnel.'; status.style.color='#1E8449'; }
-    else { status.textContent='⚠️ Aucune clé — assistant IA désactivé.'; status.style.color='#E67E22'; }
-  }
-}
-
-// --- COMPARAISON MOIS PAR MOIS ---
-function getMoisData(periode){
-  var ventes=(ls_get(LS.VENTES)||[]).filter(function(v){return v.date&&v.date.startsWith(periode);});
-  var prod=(ls_get(LS.PROD)||[]).filter(function(p){return !p.live&&p.date&&p.date.startsWith(periode);});
-  var compta=(ls_get(LS.COMPTA)||[]).filter(function(c){return c.date&&c.date.startsWith(periode);});
-  var ca=ventes.reduce(function(s,v){return s+(v.total||0);},0);
-  var kg=ventes.reduce(function(s,v){return s+(v.poids||0);},0);
-  var kgProd=prod.reduce(function(s,p){return s+(p.kg||0);},0);
-  var dep=compta.reduce(function(s,c){return s+(c.montant||0);},0);
-  var benef=ca-dep;
-  return {ca:ca,kg:kg,kgProd:kgProd,dep:dep,benef:benef,nbVentes:ventes.length};
-}
-
-function renderComparaisonMois(){
-  var el=document.getElementById('comparaisonMois');if(!el)return;
-  var now=today();
-  var d=new Date(now);
-  var moisActuel=now.slice(0,7);
-  d.setMonth(d.getMonth()-1);
-  var moisPrec=d.toISOString().slice(0,7);
-
-  var actuel=getMoisData(moisActuel);
-  var prec=getMoisData(moisPrec);
-
-  var moisNoms=['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  var nomActuel=moisNoms[parseInt(moisActuel.slice(5))]+' '+moisActuel.slice(0,4);
-  var nomPrec=moisNoms[parseInt(moisPrec.slice(5))]+' '+moisPrec.slice(0,4);
-
-  function diff(a,b){
-    if(b===0) return a>0?{pct:100,col:'#1E8449',arrow:'↑'}:{pct:0,col:'#95A5A6',arrow:'='};
-    var p=Math.round((a-b)/b*100);
-    return{pct:Math.abs(p),col:p>=0?'#1E8449':'#E74C3C',arrow:p>=0?'↑':'↓'};
-  }
-
-  var rows=[
-    {label:'💰 CA',a:actuel.ca,b:prec.ca,unit:'MRU'},
-    {label:'📦 Kg vendus',a:actuel.kg,b:prec.kg,unit:'kg'},
-    {label:'⚙️ Kg produits',a:actuel.kgProd,b:prec.kgProd,unit:'kg'},
-    {label:'🛒 Nb ventes',a:actuel.nbVentes,b:prec.nbVentes,unit:''},
-    {label:'💸 Dépenses',a:actuel.dep,b:prec.dep,unit:'MRU',inverse:true},
-    {label:'💎 Bénéfice',a:actuel.benef,b:prec.benef,unit:'MRU'}
-  ];
-
-  el.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:8px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);">'
-    +'<div></div><div>'+nomPrec+'</div><div>'+nomActuel+'</div></div>'
-    +rows.map(function(r){
-      var d2=diff(r.a,r.b);
-      var col=r.inverse?(d2.arrow==='↑'?'#E74C3C':'#1E8449'):d2.col;
-      return '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;align-items:center;padding:6px 0;border-bottom:1px solid var(--brand-border);">'
-        +'<div style="font-size:11px;font-weight:700;">'+r.label+'</div>'
-        +'<div style="text-align:center;font-size:12px;color:var(--muted);">'+fmtNum(r.b)+(r.unit?' '+r.unit:'')+'</div>'
-        +'<div style="text-align:center;">'
-        +'<div style="font-size:13px;font-weight:900;color:var(--brand);">'+fmtNum(r.a)+(r.unit?' '+r.unit:'')+'</div>'
-        +'<div style="font-size:10px;font-weight:700;color:'+col+';">'+d2.arrow+' '+d2.pct+'%</div>'
-        +'</div></div>';
-    }).join('');
-
-  // Graphique 6 mois
-  renderEvolution6mois();
-}
-
-function renderEvolution6mois(){
-  var el=document.getElementById('evolution6mois');if(!el)return;
-  var moisNoms=['','Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
-  var data=[];
-  var d=new Date(today());
-  for(var i=5;i>=0;i--){
-    var dd=new Date(d);dd.setMonth(dd.getMonth()-i);
-    var periode=dd.toISOString().slice(0,7);
-    var m=getMoisData(periode);
-    data.push({label:moisNoms[parseInt(periode.slice(5))],ca:m.ca,benef:m.benef,kg:m.kg});
-  }
-  var maxCA=Math.max.apply(null,data.map(function(d){return d.ca;}));
-  if(maxCA===0){el.innerHTML='<div class="empty-state">Pas encore de données.</div>';return;}
-
-  el.innerHTML='<div style="padding:8px 0;">'
-    +'<div style="font-size:11px;color:var(--muted);margin-bottom:8px;">CA mensuel (MRU)</div>'
-    +'<div style="display:flex;align-items:flex-end;gap:6px;height:120px;">'
-    +data.map(function(d){
-      var h=maxCA>0?Math.max(4,Math.round(d.ca/maxCA*100)):4;
-      var col=d.benef>=0?'#1A5276':'#E74C3C';
-      return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">'
-        +'<div style="font-size:9px;color:var(--muted);text-align:center;">'+fmtNum(Math.round(d.ca/1000))+'k</div>'
-        +'<div style="width:100%;border-radius:6px 6px 0 0;background:'+col+';height:'+h+'%;">'
-        +'</div>'
-        +'<div style="font-size:10px;font-weight:700;color:var(--muted);">'+d.label+'</div>'
-        +'</div>';
-    }).join('')
-    +'</div>'
-    +'<div style="display:flex;gap:12px;margin-top:12px;font-size:11px;">'
-    +'<div style="display:flex;align-items:center;gap:4px;"><div style="width:12px;height:12px;border-radius:3px;background:#1A5276;"></div>Bénéfice positif</div>'
-    +'<div style="display:flex;align-items:center;gap:4px;"><div style="width:12px;height:12px;border-radius:3px;background:#E74C3C;"></div>Déficit</div>'
-    +'</div></div>';
-}
-
-// --- RELANCE AUTOMATIQUE ---
-var _relanceSeuil = 7;
-
-function setRelanceSeuil(jours, btn){
-  _relanceSeuil = jours;
-  [7,14,30].forEach(function(j){
-    var b=document.getElementById('relBtn-'+j);if(!b)return;
-    b.style.background = j===jours?'#E74C3C':'var(--brand-pale)';
-    b.style.color = j===jours?'#fff':'var(--brand)';
-    b.style.border = j===jours?'1.5px solid #E74C3C':'1.5px solid var(--brand-border)';
-  });
-  renderRelanceList();
-}
-
-function renderRelanceList(){
-  var el=document.getElementById('relanceList');if(!el)return;
-  var cutoff=new Date();cutoff.setDate(cutoff.getDate()-_relanceSeuil);
-  var cutStr=cutoff.toISOString().slice(0,10);
-  var clients=buildClientsMap();
-  var inactifs=Object.values(clients).filter(function(c){
-    return !c.dernierAchat||c.dernierAchat<cutStr;
-  }).sort(function(a,b){return (a.dernierAchat||'').localeCompare(b.dernierAchat||'');});
-
-  if(!inactifs.length){
-    el.innerHTML='<div style="text-align:center;padding:12px;color:#1E8449;font-weight:700;">✅ Aucun client inactif depuis '+_relanceSeuil+' jours !</div>';
-    return;
-  }
-
-  el.innerHTML='<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">'+inactifs.length+' client(s) à relancer</div>'
-    +inactifs.map(function(c){
-      var jours=c.dernierAchat?Math.floor((new Date()-new Date(c.dernierAchat))/(1000*60*60*24)):999;
-      var prix=ls_get(LS.PRIX);var prixVal=prix?prix.val:0;
-      var msg=encodeURIComponent(
-        'Salam '+c.nom+' ! 🧊\n\n'
-        +'Nous avons remarqué que vous n\'avez pas commandé de glace depuis '+jours+' jours.\n'
-        +'Votre glace fraîche vous attend chez لبرود !\n\n'
-        +(prixVal?'Prix : '+fmtNum(prixVal)+' MRU/kg\n\n':'')
-        +'Contactez-nous pour commander.\nMerci de votre confiance ! 🙏'
-      );
-      var waUrl='https://wa.me/222'+c.tel.replace(/\s/g,'')+'?text='+msg;
-      return '<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--brand-border);">'
-        +'<div style="flex:1;">'
-        +'<div style="font-size:13px;font-weight:700;">'+c.nom+'</div>'
-        +'<div style="font-size:11px;color:var(--muted);">'+c.tel+' · Inactif depuis '+jours+' jours</div>'
-        +'<div style="font-size:11px;color:var(--muted);">Total historique : '+fmtNum(c.totalCA)+' MRU</div>'
-        +'</div>'
-        +'<a href="'+waUrl+'" target="_blank" style="background:#25D366;color:#fff;border:none;border-radius:20px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;text-decoration:none;flex-shrink:0;">📱 WhatsApp</a>'
-        +'</div>';
-    }).join('');
-}
-
-function envoyerRelanceWhatsApp(tel, nom){
-  var prix=ls_get(LS.PRIX);var prixVal=prix?prix.val:0;
-  var jours=0;
-  var clients=buildClientsMap();
-  var c=clients[tel];
-  if(c&&c.dernierAchat) jours=Math.floor((new Date()-new Date(c.dernierAchat))/(1000*60*60*24));
-  var msg=encodeURIComponent(
-    'Salam '+nom+' ! 🧊\n\n'
-    +'Votre glace fraîche vous attend chez لبرود !\n'
-    +(prixVal?'Prix : '+fmtNum(prixVal)+' MRU/kg\n\n':'')
-    +'Contactez-nous pour commander. Merci ! 🙏'
-  );
-  window.open('https://wa.me/222'+tel.replace(/\s/g,'')+'?text='+msg, '_blank');
-}
-
-// --- CARNET CLIENTS ---
-var _clientFiltre = 'tous';
-
-function setClientFiltre(f, btn){
-  _clientFiltre = f;
-  ['tous','actifs','fideles','inactifs'].forEach(function(x){
-    var b = document.getElementById('cfBtn-'+x);
-    if(!b) return;
-    b.style.background = x===f ? 'var(--brand)' : 'var(--brand-pale)';
-    b.style.color = x===f ? '#fff' : 'var(--brand)';
-  });
-  renderCarnetClients();
-}
-
-function buildClientsMap(){
-  var ventes = ls_get(LS.VENTES)||[];
-  var mois = today().slice(0,7);
-  var clients = {};
-
-  ventes.forEach(function(v){
-    if(!v.clientTel) return;
-    var k = v.clientTel;
-    if(!clients[k]){
-      clients[k] = {
-        nom: v.clientNom||'Inconnu', tel: v.clientTel,
-        totalKg:0, totalCA:0, nbAchats:0,
-        dernierAchat:'', premierAchat:'',
-        achatsMois:0, kgMois:0, caMois:0,
-        historique:[]
-      };
-    }
-    clients[k].totalKg += v.poids||0;
-    clients[k].totalCA += v.total||0;
-    clients[k].nbAchats++;
-    if(!clients[k].premierAchat || v.date<clients[k].premierAchat) clients[k].premierAchat=v.date;
-    if(!clients[k].dernierAchat || v.date>clients[k].dernierAchat) clients[k].dernierAchat=v.date;
-    if(v.date && v.date.startsWith(mois)){
-      clients[k].achatsMois++;
-      clients[k].kgMois += v.poids||0;
-      clients[k].caMois += v.total||0;
-    }
-    clients[k].historique.push(v);
-  });
-
-  return clients;
-}
-
-function renderCarnetClients(){
-  var el = document.getElementById('clientsList');
-  if(!el) return;
-
-  var search = ((document.getElementById('clientSearch')||{}).value||'').toLowerCase().trim();
-  var mois = today().slice(0,7);
-  var clients = buildClientsMap();
-  var list = Object.values(clients);
-
-  // Statistiques globales
-  var actifsMois = list.filter(function(c){ return c.achatsMois>0; }).length;
-  var fideles = list.filter(function(c){ return c.achatsMois>=10; }).length;
-  var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
-  s('clientsTotalNb', list.length);
-  s('clientsActifsMois', actifsMois);
-  s('clientsFideles', fideles);
-
-  // Filtres
-  if(search) list = list.filter(function(c){ return c.nom.toLowerCase().includes(search)||c.tel.includes(search); });
-  if(_clientFiltre==='actifs') list = list.filter(function(c){ return c.achatsMois>0; });
-  if(_clientFiltre==='fideles') list = list.filter(function(c){ return c.achatsMois>=10; });
-  if(_clientFiltre==='inactifs'){
-    var cutoff = new Date(); cutoff.setDate(cutoff.getDate()-30);
-    var cutStr = cutoff.toISOString().slice(0,10);
-    list = list.filter(function(c){ return !c.dernierAchat||c.dernierAchat<cutStr; });
-  }
-
-  // Tri par CA total desc
-  list.sort(function(a,b){ return b.totalCA-a.totalCA; });
-
-  if(!list.length){ el.innerHTML='<div class="empty-state">Aucun client trouvé.</div>'; return; }
-
-  el.innerHTML = list.map(function(c){
-    var joursInactif = c.dernierAchat ? Math.floor((new Date()-new Date(c.dernierAchat))/(1000*60*60*24)) : 999;
-    var statut = c.achatsMois>=10 ? {icon:'⭐',color:'#E67E22',label:'Fidèle'} :
-                 c.achatsMois>0  ? {icon:'✅',color:'#1E8449',label:'Actif'} :
-                 joursInactif>30 ? {icon:'⚠️',color:'#E74C3C',label:'Inactif'} :
-                                   {icon:'💤',color:'#95A5A6',label:'En pause'};
-    return '<div onclick="openClientDetail(\''+c.tel+'\')" style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--brand-border);cursor:pointer;">'
-      +'<div style="width:40px;height:40px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px;flex-shrink:0;">'
-      +c.nom.charAt(0).toUpperCase()+'</div>'
-      +'<div style="flex:1;min-width:0;">'
-      +'<div style="font-size:13px;font-weight:800;color:var(--text);">'+c.nom+'</div>'
-      +'<div style="font-size:11px;color:var(--muted);">'+c.tel+' · '+c.nbAchats+' achats · '+fmtNum(c.totalCA)+' MRU</div>'
-      +(c.achatsMois>0?'<div style="font-size:11px;color:#1E8449;">Ce mois: '+c.achatsMois+' achats · '+fmtNum(c.caMois)+' MRU</div>':'')
-      +'</div>'
-      +'<div style="font-size:11px;font-weight:700;color:'+statut.color+';flex-shrink:0;">'+statut.icon+' '+statut.label+'</div>'
-      +'</div>';
-  }).join('');
-}
-
-function openClientDetail(tel){
-  var clients = buildClientsMap();
-  var c = clients[tel];
-  if(!c) return;
-
-  var mois = today().slice(0,7);
-  var joursInactif = c.dernierAchat ? Math.floor((new Date()-new Date(c.dernierAchat))/(1000*60*60*24)) : 999;
-  var fidelite = c.achatsMois;
-
-  document.getElementById('clientDetailNom').textContent = c.nom;
-  var content = document.getElementById('clientDetailContent');
-  if(!content) return;
-
-  var histoHtml = c.historique.sort(function(a,b){return b.date.localeCompare(a.date);}).slice(0,10).map(function(v){
-    return '<div class="ir"><span class="il">'+v.date+' — '+fmtNum(v.poids)+'kg</span><span class="iv">'+fmtNum(v.total)+' MRU</span></div>';
-  }).join('');
-
-  content.innerHTML =
-    '<div class="card"><div class="card-title">Informations</div>'
-    +'<div class="ir"><span class="il">Téléphone</span><span>'+c.tel+'</span></div>'
-    +'<div class="ir"><span class="il">Premier achat</span><span>'+c.premierAchat+'</span></div>'
-    +'<div class="ir"><span class="il">Dernier achat</span><span>'+c.dernierAchat+(joursInactif>0?' (il y a '+joursInactif+' j.)':'')+'</span></div>'
-    +'<div style="display:flex;gap:8px;margin-top:10px;">'
-    +'<a href="tel:'+c.tel+'" style="flex:1;background:var(--brand);color:#fff;border-radius:20px;padding:8px;text-align:center;font-size:12px;font-weight:700;text-decoration:none;">📞 Appeler</a>'
-    +'<button onclick="envoyerRelanceWhatsApp(\''+c.tel+'\',\''+c.nom+'\')" style="flex:1;background:#25D366;color:#fff;border:none;border-radius:20px;padding:8px;font-size:12px;font-weight:700;cursor:pointer;">📱 WhatsApp</button>'
-    +'</div></div>'
-    +'<div class="card" style="background:linear-gradient(135deg,#EBF5FB,#D6EAF8);border:1.5px solid var(--brand-border);">'
-    +'<div class="card-title">Statistiques totales</div>'
-    +'<div class="ir"><span class="il">Total achats</span><span style="font-weight:700;">'+c.nbAchats+'</span></div>'
-    +'<div class="ir"><span class="il">Total kg</span><span style="font-weight:700;">'+fmtNum(c.totalKg)+' kg</span></div>'
-    +'<div class="ir"><span class="il">Total CA</span><span style="font-weight:700;color:var(--brand);">'+fmtNum(c.totalCA)+' MRU</span></div>'
-    +'</div>'
-    +'<div class="card" style="background:linear-gradient(135deg,#FEF9E7,#FDEBD0);border:1.5px solid #F39C12;">'
-    +'<div class="card-title" style="color:#E67E22;">⭐ Fidélité ce mois</div>'
-    +'<div class="ir"><span class="il">Achats ce mois</span><span style="font-weight:800;color:#E67E22;">'+fidelite+'/10</span></div>'
-    +(fidelite>=10?'<div style="font-size:12px;color:#1E8449;font-weight:700;text-align:center;margin-top:6px;">🎁 Eligible à l\'offre fidélité !</div>':'')
-    +'<div style="background:rgba(255,255,255,0.5);border-radius:20px;height:8px;overflow:hidden;margin-top:6px;">'
-    +'<div style="height:100%;border-radius:20px;background:linear-gradient(90deg,#E67E22,#F39C12);width:'+Math.min(100,fidelite*10)+'%;"></div>'
-    +'</div></div>'
-    +'<div class="card"><div class="card-title">10 derniers achats</div>'+histoHtml+'</div>';
-
-  document.getElementById('clientDetailModal').style.display = 'block';
-}
-
-function closeClientDetail(){
-  var modal = document.getElementById('clientDetailModal');
-  if(modal) modal.style.display = 'none';
-}
-
-// --- PRÉSENCE & RETARDS ---
-var LS_PRESENCE = 'lb_presence_v1';
-var PRES_STATUTS = {
-  present: {label:'Présent', icon:'✅', color:'#1E8449'},
-  absent:  {label:'Absent',  icon:'❌', color:'#E74C3C'},
-  retard:  {label:'Retard',  icon:'⏰', color:'#E67E22'},
-  conge:   {label:'Congé',   icon:'🏖️', color:'#2980B9'},
-  maladie: {label:'Maladie', icon:'🤒', color:'#8E44AD'}
-};
-
-function getPresences(){ return ls_get(LS_PRESENCE)||[]; }
-
-function initPresence(){
-  // Remplir select employés
-  var empSel = document.getElementById('presEmpSelect');
-  if(empSel){
-    var users = getUsers().filter(function(u){ return u.role!=='gerant'; });
-    empSel.innerHTML = '<option value="">-- Sélectionner --</option>' +
-      users.map(function(u){ return '<option value="'+u.id+'">'+u.nom+'</option>'; }).join('');
-  }
-  // Date par défaut = aujourd'hui
-  var dateInp = document.getElementById('presDate');
-  if(dateInp && !dateInp.value) dateInp.value = today();
-
-  // Filtre mois/année
-  var moisF = document.getElementById('presMoisFilter');
-  var anneeF = document.getElementById('presAnneeFilter');
-  if(moisF) moisF.value = today().slice(5,7);
-  if(anneeF){
-    var anneeActuelle = parseInt(today().slice(0,4));
-    anneeF.innerHTML = '';
-    for(var y=anneeActuelle; y>=anneeActuelle-2; y--){
-      anneeF.innerHTML += '<option value="'+y+'">'+y+'</option>';
-    }
-  }
-  renderPresenceMois();
-  renderPresenceHistorique();
-}
-
-function savePresence(){
-  var date   = (document.getElementById('presDate')||{}).value || today();
-  var empId  = (document.getElementById('presEmpSelect')||{}).value;
-  var statut = (document.getElementById('presStatut')||{}).value || 'present';
-  var note   = ((document.getElementById('presNote')||{}).value||'').trim();
-
-  if(!empId){ toast('Sélectionnez un employé.'); return; }
-
-  var users = getUsers();
-  var emp = users.find(function(u){ return u.id===empId; });
-  if(!emp){ toast('Employé introuvable.'); return; }
-
-  var all = getPresences();
-  // Vérifier si déjà enregistré ce jour pour cet employé
-  var existing = all.findIndex(function(p){ return p.empId===empId && p.date===date; });
-  var record = {
-    id: existing>=0 ? all[existing].id : genId(),
-    empId: empId, empNom: emp.nom,
-    date: date, statut: statut, note: note,
-    saisiPar: currentUser ? currentUser.nom : ''
-  };
-
-  if(existing>=0){ all[existing] = record; }
-  else { all.push(record); }
-
-  ls_set(LS_PRESENCE, all);
-  if(db) fbSet('lb_presence', record.id, record);
-
-  // Reset form
-  var presNote = document.getElementById('presNote');
-  if(presNote) presNote.value = '';
-
-  renderPresenceMois();
-  renderPresenceHistorique();
-  toast(PRES_STATUTS[statut].icon+' Présence enregistrée : '+emp.nom+' — '+(PRES_STATUTS[statut].label));
-}
-
-function renderPresenceMois(){
-  var el = document.getElementById('presResume');
-  if(!el) return;
-
-  var mois  = (document.getElementById('presMoisFilter')||{}).value || today().slice(5,7);
-  var annee = (document.getElementById('presAnneeFilter')||{}).value || today().slice(0,4);
-  var periode = annee+'-'+mois;
-
-  var all = getPresences().filter(function(p){ return p.date && p.date.startsWith(periode); });
-  var users = getUsers().filter(function(u){ return u.role!=='gerant'; });
-
-  if(!users.length){ el.innerHTML='<div class="empty-state">Aucun employé.</div>'; return; }
-
-  el.innerHTML = users.map(function(u){
-    var presUser = all.filter(function(p){ return p.empId===u.id; });
-    var nb = {present:0, absent:0, retard:0, conge:0, maladie:0};
-    presUser.forEach(function(p){ if(nb[p.statut]!==undefined) nb[p.statut]++; });
-    var total = presUser.length;
-    var tauxPres = total>0 ? Math.round(nb.present/total*100) : 0;
-    var couleur = tauxPres>=90?'#1E8449':tauxPres>=70?'#E67E22':'#E74C3C';
-
-    return '<div style="padding:10px 0;border-bottom:1px solid var(--brand-border);">'
-      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">'
-      +'<div style="font-weight:700;font-size:13px;">'+u.nom+'</div>'
-      +'<div style="font-size:12px;font-weight:700;color:'+couleur+';">'+tauxPres+'% présent</div>'
-      +'</div>'
-      +'<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;text-align:center;">'
-      +Object.keys(PRES_STATUTS).map(function(s){
-        var st=PRES_STATUTS[s];
-        return '<div style="background:rgba(255,255,255,0.7);border-radius:8px;padding:4px 2px;">'
-          +'<div style="font-size:14px;">'+st.icon+'</div>'
-          +'<div style="font-size:10px;color:var(--muted);">'+st.label+'</div>'
-          +'<div style="font-size:14px;font-weight:900;color:'+st.color+';">'+nb[s]+'</div>'
-          +'</div>';
-      }).join('')
-      +'</div>'
-      +(nb.absent>0?'<div style="font-size:11px;color:#E74C3C;margin-top:4px;">⚠️ '+nb.absent+' absence(s) — impact salaire : -'+fmtNum(Math.round((u.salaire||0)/26*nb.absent))+' MRU</div>':'')
-      +'</div>';
-  }).join('');
-}
-
-function renderPresenceHistorique(){
-  var el = document.getElementById('presHistorique');
-  if(!el) return;
-  var all = getPresences().sort(function(a,b){ return b.date.localeCompare(a.date); }).slice(0,30);
-  if(!all.length){ el.innerHTML='<div class="empty-state">Aucune présence enregistrée.</div>'; return; }
-  el.innerHTML = all.map(function(p){
-    var st = PRES_STATUTS[p.statut]||{label:p.statut,icon:'❓',color:'#95A5A6'};
-    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--brand-border);">'
-      +'<div style="font-size:20px;">'+st.icon+'</div>'
-      +'<div style="flex:1;">'
-      +'<div style="font-size:13px;font-weight:700;">'+p.empNom+'</div>'
-      +'<div style="font-size:11px;color:var(--muted);">'+p.date+(p.note?' — '+p.note:'')+'</div>'
-      +'</div>'
-      +'<div style="font-size:11px;font-weight:700;color:'+st.color+';">'+st.label+'</div>'
-      +'</div>';
-  }).join('');
-}
-
-// --- FICHE DE PAIE AUTOMATIQUE ---
-var _fichePaieData = null;
-
-function initFichePaie(){
-  var empSel = document.getElementById('ficheEmpSelect');
-  var anneeInp = document.getElementById('ficheAnnee');
-  var moisSel = document.getElementById('ficheMoisSelect');
-  if(!empSel) return;
-
-  var users = getUsers().filter(function(u){ return u.role !== 'gerant'; });
-  empSel.innerHTML = '<option value="">-- Sélectionner --</option>' +
-    users.map(function(u){ return '<option value="'+u.id+'">'+u.nom+' ('+u.role+')</option>'; }).join('');
-
-  if(anneeInp && !anneeInp.value) anneeInp.value = today().slice(0,4);
-  if(moisSel && !moisSel.value) moisSel.value = today().slice(5,7);
-}
-
-function genererFichePaie(){
-  var empId   = (document.getElementById('ficheEmpSelect')||{}).value;
-  var mois    = (document.getElementById('ficheMoisSelect')||{}).value;
-  var annee   = (document.getElementById('ficheAnnee')||{}).value;
-
-  if(!empId || !mois || !annee){ toast('Sélectionnez un employé, un mois et une année.'); return; }
-
-  var users   = getUsers();
-  var emp     = users.find(function(u){ return u.id===empId; });
-  if(!emp){ toast('Employé introuvable.'); return; }
-
-  var periode = annee + '-' + mois;
-  var ventes  = ls_get(LS.VENTES)||[];
-  var compta  = ls_get(LS.COMPTA)||[];
-
-  // Salaire de base
-  var salaireBase = emp.salaire || 0;
-
-  // Avances du mois
-  var avancesMois = compta.filter(function(c){
-    return c.type==='sal' && c.empId===empId && c.date && c.date.startsWith(periode);
-  });
-  var totalAvances = avancesMois.reduce(function(s,c){ return s+(c.montant||0); }, 0);
-
-  // Performance vendeur si applicable
-  var ventesEmp = ventes.filter(function(v){
-    return v.vendeurId===empId && v.date && v.date.startsWith(periode);
-  });
-  var kgVendu = ventesEmp.reduce(function(s,v){ return s+(v.poids||0); }, 0);
-  var caVendu = ventesEmp.reduce(function(s,v){ return s+(v.total||0); }, 0);
-
-  // Absences du mois (impact sur salaire)
-  var presences = (ls_get(LS_PRESENCE)||[]).filter(function(p){
-    return p.empId===empId && p.date && p.date.startsWith(periode);
-  });
-  var nbAbsents = presences.filter(function(p){ return p.statut==='absent'; }).length;
-  var nbRetards = presences.filter(function(p){ return p.statut==='retard'; }).length;
-  var deductionAbsence = salaireBase>0 ? Math.round(salaireBase/26*nbAbsents) : 0;
-
-  // Net à payer
-  var netAPayer = Math.max(0, salaireBase - totalAvances - deductionAbsence);
-
-  var moisNoms = ['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  var moisNom  = moisNoms[parseInt(mois)] || mois;
-
-  _fichePaieData = {
-    emp: emp, moisNom: moisNom, annee: annee, periode: periode,
-    salaireBase: salaireBase, totalAvances: totalAvances, netAPayer: netAPayer,
-    nbAbsents: nbAbsents, nbRetards: nbRetards, deductionAbsence: deductionAbsence,
-    kgVendu: kgVendu, caVendu: caVendu, nbVentes: ventesEmp.length,
-    avancesMois: avancesMois
-  };
-
-  // Afficher aperçu
-  var card = document.getElementById('fichePreviewCard');
-  var content = document.getElementById('fichePreviewContent');
-  if(card) card.style.display = 'block';
-  if(content){
-    content.innerHTML =
-      '<div style="border:2px solid var(--brand);border-radius:12px;padding:16px;font-size:13px;">'
-      +'<div style="text-align:center;margin-bottom:12px;">'
-      +'<div style="font-size:16px;font-weight:900;color:var(--brand);">🧊 لبرود — Fiche de Paie</div>'
-      +'<div style="font-size:12px;color:var(--muted);">'+moisNom+' '+annee+'</div>'
-      +'</div>'
-      +'<div class="ir"><span class="il">Employé</span><span style="font-weight:700;">'+emp.nom+'</span></div>'
-      +'<div class="ir"><span class="il">Rôle</span><span>'+emp.role+'</span></div>'
-      +'<div class="ir"><span class="il">Période</span><span>'+moisNom+' '+annee+'</span></div>'
-      +(emp.cin?'<div class="ir"><span class="il">NIN</span><span>'+emp.cin+'</span></div>':'')
-      +'<div style="border-top:2px solid var(--brand-border);margin:10px 0;"></div>'
-      +'<div class="ir"><span class="il">Salaire de base</span><span style="font-weight:700;">'+fmtNum(salaireBase)+' MRU</span></div>'
-      +(avancesMois.length?'<div class="ir"><span class="il" style="color:var(--danger);">Avances perçues</span><span style="color:var(--danger);font-weight:700;">- '+fmtNum(totalAvances)+' MRU</span></div>'
-        +avancesMois.map(function(a){return '<div style="font-size:11px;color:var(--muted);padding:2px 0 2px 16px;">• '+fmtNum(a.montant)+' MRU le '+(a.date||'')+(a.commentaire?' ('+a.commentaire+')':'')+'</div>';}).join('')
-        :'')
-      +'<div style="border-top:2px solid var(--brand);margin:10px 0;"></div>'
-      +'<div class="ir"><span class="il" style="font-size:15px;font-weight:800;color:var(--brand);">Net à payer</span><span style="font-size:18px;font-weight:900;color:#1E8449;">'+fmtNum(netAPayer)+' MRU</span></div>'
-      +(emp.role==='vendeur'?
-        '<div style="border-top:2px solid var(--brand-border);margin:10px 0;"></div>'
-        +'<div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Performance du mois</div>'
-        +'<div class="ir"><span class="il">Ventes réalisées</span><span>'+nbVentes+' ventes</span></div>'
-        +'<div class="ir"><span class="il">Kg vendus</span><span>'+fmtNum(kgVendu)+' kg</span></div>'
-        +'<div class="ir"><span class="il">CA généré</span><span>'+fmtNum(caVendu)+' MRU</span></div>'
-        :''
-      )
-      +'<div style="border-top:2px solid var(--brand-border);margin:12px 0 8px;"></div>'
-      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;font-size:11px;">'
-      +'<div><div style="color:var(--muted);margin-bottom:20px;">Signature employé :</div><div style="border-top:1px solid #333;padding-top:4px;">'+emp.nom+'</div></div>'
-      +'<div><div style="color:var(--muted);margin-bottom:20px;">Signature gérant :</div><div style="border-top:1px solid #333;padding-top:4px;">Gérant لبرود</div></div>'
-      +'</div></div>';
-  }
-  toast('Fiche de paie générée !');
-}
-
-function telechargerFichePaie(){
-  if(!_fichePaieData){ toast('Générez d\'abord la fiche.'); return; }
-  var d = _fichePaieData;
-  var moisNoms=['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-
-  var html = '<!DOCTYPE html><html><head><meta charset="utf-8"/>'
-    +'<style>body{font-family:Arial,sans-serif;padding:40px;max-width:600px;margin:0 auto;}'
-    +'h1{color:#1A5276;text-align:center;}h2{color:#1A5276;border-bottom:2px solid #1A5276;padding-bottom:5px;}'
-    +'.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;}'
-    +'.label{color:#666;}.value{font-weight:bold;}'
-    +'.total{background:#1A5276;color:white;padding:10px;border-radius:8px;display:flex;justify-content:space-between;margin-top:10px;font-size:18px;font-weight:bold;}'
-    +'.sign{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;}'
-    +'.sign-box{border-top:1px solid #333;padding-top:8px;font-size:12px;}'
-    +'</style></head><body>'
-    +'<h1>🧊 لبرود — Fiche de Paie</h1>'
-    +'<p style="text-align:center;color:#666;">'+d.moisNom+' '+d.annee+' | Généré le '+today()+'</p>'
-    +'<h2>Informations Employé</h2>'
-    +'<div class="row"><span class="label">Nom</span><span class="value">'+d.emp.nom+'</span></div>'
-    +'<div class="row"><span class="label">Rôle</span><span class="value">'+d.emp.role+'</span></div>'
-    +'<div class="row"><span class="label">Période</span><span class="value">'+d.moisNom+' '+d.annee+'</span></div>'
-    +(d.emp.cin?'<div class="row"><span class="label">NIN</span><span class="value">'+d.emp.cin+'</span></div>':'')
-    +'<h2>Détail du Salaire</h2>'
-    +'<div class="row"><span class="label">Salaire de base</span><span class="value">'+fmtNum(d.salaireBase)+' MRU</span></div>'
-    +(d.totalAvances?'<div class="row"><span class="label" style="color:red;">Avances perçues</span><span class="value" style="color:red;">- '+fmtNum(d.totalAvances)+' MRU</span></div>'
-      +d.avancesMois.map(function(a){return '<div class="row" style="font-size:12px;padding-left:20px;"><span class="label">• '+fmtNum(a.montant)+' MRU le '+(a.date||'')+'</span></div>';}).join('')
-      :'')
-    +'<div class="total"><span>Net à payer</span><span>'+fmtNum(d.netAPayer)+' MRU</span></div>'
-    +(d.emp.role==='vendeur'?
-      '<h2>Performance du Mois</h2>'
-      +'<div class="row"><span class="label">Nombre de ventes</span><span class="value">'+d.nbVentes+'</span></div>'
-      +'<div class="row"><span class="label">Kg vendus</span><span class="value">'+fmtNum(d.kgVendu)+' kg</span></div>'
-      +'<div class="row"><span class="label">CA généré</span><span class="value">'+fmtNum(d.caVendu)+' MRU</span></div>'
-      :'')
-    +'<div class="sign">'
-    +'<div class="sign-box"><p>Signature employé :</p><br/><p>'+d.emp.nom+'</p></div>'
-    +'<div class="sign-box"><p>Signature gérant :</p><br/><p>Gérant لبرود</p></div>'
-    +'</div>'
-    +'</body></html>';
-
-  var blob = new Blob([html], {type:'application/msword'});
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'fiche_paie_'+d.emp.nom.replace(/ /g,'_')+'_'+d.moisNom+'_'+d.annee+'.doc';
-  a.click();
-  toast('Fiche de paie téléchargée !');
-}
-
-// --- DIESEL ---
-var LS_DIESEL = 'lb_diesel_v1';
-var LS_DIESEL_CONFIG = 'lb_diesel_config';
-
-function getDieselConfig(){ return ls_get(LS_DIESEL_CONFIG)||{prixLitre:35, consomEst:25}; }
-function getDiesels(){ return ls_get(LS_DIESEL)||[]; }
-
-function initDiesel(){
-  var cfg = getDieselConfig();
-  var pl = document.getElementById('dieselPrixLitre');
-  var ce = document.getElementById('dieselConsomEst');
-  var dd = document.getElementById('dieselDate');
-  var mf = document.getElementById('dieselMoisFilter');
-  var af = document.getElementById('dieselAnneeFilter');
-
-  if(pl && !pl.value) pl.value = cfg.prixLitre||'';
-  if(ce && !ce.value) ce.value = cfg.consomEst||'';
-  if(dd && !dd.value) dd.value = today();
-
-  if(mf) mf.value = today().slice(5,7);
-  if(af){
-    var annee = parseInt(today().slice(0,4));
-    af.innerHTML='';
-    for(var y=annee;y>=annee-2;y--) af.innerHTML+='<option value="'+y+'">'+y+'</option>';
-  }
-
-  saveDieselConfig();
-  renderDieselStats();
-  renderDieselHistorique();
-}
-
-function saveDieselConfig(){
-  var prixLitre = parseFloat((document.getElementById('dieselPrixLitre')||{}).value)||0;
-  var consomEst = parseFloat((document.getElementById('dieselConsomEst')||{}).value)||0;
-  ls_set(LS_DIESEL_CONFIG, {prixLitre:prixLitre, consomEst:consomEst});
-
-  var el = document.getElementById('dieselCoutEstime');
-  if(el && prixLitre && consomEst){
-    var coutJour = Math.round(prixLitre * consomEst);
-    var coutMois = coutJour * 26;
-    el.innerHTML = '💡 Estimation : <b>'+fmtNum(coutJour)+' MRU/jour</b> · <b>'+fmtNum(coutMois)+' MRU/mois</b>';
-  }
-  renderDieselStats();
-}
-
-function saveDiesel(){
-  var date   = (document.getElementById('dieselDate')||{}).value || today();
-  var litres = parseFloat((document.getElementById('dieselLitres')||{}).value)||0;
-  var note   = ((document.getElementById('dieselNote')||{}).value||'').trim();
-
-  if(!litres){ toast('Saisissez le nombre de litres.'); return; }
-
-  var cfg = getDieselConfig();
-  var cout = Math.round(litres * (cfg.prixLitre||0));
-
-  var all = getDiesels();
-  // Si déjà une saisie ce jour, remplacer
-  var idx = all.findIndex(function(d){ return d.date===date; });
-  var record = { id: idx>=0?all[idx].id:genId(), date:date, litres:litres, cout:cout, note:note };
-
-  if(idx>=0){ all[idx]=record; } else { all.push(record); }
-  ls_set(LS_DIESEL, all);
-  if(db) fbSet('lb_diesel', record.id, record);
-
-  var dn = document.getElementById('dieselNote'); if(dn) dn.value='';
-  var dl = document.getElementById('dieselLitres'); if(dl) dl.value='';
-
-  renderDieselStats();
-  renderDieselHistorique();
-  toast('⛽ '+litres+'L enregistrés — '+fmtNum(cout)+' MRU');
-}
-
-function renderDieselStats(){
-  var mois = today().slice(0,7);
-  var cfg  = getDieselConfig();
-  var all  = getDiesels().filter(function(d){ return d.date && d.date.startsWith(mois); });
-  var litresMois = all.reduce(function(s,d){ return s+(d.litres||0); }, 0);
-  var coutMois   = Math.round(litresMois * (cfg.prixLitre||0));
-
-  var kgProd = (ls_get(LS.PROD)||[]).filter(function(p){return !p.live&&p.date&&p.date.startsWith(mois);}).reduce(function(s,p){return s+(p.kg||0);},0);
-  var ca     = (ls_get(LS.VENTES)||[]).filter(function(v){return v.date&&v.date.startsWith(mois);}).reduce(function(s,v){return s+(v.total||0);},0);
-  var coutKg = kgProd>0 ? Math.round(coutMois/kgProd*10)/10 : 0;
-  var pctCA  = ca>0 ? Math.round(coutMois/ca*100) : 0;
-
-  function s(id,v){var el=document.getElementById(id);if(el)el.textContent=v;}
-  s('dieselCoutMois', fmtNum(coutMois)+' MRU');
-  s('dieselLitresMois', fmtNum(litresMois)+' L');
-  s('dieselCoutKg', fmtNum(coutKg)+' MRU');
-  s('dieselPctCA', pctCA+'%');
-
-  // Résumé sessions opérateur
-  var sessions = (ls_get(LS_OP_SESSIONS)||[]).filter(function(s){ return s.date&&s.date.startsWith(mois); });
-  var elSess = document.getElementById('dieselSessions');
-  if(elSess){
-    if(!sessions.length){ elSess.innerHTML='<div class="empty-state">Aucune session ce mois.</div>'; }
-    else {
-      var hSomelec=0, hGroupe=0, nbCoupures=0, nbBascul=0;
-      sessions.forEach(function(s){
-        if(s.source==='somelec') hSomelec+=s.dureeMin||0;
-        else hGroupe+=s.dureeMin||0;
-        if(s.cause&&s.cause.includes('Coupure')) nbCoupures++;
-        if(s.cause&&s.cause.includes('Basculement')) nbBascul++;
-      });
-      elSess.innerHTML =
-        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">'
-        +'<div style="background:#EBF5FB;border-radius:10px;padding:10px;text-align:center;">'
-        +'<div style="font-size:10px;color:var(--muted);">⚡ Heures SOMELEC</div>'
-        +'<div style="font-size:18px;font-weight:900;color:#2980B9;">'+Math.round(hSomelec/60*10)/10+'h</div>'
-        +'</div>'
-        +'<div style="background:#FEF9E7;border-radius:10px;padding:10px;text-align:center;">'
-        +'<div style="font-size:10px;color:var(--muted);">⛽ Heures Groupe</div>'
-        +'<div style="font-size:18px;font-weight:900;color:#E67E22;">'+Math.round(hGroupe/60*10)/10+'h</div>'
-        +'</div>'
-        +'<div style="background:#FDEDEC;border-radius:10px;padding:10px;text-align:center;">'
-        +'<div style="font-size:10px;color:var(--muted);">⚡ Coupures SOMELEC</div>'
-        +'<div style="font-size:18px;font-weight:900;color:#E74C3C;">'+nbCoupures+'</div>'
-        +'</div>'
-        +'<div style="background:#E8F8F5;border-radius:10px;padding:10px;text-align:center;">'
-        +'<div style="font-size:10px;color:var(--muted);">🔄 Basculements</div>'
-        +'<div style="font-size:18px;font-weight:900;color:#1E8449;">'+nbBascul+'</div>'
-        +'</div>'
-        +'</div>'
-        +sessions.sort(function(a,b){return b.date.localeCompare(a.date);}).slice(0,10).map(function(s){
-          var col=s.source==='somelec'?'#2980B9':'#E67E22';
-          var icon=s.source==='somelec'?'⚡':'⛽';
-          return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--brand-border);">'
-            +'<div style="font-size:18px;">'+icon+'</div>'
-            +'<div style="flex:1;">'
-            +'<div style="font-size:12px;font-weight:700;color:'+col+';">'+(s.source==='somelec'?'SOMELEC':'Groupe')+'</div>'
-            +'<div style="font-size:11px;color:var(--muted);">'+s.date+' '+s.heureDebut+' → '+s.heureFin+' ('+s.dureeMin+'min)</div>'
-            +'<div style="font-size:11px;color:var(--muted);">'+s.cause+'</div>'
-            +'</div>'
-            +(s.source==='groupe'&&s.litres?'<div style="font-size:11px;font-weight:700;color:#E67E22;">'+s.litres+'L</div>':'')
-            +'</div>';
-        }).join('');
-    }
-  }
-}
-
-function renderDieselHistorique(){
-  var el = document.getElementById('dieselHistorique'); if(!el) return;
-  var mois   = (document.getElementById('dieselMoisFilter')||{}).value || today().slice(5,7);
-  var annee  = (document.getElementById('dieselAnneeFilter')||{}).value || today().slice(0,4);
-  var periode = annee+'-'+mois;
-  var cfg    = getDieselConfig();
-
-  var all = getDiesels().filter(function(d){ return d.date&&d.date.startsWith(periode); })
-    .sort(function(a,b){ return b.date.localeCompare(a.date); });
-
-  if(!all.length){ el.innerHTML='<div class="empty-state">Aucune saisie ce mois.</div>'; return; }
-
-  var totalL = all.reduce(function(s,d){return s+(d.litres||0);},0);
-  var totalC = Math.round(totalL*(cfg.prixLitre||0));
-
-  el.innerHTML = '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:2px solid var(--brand);margin-bottom:6px;font-weight:700;">'
-    +'<span>Total : '+fmtNum(totalL)+' L</span>'
-    +'<span style="color:var(--danger);">'+fmtNum(totalC)+' MRU</span>'
-    +'</div>'
-    +all.map(function(d){
-      var cout = Math.round((d.litres||0)*(cfg.prixLitre||0));
-      return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--brand-border);">'
-        +'<div style="font-size:20px;">⛽</div>'
-        +'<div style="flex:1;">'
-        +'<div style="font-size:13px;font-weight:700;">'+d.date+' — '+fmtNum(d.litres)+' L</div>'
-        +(d.note?'<div style="font-size:11px;color:var(--muted);">'+d.note+'</div>':'')
-        +'</div>'
-        +'<div style="font-size:13px;font-weight:800;color:var(--danger);">'+fmtNum(cout)+' MRU</div>'
-        +'<button onclick="deleteDiesel(\''+d.id+'\')" style="background:none;border:none;font-size:14px;cursor:pointer;">🗑️</button>'
-        +'</div>';
-    }).join('');
-}
-
-function deleteDiesel(id){
-  showModal('Supprimer ?','Supprimer cette saisie ?','#C0392B','Supprimer',function(){
-    ls_set(LS_DIESEL, getDiesels().filter(function(d){return d.id!==id;}));
-    if(db) db.collection('lb_diesel').doc(id).delete();
-    renderDieselStats();
-    renderDieselHistorique();
-    toast('Saisie supprimée');
-  });
-}
-
-// --- HISTORIQUE DES PRIX ---
-function renderPrixHistorique(){
-  var el = document.getElementById('prixHistorique');
-  if(!el) return;
-
-  var historique = ls_get('lb_prix_historique')||[];
-  var prixActuel = ls_get(LS.PRIX);
-
-  // Mettre a jour affichage prix actuel
-  var prixDepuis = document.getElementById('prixDepuis');
-  if(prixActuel && prixDepuis){
-    prixDepuis.textContent = 'Depuis le ' + (prixActuel.date||'');
-  }
-
-  if(!historique.length){
-    el.innerHTML = '<div class="empty-state">Aucun changement de prix enregistre.</div>';
-    return;
-  }
-
-  el.innerHTML = historique.map(function(h, i){
-    var suivant = i===0 ? (prixActuel?prixActuel.val:null) : historique[i-1].prix;
-    var diff = suivant ? suivant - h.prix : 0;
-    var diffColor = diff>0 ? '#1E8449' : diff<0 ? '#E74C3C' : '#95A5A6';
-    var diffTxt = diff>0 ? '+'+fmtNum(diff)+' MRU' : diff<0 ? fmtNum(diff)+' MRU' : '=';
-    var duree = '';
-    if(h.dateDebut && h.dateFin){
-      var d1 = new Date(h.dateDebut), d2 = new Date(h.dateFin);
-      var jours = Math.round((d2-d1)/(1000*60*60*24));
-      duree = jours + ' jour'+(jours>1?'s':'');
-    }
-    return '<div style="padding:12px 0;border-bottom:1px solid var(--brand-border);">'
-      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
-      +'<div style="flex:1;">'
-      +'<div style="font-size:18px;font-weight:900;color:var(--brand);">'+fmtNum(h.prix)+' MRU/kg</div>'
-      +'<div style="font-size:11px;color:var(--muted);margin-top:2px;">'
-      +(h.dateDebut?'Du '+h.dateDebut:'')+(h.dateFin?' au '+h.dateFin:'')+(duree?' ('+duree+')':'')
-      +'</div>'
-      +(h.kgVendus?'<div style="font-size:11px;color:var(--muted);margin-top:2px;">'+fmtNum(h.kgVendus)+' kg vendus — '+fmtNum(h.caRealise)+' MRU ('+h.nbVentes+' ventes)</div>':'')
-      +'</div>'
-      +'<div style="text-align:right;flex-shrink:0;margin-left:10px;">'
-      +(diff!==0?'<div style="font-size:12px;font-weight:700;color:'+diffColor+';">'+diffTxt+'</div>':'')
-      +'</div>'
-      +'</div>'
-      +'</div>';
-  }).join('');
-}
-
-function renderDistribGer(){
-  var el = document.getElementById('gerDistribList');
-  if(!el) return;
-  var all = getDistribs().sort(function(a,b){ return (b.creeLe||'').localeCompare(a.creeLe||''); });
-
-  // Stats
-  var nbBoucles = all.filter(function(d){return d.boucle;}).length;
-  var totalDu   = all.filter(function(d){return !d.boucle;}).reduce(function(s,d){return s+(d.reste||0);},0);
-  var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
-  s('gerDistribNb', all.length);
-  s('gerDistribTotalDu', fmtNum(totalDu)+' MRU');
-  s('gerDistribBoucles', nbBoucles);
-
-  if(!all.length){ el.innerHTML='<div class="card"><div class="empty-state">Aucun distributeur enregistré.</div></div>'; return; }
-
-  el.innerHTML = all.map(function(d){
-    var pctPaye = d.total>0 ? Math.min(100,Math.round((d.total-d.reste)/d.total*100)) : 100;
-    var paiements = (d.paiements||[]).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
-
-    return '<div class="card" style="border:1.5px solid '+(d.boucle?'#A9DFBF':'#E74C3C')+';">'
-      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">'
-      +'<div style="flex:1;">'
-      +'<div style="font-size:15px;font-weight:900;color:var(--brand);">🏪 '+d.nom+'</div>'
-      +(d.tel?'<div style="font-size:11px;color:var(--muted);">📞 '+d.tel+'</div>':'')
-      +'<div style="font-size:11px;color:var(--muted);">'+d.date+' · '+fmtNum(d.kg)+'kg/liv × '+(d.nbLiv||1)+(d.freq&&d.freq!=="unique"?" ("+d.freq+")":"")+" = "+fmtNum(d.kgTotal||d.kg)+'kg total · '+fmtNum(d.prix)+' MRU/kg</div>'
-      +(d.note?'<div style="font-size:11px;color:var(--muted);">📝 '+d.note+'</div>':'')
-      +'</div>'
-      +'<div style="text-align:right;flex-shrink:0;margin-left:8px;">'
-      +'<div style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:'+(d.boucle?'#1E8449':'#E74C3C')+';color:#fff;">'+(d.boucle?'✅ Bouclé':'🔴 Reste '+fmtNum(d.reste)+' MRU')+'</div>'
-      +'<div style="font-size:11px;color:var(--muted);margin-top:4px;">Total: '+fmtNum(d.total)+' MRU</div>'
-      +'</div></div>'
-      // Barre progression
-      +'<div style="margin-bottom:8px;">'
-      +'<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">'
-      +'<span style="color:#1E8449;">Payé: '+fmtNum(d.total-d.reste)+' MRU</span>'
-      +'<span style="color:'+(d.boucle?'#1E8449':'#E74C3C')+';">'+(d.boucle?'Bouclé ✅':'Reste: '+fmtNum(d.reste)+' MRU')+'</span>'
-      +'</div>'
-      +'<div style="background:#f0f0f0;border-radius:20px;height:8px;overflow:hidden;">'
-      +'<div style="height:100%;border-radius:20px;background:linear-gradient(90deg,#27AE60,#F39C12);width:'+pctPaye+'%;"></div>'
-      +'</div>'
-      +'<div style="font-size:10px;color:var(--muted);text-align:right;margin-top:2px;">'+pctPaye+'% payé</div>'
-      +'</div>'
-      // Historique paiements
-      +(paiements.length?
-        '<div style="background:var(--brand-pale);border-radius:10px;padding:8px;">'
-        +'<div style="font-size:11px;font-weight:700;color:var(--brand);margin-bottom:6px;">📋 Paiements</div>'
-        +paiements.map(function(p){
-          return '<div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(0,0,0,0.05);">'
-            +'<span>'+p.date+' — '+(p.type==='avance'?'💰 Avance':'✅ Paiement')+'</span>'
-            +'<span style="font-weight:700;color:#1E8449;">+'+fmtNum(p.montant)+' MRU</span>'
-            +'</div>';
-        }).join('')
-        +'</div>'
-        :'')
-      +'</div>';
-  }).join('');
-}
-
-// ══════════════════════════════════════
-//  DISTRIBUTEURS
-// ══════════════════════════════════════
-var LS_DISTRIB = 'lb_distrib_v1';
-
-function getDistribs(){ return ls_get(LS_DISTRIB)||[]; }
-
-function calcDistribTotal(){
-  var kg     = parseFloat((document.getElementById('distribKg')||{}).value)||0;
-  var prix   = parseFloat((document.getElementById('distribPrix')||{}).value)||0;
-  var nbLiv  = parseFloat((document.getElementById('distribNbLiv')||{}).value)||1;
-  var freq   = (document.getElementById('distribFreq')||{}).value||'unique';
-  var avance = parseFloat((document.getElementById('distribAvance')||{}).value)||0;
-
-  var freqLabels = {jour:'jour',semaine:'semaine',mois:'mois',unique:'commande unique'};
-  var kgTotal = kg * nbLiv;
-  var total   = Math.round(kgTotal * prix);
-  var reste   = Math.max(0, total - avance);
-
-  var wrap = document.getElementById('distribTotalCalc');
-  var val  = document.getElementById('distribTotalVal');
-  if(kg>0 && prix>0){
-    if(wrap) wrap.style.display='block';
-    var txt = fmtNum(kg)+'kg × '+nbLiv+' '+(freq!=='unique'?freqLabels[freq]+'s':'livraison')+' = '+fmtNum(kgTotal)+'kg total<br>'
-      +'<span style="font-size:22px;font-weight:900;">'+fmtNum(total)+' MRU</span>';
-    if(avance>0) txt += '<br><span style="color:#E74C3C;font-size:13px;">Reste après avance : '+fmtNum(reste)+' MRU</span>';
-    if(val) val.innerHTML = txt;
-  } else {
-    if(wrap) wrap.style.display='none';
-  }
-}
-
-function saveDistrib(){
-  var nom    = ((document.getElementById('distribNom')||{}).value||'').trim();
-  var tel    = ((document.getElementById('distribTel')||{}).value||'').trim();
-  var kg     = parseFloat((document.getElementById('distribKg')||{}).value)||0;
-  var nbLiv  = parseFloat((document.getElementById('distribNbLiv')||{}).value)||1;
-  var freq   = (document.getElementById('distribFreq')||{}).value||'unique';
-  var prix   = parseFloat((document.getElementById('distribPrix')||{}).value)||0;
-  var avance = parseFloat((document.getElementById('distribAvance')||{}).value)||0;
-  var date   = (document.getElementById('distribDate')||{}).value||today();
-  var note   = ((document.getElementById('distribNote')||{}).value||'').trim();
-  var editId = ((document.getElementById('distribEditId')||{}).value||'');
-
-  if(!nom){ toast('Saisissez le nom du distributeur.'); return; }
-  if(!kg||!prix){ toast('Saisissez la quantité et le prix/kg.'); return; }
-
-  var freqLabels = {jour:'par jour',semaine:'par semaine',mois:'par mois',unique:'commande unique'};
-  var kgTotal = Math.round(kg * nbLiv);
-  var total   = Math.round(kgTotal * prix);
-  var reste   = Math.max(0, total - avance);
-  var all    = getDistribs();
-
-  if(editId){
-    var idx = all.findIndex(function(d){ return d.id===editId; });
-    if(idx>=0){
-      all[idx] = Object.assign({}, all[idx], {nom:nom,tel:tel,kg:kg,prix:prix,total:total,avance:avance,reste:reste,date:date,note:note});
-    }
-  } else {
-    var item = {
-      id:genId(), nom:nom, tel:tel, kg:kg, nbLiv:nbLiv, freq:freq,
-      kgTotal:kgTotal, prix:prix,
-      total:total, avance:avance, reste:reste,
-      date:date, note:note, boucle:reste<=0,
-      paiements: avance>0 ? [{id:genId(),montant:avance,date:date,type:'avance',note:'Avance initiale'}] : [],
-      creeLe:today()
-    };
-    all.push(item);
-    if(db) fbSet('lb_distrib', item.id, item);
-  }
-
-  ls_set(LS_DISTRIB, all);
-  if(editId && db){
-    var updated = all.find(function(d){return d.id===editId;});
-    if(updated) fbSet('lb_distrib', editId, updated);
-  }
-  cancelDistribEdit();
-  renderDistribList();
-  toast('Marché "'+nom+'" enregistré — Total: '+fmtNum(total)+' MRU ✓');
-}
-
-function cancelDistribEdit(){
-  ['distribNom','distribTel','distribKg','distribNbLiv','distribPrix','distribAvance','distribNote','distribEditId'].forEach(function(id){
-    var el=document.getElementById(id);if(el)el.value='';
-  });
-  var f=document.getElementById('distribFreq');if(f)f.value='jour';
-  var d=document.getElementById('distribDate');if(d)d.value=today();
-  var b=document.getElementById('distribCancelBtn');if(b)b.style.display='none';
-  var t=document.getElementById('distribFormTitle');if(t)t.textContent='➕ Nouveau marché distributeur';
-  var w=document.getElementById('distribTotalCalc');if(w)w.style.display='none';
-}
-
-function editDistrib(id){
-  var item = getDistribs().find(function(d){return d.id===id;});
-  if(!item) return;
-  document.getElementById('distribNom').value    = item.nom||'';
-  document.getElementById('distribTel').value    = item.tel||'';
-  document.getElementById('distribKg').value     = item.kg||'';
-  document.getElementById('distribNbLiv').value  = item.nbLiv||1;
-  document.getElementById('distribFreq').value   = item.freq||'jour';
-  document.getElementById('distribPrix').value   = item.prix||'';
-  document.getElementById('distribAvance').value = item.avance||'';
-  document.getElementById('distribDate').value   = item.date||today();
-  document.getElementById('distribNote').value   = item.note||'';
-  document.getElementById('distribEditId').value = id;
-  var b=document.getElementById('distribCancelBtn');if(b)b.style.display='block';
-  var t=document.getElementById('distribFormTitle');if(t)t.textContent='✏️ Modifier le marché';
-  calcDistribTotal();
-  // Scroll to form
-  document.getElementById('distribFormTitle').scrollIntoView({behavior:'smooth'});
-}
-
-function deleteDistrib(id){
-  showModal('Supprimer ?','Supprimer ce marché et tous ses paiements ?','#C0392B','Supprimer',function(){
-    ls_set(LS_DISTRIB, getDistribs().filter(function(d){return d.id!==id;}));
-    if(db) db.collection('lb_distrib').doc(id).delete();
-    renderDistribList();
-    toast('Marché supprimé');
-  });
-}
-
-function ajouterPaiementDistrib(id){
-  var all  = getDistribs();
-  var idx  = all.findIndex(function(d){return d.id===id;});
-  if(idx<0) return;
-  var item = all[idx];
-
-  // Créer modal saisie paiement
-  var montantStr = prompt('Montant reçu (MRU) — Reste: '+fmtNum(item.reste)+' MRU');
-  if(!montantStr) return;
-  var montant = parseFloat(montantStr)||0;
-  if(!montant||montant<=0){ toast('Montant invalide.'); return; }
-
-  var paiement = {id:genId(), montant:montant, date:today(), type:'paiement', note:'Paiement reçu'};
-  item.paiements = item.paiements||[];
-  item.paiements.push(paiement);
-  item.reste = Math.max(0, item.reste - montant);
-  item.boucle = item.reste <= 0;
-
-  all[idx] = item;
-  ls_set(LS_DISTRIB, all);
-  if(db) fbSet('lb_distrib', id, item);
-  renderDistribList();
-
-  if(item.boucle){
-    toast('✅ Marché "'+item.nom+'" entièrement bouclé !');
-  } else {
-    toast('Paiement de '+fmtNum(montant)+' MRU enregistré — Reste: '+fmtNum(item.reste)+' MRU');
-  }
-}
-
-function renderDistribList(){
-  var el = document.getElementById('distribList');
-  if(!el) return;
-  var all = getDistribs().sort(function(a,b){ return (b.creeLe||'').localeCompare(a.creeLe||''); });
-
-  // Stats globales
-  var nbBoucles = all.filter(function(d){return d.boucle;}).length;
-  var totalDu   = all.filter(function(d){return !d.boucle;}).reduce(function(s,d){return s+(d.reste||0);},0);
-  var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
-  s('distribNb', all.length);
-  s('distribTotalDu', fmtNum(totalDu)+' MRU');
-  s('distribBoucles', nbBoucles);
-
-  if(!all.length){
-    el.innerHTML='<div class="card"><div class="empty-state">Aucun distributeur enregistré.</div></div>';
-    return;
-  }
-
-  el.innerHTML = all.map(function(d){
-    var pctPaye = d.total>0 ? Math.min(100,Math.round((d.total-d.reste)/d.total*100)) : 100;
-    var statCol = d.boucle ? '#1E8449' : d.reste>0 ? '#E74C3C' : '#1E8449';
-    var statTxt = d.boucle ? '✅ Bouclé' : '🔴 Reste '+fmtNum(d.reste)+' MRU';
-
-    var paiements = (d.paiements||[]).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
-
-    return '<div class="card" style="border:1.5px solid '+(d.boucle?'#A9DFBF':'#E74C3C')+';">'
-      // Header
-      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">'
-      +'<div style="flex:1;">'
-      +'<div style="font-size:15px;font-weight:900;color:var(--brand);">🏪 '+d.nom+'</div>'
-      +(d.tel?'<div style="font-size:11px;color:var(--muted);">📞 '+d.tel+'</div>':'')
-      +'<div style="font-size:11px;color:var(--muted);">'+d.date+' · '+fmtNum(d.kg)+'kg/liv × '+(d.nbLiv||1)+(d.freq&&d.freq!=="unique"?" ("+d.freq+")":"")+" = "+fmtNum(d.kgTotal||d.kg)+'kg total · '+fmtNum(d.prix)+' MRU/kg</div>'
-      +(d.note?'<div style="font-size:11px;color:var(--muted);">📝 '+d.note+'</div>':'')
-      +'</div>'
-      +'<div style="text-align:right;flex-shrink:0;margin-left:8px;">'
-      +'<div style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:'+(d.boucle?'#1E8449':'#E74C3C')+';color:#fff;">'+statTxt+'</div>'
-      +'<div style="font-size:11px;color:var(--muted);margin-top:4px;">Total: '+fmtNum(d.total)+' MRU</div>'
-      +'</div></div>'
-
-      // Barre de progression
-      +'<div style="margin-bottom:10px;">'
-      +'<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">'
-      +'<span style="color:#1E8449;">Payé: '+fmtNum(d.total-d.reste)+' MRU</span>'
-      +'<span style="color:'+statCol+';">'+(d.boucle?'Bouclé ✅':'Reste: '+fmtNum(d.reste)+' MRU')+'</span>'
-      +'</div>'
-      +'<div style="background:#f0f0f0;border-radius:20px;height:8px;overflow:hidden;">'
-      +'<div style="height:100%;border-radius:20px;background:linear-gradient(90deg,#27AE60,#F39C12);width:'+pctPaye+'%;transition:width 0.4s;"></div>'
-      +'</div>'
-      +'<div style="font-size:10px;color:var(--muted);text-align:right;margin-top:2px;">'+pctPaye+'% payé</div>'
-      +'</div>'
-
-      // Historique paiements
-      +(paiements.length?
-        '<div style="background:var(--brand-pale);border-radius:10px;padding:8px;margin-bottom:8px;">'
-        +'<div style="font-size:11px;font-weight:700;color:var(--brand);margin-bottom:6px;">📋 Historique paiements</div>'
-        +paiements.map(function(p){
-          return '<div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(0,0,0,0.05);">'
-            +'<span>'+p.date+' — '+(p.type==='avance'?'💰 Avance':'✅ Paiement')+'</span>'
-            +'<span style="font-weight:700;color:#1E8449;">+'+fmtNum(p.montant)+' MRU</span>'
-            +'</div>';
-        }).join('')
-        +'</div>'
-        :'')
-
-      // Actions
-      +'<div style="display:flex;gap:8px;">'
-      +(!d.boucle?'<button onclick="ajouterPaiementDistrib(\''+d.id+'\')" style="flex:1;background:#1E8449;color:#fff;border:none;border-radius:20px;padding:8px;font-size:12px;font-weight:700;cursor:pointer;">💵 Enregistrer paiement</button>':'')
-      +'<button onclick="editDistrib(\''+d.id+'\')" style="background:none;border:1.5px solid var(--brand-border);border-radius:20px;padding:8px 14px;font-size:12px;cursor:pointer;">✏️</button>'
-      +'<button onclick="deleteDistrib(\''+d.id+'\')" style="background:none;border:1.5px solid #E74C3C;border-radius:20px;padding:8px 14px;font-size:12px;cursor:pointer;">🗑️</button>'
-      +'</div>'
-      +'</div>';
-  }).join('');
-}
-
-function initDistrib(){
-  var d=document.getElementById('distribDate');if(d&&!d.value)d.value=today();
-  renderDistribList();
-}
-
-// --- PHOTO JUSTIFICATIF VENTE ---
-var _venPhotoBase64 = null;
-
-function viewVenPhoto(id){
-  var all = ls_get(LS.VENTES)||[];
-  var v = all.find(function(x){return x.id===id;});
-  if(!v||!v.photo) return;
-  // Afficher en plein écran
-  var overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;';
-  overlay.onclick = function(){ document.body.removeChild(overlay); };
-  overlay.innerHTML = '<div style="position:relative;max-width:95vw;max-height:90vh;">'
-    +'<img src="'+v.photo+'" style="max-width:95vw;max-height:85vh;object-fit:contain;border-radius:12px;"/>'
-    +'<div style="text-align:center;color:#fff;margin-top:8px;font-size:12px;">'+v.clientNom+' · '+v.date+' · '+fmtNum(v.total)+' MRU</div>'
-    +'<div style="text-align:center;color:rgba(255,255,255,0.6);font-size:11px;margin-top:4px;">Appuyez pour fermer</div>'
-    +'</div>';
-  document.body.appendChild(overlay);
-}
-
-function onVenPhotoSelected(event){
-  var file = event.target.files[0];
-  if(!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e){
-    var result = e.target.result;
-    // Redimensionner via canvas
-    var img = new Image();
-    img.onload = function(){
-      var canvas = document.createElement('canvas');
-      var maxSize = 800;
-      var w = img.width, h = img.height;
-      if(w>h){ if(w>maxSize){h=Math.round(h*maxSize/w);w=maxSize;} }
-      else { if(h>maxSize){w=Math.round(w*maxSize/h);h=maxSize;} }
-      canvas.width=w; canvas.height=h;
-      canvas.getContext('2d').drawImage(img,0,0,w,h);
-      _venPhotoBase64 = canvas.toDataURL('image/jpeg', 0.7);
-      // Afficher preview
-      var preview = document.getElementById('venPhotoPreview');
-      var imgEl   = document.getElementById('venPhotoImg');
-      var delBtn  = document.getElementById('venPhotoDeleteBtn');
-      if(preview) preview.style.display='block';
-      if(imgEl)   imgEl.src = _venPhotoBase64;
-      if(delBtn)  delBtn.style.display='block';
-      toast('📷 Photo ajoutée !');
-    };
-    img.src = result;
-  };
-  reader.readAsDataURL(file);
-}
-
-function deleteVenPhoto(){
-  _venPhotoBase64 = null;
-  var preview = document.getElementById('venPhotoPreview');
-  var imgEl   = document.getElementById('venPhotoImg');
-  var delBtn  = document.getElementById('venPhotoDeleteBtn');
-  var input   = document.getElementById('venPhotoInput');
-  if(preview) preview.style.display='none';
-  if(imgEl)   imgEl.src='';
-  if(delBtn)  delBtn.style.display='none';
-  if(input)   input.value='';
-}
-
-function resetVenPhoto(){
-  deleteVenPhoto();
-}
-
-function lebroudExtras(role){
-  if(role==='gerant'){
-    if(typeof refreshStock==='function')refreshStock();
-    if(typeof refreshBilanGer==='function')refreshBilanGer();
-    if(typeof renderOffreList==='function')renderOffreList();
-    if(typeof renderInvestList==='function')renderInvestList();
-    if(typeof loadApiKeyDisplay==='function')loadApiKeyDisplay();
-    var dd=document.getElementById('offreDateDebut');if(dd&&!dd.value)dd.value=today();
-    var di=document.getElementById('investDate');if(di&&!di.value)di.value=today();
-  } else if(role==='vendeur'){
-    if(typeof refreshStock==='function')refreshStock();
-    if(typeof refreshVenOffres==='function')refreshVenOffres();
-  } else if(role==='comptable'){
-    if(typeof refreshStock==='function')refreshStock();
-  }
 }
 
 
